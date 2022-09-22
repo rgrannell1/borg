@@ -1,8 +1,10 @@
+
 # Borg
 
-Borg captures a website's text-selection as a bookmark when you triple-tap `,`
-,then sends a [CloudEvent](https://cloudevents.io/) bookmark to an external HTTP
-POST endpoint.
+Borg is a Chrome extension that:
+
+- bookmarks a page's selected-text using a [CloudEvent](https://cloudevents.io/)
+- sends this bookmark to an endpoint of your choice
 
 ## Why?
 
@@ -11,24 +13,7 @@ POST endpoint.
 
 ## What does it send?
 
-See `spec/bookmark.json` and `src/publisher.js`
-
-## Usage
-
-Modify `src/user-config.js` to point bookmarks to your receiving server. For
-example:
-
-```js
-export function userConfig() {
-  return {
-    webhooks: [
-      new HttpPublisher({
-        url: "https://your-domain/your-secret-endpoint",
-      }),
-    ],
-  };
-}
-```
+See `spec/bookmark.json`
 
 ## License
 

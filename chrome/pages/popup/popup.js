@@ -4,7 +4,7 @@ import { selectionBookmark } from "../../js/bookmark.js";
 const publisher = new PluginPublisher({
   webhooks: [
     new HttpPublisher({
-      url: "https://rgrannell.xyx/api/things",
+      url: "https://rgrannell.xyx/api/events",
     }),
   ],
 });
@@ -13,6 +13,8 @@ console.log("borg: loading");
 const elem = document.querySelector("#save-bookmark");
 
 elem.addEventListener("click", async () => {
+  elem.innerText = 'Assimilating...'
+
   const settings = await chrome.action.getUserSettings();
   const tabs = await chrome.tabs.query({
     active: true,
@@ -22,8 +24,14 @@ elem.addEventListener("click", async () => {
   if (tabs.length > 0) {
     const body = await selectionBookmark(tabs[0]);
 
-    await publisher.send(body);
+    try {
+      await publisher.send(body);
+    } catch (err) {
+      elem.innerText = 'Failed'
+      throw err;
+    }
+    elem.innerText = 'Assimilate'
   } else {
-    console.error("no tabs loaded");
+    console.error("borg: no tabs loaded");
   }
 });
