@@ -1,19 +1,37 @@
 {
   "name": "Borg",
+  "short_name": "Borg",
   "author": "Róisín Grannell",
-  "description": "Store bookmarks to a private endpoint",
+  "description": "A toolbar button to bookmark selections via CloudEvents",
   "version": "1.0",
   "manifest_version": 3,
-  "background": {
-    "service_worker": "js/borg-plugin.js"
+  "icons": {
+    "16": "icons/16x16.png",
+    "32": "icons/32x32.png"
   },
-  "browser_action": {
-    "default_icon": {},
-    "default_popup": "chrome/popup.html",
-    "default_title": "Borg"
+  "action": {
+    "browser_style": true,
+    "default_icons": {
+      "16": "icons/16x16.png",
+      "32": "icons/32x32.png"
+    },
+    "default_popup": "pages/popup/popup.html",
+    "default_title": "Borg",
+    "theme_icons": [
+      {
+        "light": "icons/16x16.png",
+        "dark": "icons/16x16.png",
+        "size": 16
+      },
+      {
+        "light": "icons/32x32.png",
+        "dark": "icons/32x32.png",
+        "size": 32
+      }
+    ]
   },
   "commands": {
-    "saveBookmark": {
+    "save-bookmark": {
       "description": "Save bookmark",
       "suggested_key": {
         "default": "Ctrl+Shift+S",
@@ -21,14 +39,14 @@
       }
     }
   },
-  "icons": {
-    "16": "icons/16x16.png",
-    "32": "icons/32x32.png"
-  },
-  "options_page": "chrome/options.html",
+  "options_page": "pages/options/options.html",
+  "host_permissions": [
+    "http://*/",
+    "https://*/"
+  ],
   "permissions": [
-    "activeTab",
     "storage",
-    "tabs"
+    "tabs",
+    "scripting"
   ]
 }

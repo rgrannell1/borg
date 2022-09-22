@@ -1,14 +1,18 @@
-import { BORG_BOOKMARK_TYPE } from "./constants.js";
-
 /*
  * Publish some information over HTTP POST
  *
  */
-export function selectionBookmark() {
+export async function selectionBookmark(tab) {
   const now = new Date();
   const id = `urn:borg_bookmark:${now.getTime()}`;
-  const url = window.location.href;
-  const selection = window.getSelection().toString();
+  const url = tab.url;
+
+  const selection = await chrome.scripting.executeScript({
+    target: { tabId: tab.id },
+    func() {
+      return window.getSelection().toString();
+    },
+  });
 
   return {
     source: "https://github.com/rgrannell1/borg/spec/bookmark.json",
@@ -21,7 +25,7 @@ export function selectionBookmark() {
       url,
       id,
       selection,
-      created_at: now.toISOString()
+      created_at: now.toISOString(),
     }),
   };
 }

@@ -23,12 +23,14 @@ export class HttpPublisher {
     this.url = opts.url;
   }
   async send(body) {
+    console.log("borg: sending bookmark over HTTP");
+
     const headers = new Headers({
       "Content-Type": "application/json",
       "Accept": "application/json",
     });
 
-    return fetch(this.url, {
+    await fetch(this.url, {
       method: "POST",
       mode: "no-cors",
       headers,

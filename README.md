@@ -1,7 +1,8 @@
-
 # Borg
 
-Borg captures a website's text-selection as a bookmark when you triple-tap `,` ,then sends a [CloudEvent](https://cloudevents.io/) bookmark to an external HTTP POST endpoint.
+Borg captures a website's text-selection as a bookmark when you triple-tap `,`
+,then sends a [CloudEvent](https://cloudevents.io/) bookmark to an external HTTP
+POST endpoint.
 
 ## Why?
 
@@ -14,17 +15,18 @@ See `spec/bookmark.json` and `src/publisher.js`
 
 ## Usage
 
-Modify `src/user-config.js` to point bookmarks to your receiving server. For example:
+Modify `src/user-config.js` to point bookmarks to your receiving server. For
+example:
 
 ```js
-export function userConfig () {
+export function userConfig() {
   return {
-    webhooks:  [
+    webhooks: [
       new HttpPublisher({
-        url: "https://your-domain/your-secret-endpoint"
+        url: "https://your-domain/your-secret-endpoint",
       }),
     ],
-  }
+  };
 }
 ```
 

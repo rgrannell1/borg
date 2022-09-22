@@ -22,5 +22,5 @@
       "type": "string"
     }
   },
-  "required": [ "url", "id", "selection", "created_at" ]
+  "required": ["url", "id", "selection", "created_at"]
 }
