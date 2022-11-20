@@ -4,7 +4,7 @@ import { selectionBookmark } from "../../js/bookmark.js";
 const publisher = new PluginPublisher({
   webhooks: [
     new HttpPublisher({
-      url: "https://rgrannell.xyx/api/events",
+      url: "https://mycloud.rgrannell.xyz/",
     }),
   ],
 });
