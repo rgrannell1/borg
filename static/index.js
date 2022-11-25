@@ -28,6 +28,7 @@ class CommonStorageAPI {
     try {
       const res = await fetch(`${ENDPOINT}/content/${topic}`, {
         method: 'post',
+        mode: 'cors',
         headers: new Headers({
           'content-type': 'application/json',
           authorization: `Basic ${ btoa(credentials.username + ':' + credentials.password) }`
