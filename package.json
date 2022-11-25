@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/rgrannell1/borg/issues"
   },
-  "homepage": "https://github.com/rgrannell1/borg#readme"
+  "homepage": "https://github.com/rgrannell1/borg#readme",
+  "devDependencies": {
+    "parcel": "^2.8.0"
+  }
 }
