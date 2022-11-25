@@ -1,0 +1,19 @@
+{
+  "name": "borg",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "true"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rgrannell1/borg.git"
+  },
+  "author": "Róisin Grannell",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rgrannell1/borg/issues"
+  },
+  "homepage": "https://github.com/rgrannell1/borg#readme"
+}

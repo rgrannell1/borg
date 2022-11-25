@@ -66,6 +66,7 @@ main {
   padding: 0.25em 0.5em;
   background-color: #fff;
   border: 2px solid var(--input-border);
+  min-width: 400px;
 }
 
 .button-58 {
