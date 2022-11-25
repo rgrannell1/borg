@@ -57,4 +57,13 @@
   </body>
 
   <script src="./index.js"></script>
+  <script>
+    // -- register a service-worker
+    if('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/sw.js')
+      console.log('loaded /sw.js')
+    } else {
+      console.error('failed to load /sw.js')
+    }
+  </script>
 </html>
