@@ -26,6 +26,9 @@ class CommonStorageAPI {
 
   static async postContent(credentials, topic, content) {
     try {
+      const body = JSON.stringify({
+        content: [ content ]
+      });
       const res = await fetch(`${ENDPOINT}/content/${topic}`, {
         method: 'post',
         mode: 'cors',
@@ -33,9 +36,7 @@ class CommonStorageAPI {
           'content-type': 'application/json',
           authorization: `Basic ${ btoa(credentials.username + ':' + credentials.password) }`
         }),
-        body: JSON.stringify({
-          content: [ JSON.stringify(content) ]
-        })
+        body
       });
 
       const status = res.status;
