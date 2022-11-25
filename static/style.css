@@ -1,0 +1,130 @@
+
+:root {
+  --navbar-font-colour: white;
+  --navbar-background-colour: red;
+  --font-colour: #323232;
+  --input-border: black;
+
+    /* button colours */
+  --button-ok-background-colour: #22ff00;
+  --button-error-background-colour: red;
+  --button-unauthorized-background-colour: black;
+
+  /* button text colours */
+  --button-error-colour: white;
+  --button-unauthorized-colour: white;
+  --button-ok-colour: #171e29;
+}
+
+@media (min-width: 768px) {
+  .button-58 {
+    min-width: 170px;
+  }
+}
+
+html * {
+  margin: 0;
+  padding: 0;
+}
+
+.brand {
+  font-size: 1.3em;
+}
+
+form {
+  font-size: 1.2em;
+}
+
+html {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: var(--font-colour);
+}
+
+.navbar {
+  color: var(--navbar-font-colour);
+  background-color: var(--navbar-background-colour);
+}
+
+.navbar ul {
+  list-style: none;
+}
+
+.navbar ul li {
+  padding: 15px;
+}
+
+main {
+  padding: 80px 100px;
+}
+
+.borg-input {
+  font-size: 1em;
+  padding: 5px;
+  font-size: 16px;
+  font-size: max(16px, 1em);
+  font-family: inherit;
+  padding: 0.25em 0.5em;
+  background-color: #fff;
+  border: 2px solid var(--input-border);
+}
+
+.button-58 {
+  align-items: center;
+  background-color: #06f;
+  border: 2px solid #06f;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  fill: #000;
+  font-family: Inter,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  height: 48px;
+  justify-content: center;
+  letter-spacing: -.8px;
+  line-height: 24px;
+  min-width: 140px;
+  outline: 0;
+  padding: 0 17px;
+  text-align: center;
+  text-decoration: none;
+  transition: all .3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-58:focus {
+  color: #171e29;
+}
+
+.button-58:hover {
+  background-color: #3385ff;
+  border-color: #3385ff;
+  fill: #06f;
+}
+
+.button-58:active {
+  background-color: #3385ff;
+  border-color: #3385ff;
+  fill: #06f;
+}
+
+.button-ok {
+  background-color: var(--button-ok-background-colour);
+  border-color: var(--button-ok-background-colour);
+  color: var(--button-ok-colour);
+}
+
+.button-error {
+  background-color: var(--button-error-background-colour);
+  border-color: var(--button-error-background-colour);
+  color: var(--button-error-colour);
+}
+
+.button-unauthorized {
+  background-color: var(--button-unauthorized-background-colour);
+  border-color: var(--button-unauthorized-background-colour);
+  color: var(--button-unauthorized-colour);
+}

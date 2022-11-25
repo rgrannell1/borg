@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Borg</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+
+  <body>
+    <header>
+      <nav class="navbar">
+        <ul>
+          <li>
+            <span class="brand"><h1>Borg</h1></span>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <form id="borg-form" method="post">
+        <div>
+          <label for="username">Username</label>
+          <br>
+          <input class="borg-input" type="text" id="username" name="username" autocomplete="username">
+        </div>
+
+        <div>
+          <label for="pass">Password</label>
+          <br>
+          <input class="borg-input" type="password" id="pass" name="password" required autocomplete="current-password">
+        </div>
+
+        <div>
+          <label>URL</label>
+          <br>
+          <input class="borg-input" type="url" name="url" id="url" required autocomplete="off">
+        </div>
+
+        <br>
+        <div>
+          <button id="borg-submit" class="button-58" id="borg-submit" type="submit">Assimilate</button>
+        </div>
+      </form>
+    </main>
+  </body>
+
+  <script src="./index.js"></script>
+</html>
