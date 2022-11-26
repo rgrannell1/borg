@@ -46,8 +46,10 @@ class CommonStorageAPI {
           state: States.UNAUTHORIZED
         }
       } else if (status === Status.OK) {
+        const body = await res.json();
         return {
-          state: States.OK
+          state: States.OK,
+          total: body.stats.total
         }
       } else {
         return {
@@ -106,9 +108,9 @@ class Button {
     return document.querySelector('#borg-submit');
   }
 
-  static setState(state) {
+  static setState(state, stateData) {
     if (state === States.OK) {
-      Button.setSuccessful(Button.element());
+      Button.setSuccessful(Button.element(), stateData);
     } else if (state === States.UNAUTHORIZED) {
       Button.setUnauthorized(Button.element());
     } else if (state === States.ERROR) {
@@ -125,9 +127,11 @@ class Button {
     elem.innerText = Button.TEXT;
   }
 
-  static setSuccessful(elem) {
+  static setSuccessful(elem, stateData) {
     elem.classList.add(Button.CLASS_OK);
-    elem.innerText = Button.TEXT_OK;
+    elem.innerText = stateData.total
+      ? `${Button.TEXT_OK} #${stateData.total}`
+      : `${Button.TEXT_OK}`;
 
     setTimeout(() => Button.reset(), Button.TIMEOUT);
   }
@@ -171,7 +175,7 @@ function getFormInformation(event) {
  */
 function changeState(state) {
   if (state.state === States.OK) {
-    Button.setState(States.OK);
+    Button.setState(States.OK, state);
   } else if (state.state === States.UNAUTHORIZED) {
     Button.setState(States.UNAUTHORIZED);
   } else if (state.state === States.ERROR) {
