@@ -1,7 +1,7 @@
 const CSS_DIR = "css";
 
 const resources = [
-  `/style.css`
+  `./style.css`,
 ];
 
 self.addEventListener("install", function (event) {

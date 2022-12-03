@@ -7,7 +7,7 @@
 
     <meta charset="utf-8">
 
-    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="manifest" href="manifest.webmanifest">
     <link rel="shortcut icon" type="image/png" href="/icons/favicon-32x32.png">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -60,10 +60,10 @@
   <script>
     // -- register a service-worker
     if('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js')
-      console.log('loaded /sw.js')
+      navigator.serviceWorker.register('./sw.js');
+      console.log('loaded ./sw.js')
     } else {
-      console.error('failed to load /sw.js')
+      console.error('failed to load ./sw.js');
     }
   </script>
 </html>

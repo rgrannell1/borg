@@ -1,4 +1,3 @@
-
 # Borg
 
 Borg is a Chrome extension that:

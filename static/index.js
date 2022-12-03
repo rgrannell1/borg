@@ -1,5 +1,4 @@
-
-const ENDPOINT = 'https://mycloud.rgrannell.xyz';
+const ENDPOINT = "https://mycloud.rgrannell.xyz";
 
 /*
  *
@@ -13,54 +12,56 @@ class Status {
  *
  */
 class States {
-  static OK = 'ok';
-  static ERROR = 'error';
-  static UNAUTHORIZED = 'unauthorized'
+  static OK = "ok";
+  static ERROR = "error";
+  static UNAUTHORIZED = "unauthorized";
 }
 
 /*
  *
  */
 class CommonStorageAPI {
-  static TOPIC_BOOKMARKS = 'bookmarks'
+  static TOPIC_BOOKMARKS = "bookmarks";
 
   static async postContent(credentials, topic, content) {
     try {
       const body = JSON.stringify({
-        content: [ content ]
+        content: [content],
       });
       const res = await fetch(`${ENDPOINT}/content/${topic}`, {
-        method: 'post',
-        mode: 'cors',
+        method: "post",
+        mode: "cors",
         headers: new Headers({
-          'content-type': 'application/json',
-          authorization: `Basic ${ btoa(credentials.username + ':' + credentials.password) }`
+          "content-type": "application/json",
+          authorization: `Basic ${
+            btoa(credentials.username + ":" + credentials.password)
+          }`,
         }),
-        body
+        body,
       });
 
       const status = res.status;
 
       if (status === Status.UNAUTHORIZED) {
         return {
-          state: States.UNAUTHORIZED
-        }
+          state: States.UNAUTHORIZED,
+        };
       } else if (status === Status.OK) {
         const body = await res.json();
         return {
           state: States.OK,
-          total: body.stats.total
-        }
+          total: body.stats.total,
+        };
       } else {
         return {
-          state: States.ERROR
-        }
+          state: States.ERROR,
+        };
       }
     } catch (err) {
       console.error(err);
       return {
-        state: States.ERROR
-      }
+        state: States.ERROR,
+      };
     }
   }
 }
@@ -84,8 +85,8 @@ class Specs {
         url,
         id,
         created_at: now.toISOString(),
-      })
-    }
+      }),
+    };
   }
 }
 
@@ -93,19 +94,19 @@ class Specs {
  *
  */
 class Button {
-  static TEXT = 'Assimilate';
-  static TEXT_OK = 'Assimilated!';
-  static TEXT_ERROR = 'Failed!';
-  static TEXT_UNAUTHORIZED = 'Not Authorised';
+  static TEXT = "Assimilate";
+  static TEXT_OK = "Assimilated!";
+  static TEXT_ERROR = "Failed!";
+  static TEXT_UNAUTHORIZED = "Not Authorised";
 
-  static CLASS_OK = 'button-ok';
-  static CLASS_UNAUTHORIZED = 'button-unauthorized';
-  static CLASS_ERROR = 'button-error';
+  static CLASS_OK = "button-ok";
+  static CLASS_UNAUTHORIZED = "button-unauthorized";
+  static CLASS_ERROR = "button-error";
 
   static TIMEOUT = 3_000;
 
   static element() {
-    return document.querySelector('#borg-submit');
+    return document.querySelector("#borg-submit");
   }
 
   static setState(state, stateData) {
@@ -157,17 +158,17 @@ class Button {
 function getFormInformation(event) {
   const tgt = event.currentTarget;
 
-  const user = tgt.username.value
-  const pass = tgt.password.value
-  const url = tgt.url.value
+  const user = tgt.username.value;
+  const pass = tgt.password.value;
+  const url = tgt.url.value;
 
   return {
     credentials: {
       username: user,
-      password: pass
+      password: pass,
     },
-    url
-  }
+    url,
+  };
 }
 
 /*
@@ -187,16 +188,20 @@ function changeState(state) {
  *
  */
 function onload() {
-  const $form = document.getElementById('borg-form');
+  const $form = document.getElementById("borg-form");
 
-  $form.addEventListener('submit', async event => {
+  $form.addEventListener("submit", async (event) => {
     event.preventDefault();
     Button.setState(Button.SUCCESSFUL);
 
-    const {credentials, url} = getFormInformation(event);
-    const state = await CommonStorageAPI.postContent(credentials, CommonStorageAPI.TOPIC_BOOKMARKS, Specs.Bookmark(url));
+    const { credentials, url } = getFormInformation(event);
+    const state = await CommonStorageAPI.postContent(
+      credentials,
+      CommonStorageAPI.TOPIC_BOOKMARKS,
+      Specs.Bookmark(url),
+    );
 
-    changeState(state)
+    changeState(state);
   });
 }
 
