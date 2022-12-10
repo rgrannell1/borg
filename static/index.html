@@ -18,43 +18,56 @@
   </head>
 
   <body>
-    <header>
-      <nav class="navbar">
+    <div class="grid-cnt">
+
+      <div class="brand">
+        <h1>Borg</h1>
+      </div>
+
+      <div class="topbar"></div>
+
+      <main class="borg-main">
+        <form id="borg-form" method="post">
+          <div class="borg-input-group">
+            <label for="username">Username</label>
+            <br>
+            <input class="borg-input" type="text" id="username" name="username" autocomplete="username">
+          </div>
+
+          <div class="borg-input-group">
+            <label for="pass">Password</label>
+            <br>
+            <input class="borg-input" type="password" id="pass" name="password" required autocomplete="current-password">
+          </div>
+
+          <div class="borg-input-group">
+            <label for="url">URL</label>
+            <br>
+            <input class="borg-input" type="url" name="url" id="url" required autocomplete="off">
+          </div>
+
+          <br>
+          <div class="borg-input-group">
+            <button id="borg-submit" class="button-58" id="borg-submit" type="submit">Assimilate</button>
+          </div>
+        </form>
+      </main>
+
+      <aside class="borg-sidebar">
         <ul>
-          <li>
-            <span class="brand"><h1>Borg</h1></span>
-          </li>
+          <li><a href="/foo">Add</a></li>
+          <li><a href="./foo">Show</a></li>
+          <li><div class="seperator"></div></li>
         </ul>
-      </nav>
-    </header>
+      </aside>
 
-    <main>
-      <form id="borg-form" method="post">
-        <div>
-          <label for="username">Username</label>
-          <br>
-          <input class="borg-input" type="text" id="username" name="username" autocomplete="username">
-        </div>
+      <footer class="borg-footer">
 
-        <div>
-          <label for="pass">Password</label>
-          <br>
-          <input class="borg-input" type="password" id="pass" name="password" required autocomplete="current-password">
-        </div>
+      </footer>
 
-        <div>
-          <label for="url">URL</label>
-          <br>
-          <input class="borg-input" type="url" name="url" id="url" required autocomplete="off">
-        </div>
+    </body>
 
-        <br>
-        <div>
-          <button id="borg-submit" class="button-58" id="borg-submit" type="submit">Assimilate</button>
-        </div>
-      </form>
-    </main>
-  </body>
+    </div>
 
   <script src="./index.js"></script>
   <script>
