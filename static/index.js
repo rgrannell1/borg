@@ -189,6 +189,15 @@ function changeState(state) {
  */
 function onload() {
   const $form = document.getElementById("borg-form");
+  const $url = document.getElementById("url");
+  const $clear = document.getElementById("borg-url-clear");
+
+  // wire up clear url button
+  $clear.addEventListener('click', event => {
+    event.preventDefault();
+
+    $url.value = '';
+  })
 
   $form.addEventListener("submit", async (event) => {
     event.preventDefault();

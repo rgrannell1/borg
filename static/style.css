@@ -90,11 +90,18 @@ main {
   font-size: 16px;
   font-size: max(16px, 1em);
   font-family: inherit;
+  box-sizing: border-box;
   padding: 0.25em 0.5em;
   background-color: #fff;
   border: 2px solid var(--input-border);
   min-width: 200px;
   width: 100%;
+}
+
+.borg-url-input-cnt {
+  display: grid;
+  grid-template-columns: 9fr 1fr;
+  column-gap: 20px;
 }
 
 .button-58 {
@@ -179,3 +186,4 @@ footer {
   padding: 16px 0;
   text-align: center;
 }
+
