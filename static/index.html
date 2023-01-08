@@ -18,29 +18,27 @@
   </head>
 
   <body>
-    <header>
-      <nav class="navbar">
-        <ul>
-          <li>
-            <span class="brand"><h1>Borg</h1></span>
-          </li>
-        </ul>
-      </nav>
-    </header>
+    <div class="grid-cnt">
 
-    <main>
-      <form id="borg-form" method="post">
-        <div>
-          <label for="username">Username</label>
-          <br>
-          <input class="borg-input" type="text" id="username" name="username" autocomplete="username">
-        </div>
+      <div class="brand">
+        <h1>Borg</h1>
+      </div>
 
-        <div>
-          <label for="pass">Password</label>
-          <br>
-          <input class="borg-input" type="password" id="pass" name="password" required autocomplete="current-password">
-        </div>
+      <div class="topbar"></div>
+
+      <main class="borg-main">
+        <form id="borg-form" method="post">
+          <div class="borg-input-group">
+            <label for="username">Username</label>
+            <br>
+            <input class="borg-input" type="text" id="username" name="username" autocomplete="username">
+          </div>
+
+          <div class="borg-input-group">
+            <label for="pass">Password</label>
+            <br>
+            <input class="borg-input" type="password" id="pass" name="password" required autocomplete="current-password">
+          </div>
 
         <label for="url">URL</label>
         <br>
@@ -49,13 +47,28 @@
           <button id="borg-url-clear">X</button>
         </div>
 
-        <br>
-        <div>
-          <button id="borg-submit" class="button-58" id="borg-submit" type="submit">Assimilate</button>
-        </div>
-      </form>
-    </main>
-  </body>
+          <br>
+          <div class="borg-input-group">
+            <button id="borg-submit" class="button-58" id="borg-submit" type="submit">Assimilate</button>
+          </div>
+        </form>
+      </main>
+
+      <aside class="borg-sidebar">
+        <ul>
+          <li><a href="/foo">Add</a></li>
+          <li><a href="./foo">Show</a></li>
+          <li><div class="seperator"></div></li>
+        </ul>
+      </aside>
+
+      <footer class="borg-footer">
+
+      </footer>
+
+    </body>
+
+    </div>
 
   <script src="./index.js"></script>
   <script>
