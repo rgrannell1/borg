@@ -1,7 +1,8 @@
-const CSS_DIR = "css";
 
 const resources = [
-  `./style.css`,
+  `./css/shared.css`,
+  `./css/add-bookmark.css`,
+  `./js/index.js`
 ];
 
 self.addEventListener("install", function (event) {

@@ -14,10 +14,12 @@
     <meta name="theme-color" content="#ff0000">
     <meta name="description" content="Save bookmarks to common-storage">
 
-    <link rel="stylesheet" type="text/css" href="style.css" />
+    <link rel="stylesheet" type="text/css" href="css/shared.css" />
+    <link rel="stylesheet" type="text/css" href="css/add-bookmark.css" /Z>
   </head>
 
   <body>
+      <!-- Navbar -->
     <header>
       <nav class="navbar">
         <ul>
@@ -28,6 +30,7 @@
       </nav>
     </header>
 
+    <!-- Input form for new bookmarks -->
     <main>
       <form id="borg-form" method="post">
         <div class="borg-input-cnt">
@@ -57,9 +60,10 @@
     </main>
   </body>
 
-  <script src="./index.js"></script>
+  <script src="./js/index.js"></script>
+
+  <!-- Register a service worker -->
   <script>
-    // -- register a service-worker
     if('serviceWorker' in navigator) {
       navigator.serviceWorker.register('./sw.js');
       console.log('loaded ./sw.js')

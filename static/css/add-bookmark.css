@@ -1,51 +1,8 @@
 
-:root {
-  --navbar-font-colour: white;
-  --navbar-background-colour: red;
-  --navbar-border-colour: rgb(172, 1, 1);
-  --font-colour: #323232;
-  --input-border: black;
-
-    /* default button colours */
-    --button-default-background-colour: #3385ff;
-    --button-default-hover-background-colour: #245bad;
-
-    /* ok button colours */
-  --button-ok-background-colour: #22ff00;
-  --button-ok-hover-background-colour: #1bce00;
-
-    /* error button colours */
-  --button-error-background-colour: red;
-  --button-error-hover-background-colour: rgb(181, 0, 0);
-
-    /* unauthorized button colours */
-  --button-unauthorized-background-colour: rgb(137, 137, 137);
-  --button-unauthorized-hover-background-colour: black;
-
-  /* button text colours */
-  --button-error-colour: white;
-  --button-unauthorized-colour: white;
-  --button-ok-colour: #171e29;
-}
-
 @media (min-width: 768px) {
   .button-58 {
     min-width: 170px;
   }
-}
-
-
-html * {
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  width: 100%;
-}
-
-.brand {
-  font-size: 1.3em;
 }
 
 form {
@@ -60,28 +17,14 @@ label {
   padding-left: 0px;
 }
 
-html {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: var(--font-colour);
+.borg-url-input-cnt {
+  display: grid;
+  grid-template-columns: 9fr 1fr;
+  column-gap: 20px;
 }
 
-.navbar {
-  color: var(--navbar-font-colour);
-  background-color: var(--navbar-background-colour);
-  border-bottom: 4px solid var(--navbar-border-colour);
-}
-
-.navbar ul {
-  list-style: none;
-}
-
-.navbar ul li {
-  padding: 15px;
-}
-
-main {
-  padding: 80px 40px;
-  text-align: center;
+.borg-input-cnt {
+  margin-bottom: 10px;
 }
 
 .borg-input {
@@ -98,15 +41,6 @@ main {
   width: 100%;
 }
 
-.borg-input-cnt {
-  margin-bottom: 10px;
-}
-
-.borg-url-input-cnt {
-  display: grid;
-  grid-template-columns: 9fr 1fr;
-  column-gap: 20px;
-}
 
 .button-58 {
   display: block;

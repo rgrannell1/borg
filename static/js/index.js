@@ -1,25 +1,19 @@
 const ENDPOINT = "https://mycloud.rgrannell.xyz";
 
-/*
- *
- */
+/* */
 class Status {
   static OK = 200;
   static UNAUTHORIZED = 401;
 }
 
-/*
- *
- */
+/* */
 class States {
   static OK = "ok";
   static ERROR = "error";
   static UNAUTHORIZED = "unauthorized";
 }
 
-/*
- *
- */
+/* */
 class CommonStorageAPI {
   static TOPIC_BOOKMARKS = "bookmarks";
 
@@ -66,9 +60,7 @@ class CommonStorageAPI {
   }
 }
 
-/*
- *
- */
+/* */
 class Specs {
   static Bookmark(url) {
     const now = new Date();
@@ -90,9 +82,7 @@ class Specs {
   }
 }
 
-/*
- *
- */
+/* */
 class Button {
   static TEXT = "Assimilate";
   static TEXT_OK = "Assimilated!";
@@ -107,6 +97,16 @@ class Button {
 
   static element() {
     return document.querySelector("#borg-submit");
+  }
+
+  static changeState(state) {
+    if (state.state === States.OK) {
+      Button.setState(States.OK, state);
+    } else if (state.state === States.UNAUTHORIZED) {
+      Button.setState(States.UNAUTHORIZED);
+    } else if (state.state === States.ERROR) {
+      Button.setState(States.ERROR);
+    }
   }
 
   static setState(state, stateData) {
@@ -131,7 +131,7 @@ class Button {
   static setSuccessful(elem, stateData) {
     elem.classList.add(Button.CLASS_OK);
     elem.innerText = stateData.total
-      ? `${Button.TEXT_OK} #${stateData.total}`
+      ? `${Button.TEXT_OK} #${stateData.total.toLocaleString()}`
       : `${Button.TEXT_OK}`;
 
     setTimeout(() => Button.reset(), Button.TIMEOUT);
@@ -152,9 +152,7 @@ class Button {
   }
 }
 
-/*
- *
- */
+/* */
 function getFormInformation(event) {
   const tgt = event.currentTarget;
 
@@ -171,47 +169,60 @@ function getFormInformation(event) {
   };
 }
 
-/*
- *
- */
-function changeState(state) {
-  if (state.state === States.OK) {
-    Button.setState(States.OK, state);
-  } else if (state.state === States.UNAUTHORIZED) {
-    Button.setState(States.UNAUTHORIZED);
-  } else if (state.state === States.ERROR) {
-    Button.setState(States.ERROR);
+class ClearButton {
+  static attach() {
+    const $url = document.getElementById("url");
+    const $clear = document.getElementById("borg-url-clear");
+
+    // wire up clear url button
+    $clear.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      $url.value = "";
+    });
   }
 }
 
-/*
- *
- */
+class Form {
+  static getInfo(event) {
+    const tgt = event.currentTarget;
+
+    const user = tgt.username.value;
+    const pass = tgt.password.value;
+    const url = tgt.url.value;
+
+    return {
+      credentials: {
+        username: user,
+        password: pass,
+      },
+      url,
+    };
+  }
+
+  static attach() {
+    const $form = document.getElementById("borg-form");
+
+    $form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      Button.setState(Button.SUCCESSFUL);
+
+      const { credentials, url } = Form.getInfo(event);
+      const state = await CommonStorageAPI.postContent(
+        credentials,
+        CommonStorageAPI.TOPIC_BOOKMARKS,
+        Specs.Bookmark(url),
+      );
+
+      Button.changeState(state);
+    });
+  }
+}
+
+/* */
 function onload() {
-  const $form = document.getElementById("borg-form");
-  const $url = document.getElementById("url");
-  const $clear = document.getElementById("borg-url-clear");
-
-  // wire up clear url button
-  $clear.addEventListener('click', event => {
-    event.preventDefault();
-
-    $url.value = '';
-  })
-
-  $form.addEventListener("submit", async (event) => {
-    event.preventDefault();
-    Button.setState(Button.SUCCESSFUL);
-
-    const { credentials, url } = getFormInformation(event);
-    const state = await CommonStorageAPI.postContent(
-      credentials,
-      CommonStorageAPI.TOPIC_BOOKMARKS,
-      Specs.Bookmark(url),
-    );
-
-    changeState(state);
-  });
+  ClearButton.attach();
+  Form.attach();
 }
 
 onload();
