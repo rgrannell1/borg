@@ -8,64 +8,28 @@
     <meta charset="utf-8">
 
     <link rel="manifest" href="manifest.webmanifest">
-    <link rel="shortcut icon" type="image/png" href="/icons/favicon-32x32.png">
+    <link rel="shortcut icon" type="image/png" href="./icons/favicon-32x32.png">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="#ff0000">
     <meta name="description" content="Save bookmarks to common-storage">
 
-    <link rel="stylesheet" type="text/css" href="css/shared.css" />
-    <link rel="stylesheet" type="text/css" href="css/add-bookmark.css" /Z>
+    <style>
+      html * { margin: 0; padding: 0; }
+    </style>
   </head>
 
-  <body>
-      <!-- Navbar -->
-    <header>
-      <nav class="navbar">
-        <ul>
-          <li>
-            <span class="brand"><h1>Borg</h1></span>
-          </li>
-        </ul>
-      </nav>
-    </header>
-
-    <!-- Input form for new bookmarks -->
-    <main>
-      <form id="borg-form" method="post">
-        <div class="borg-input-cnt">
-          <label for="username">Username</label>
-          <br>
-          <input class="borg-input" type="text" id="username" name="username" autocomplete="username">
-        </div>
-
-        <div class="borg-input-cnt">
-          <label for="pass">Password</label>
-          <br>
-          <input class="borg-input" type="password" id="pass" name="password" required autocomplete="current-password">
-        </div>
-
-        <label for="url">URL</label>
-        <br>
-        <div class="borg-url-input-cnt">
-          <input class="borg-input" type="url" name="url" id="url" required autocomplete="off">
-          <button id="borg-url-clear">X</button>
-        </div>
-
-        <br>
-        <div>
-          <button id="borg-submit" class="button-58" id="borg-submit" type="submit">Assimilate</button>
-        </div>
-      </form>
-    </main>
+  <body style="width: 100%">
+    <borg-app></borg-app>
   </body>
 
-  <script src="./js/index.js"></script>
+  <script async type="module" src="./js/views/app.js"></script>
 
   <!-- Register a service worker -->
-  <script>
+  <script async type="module">
+    const swPath = new URL('./sw.js', import.meta.url);
     if('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./sw.js');
+      navigator.serviceWorker.register(swPath);
       console.log('loaded ./sw.js')
     } else {
       console.error('failed to load ./sw.js');

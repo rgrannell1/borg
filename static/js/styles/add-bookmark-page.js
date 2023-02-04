@@ -1,4 +1,6 @@
+import { css } from "https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js";
 
+export default css`
 @media (min-width: 768px) {
   .button-58 {
     min-width: 170px;
@@ -40,7 +42,6 @@ label {
   min-width: 200px;
   width: 100%;
 }
-
 
 .button-58 {
   display: block;
@@ -118,9 +119,4 @@ label {
   border-color: var(--button-unauthorized-hover-background-colour);
   fill: var(--button-unauthorized-hover-background-colour);
 }
-
-footer {
-  border-top: 1px solid rgba(0,0,0,.12);
-  padding: 16px 0;
-  text-align: center;
-}
+`;

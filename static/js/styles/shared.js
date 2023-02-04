@@ -1,5 +1,7 @@
+import { css } from "https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js";
 
-:root {
+export default css`
+:host {
   --navbar-font-colour: hsl(0, 0%, 100%);
   --navbar-background-colour: hsl(0, 100%, 50%);
   --navbar-border-colour: hsl(0, 99%, 34%);
@@ -30,40 +32,10 @@
   --main-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-html * {
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  width: 100%;
-}
-
-html {
+main {
   font-family: var(--main-font);
   color: var(--font-colour);
-}
-
-main {
   padding: 80px 40px;
   text-align: center;
 }
-
-.brand {
-  font-size: 1.3em;
-}
-
-.navbar {
-  color: var(--navbar-font-colour);
-  background-color: var(--navbar-background-colour);
-  border-bottom: 4px solid var(--navbar-border-colour);
-}
-
-.navbar ul {
-  list-style: none;
-}
-
-.navbar ul li {
-  padding: 15px;
-}
-
+`;
