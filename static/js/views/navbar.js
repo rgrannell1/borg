@@ -2,16 +2,12 @@ import {
   html,
   LitElement,
 } from "https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js";
-import NAVBAR_STYLE from "../styles/navbar.js";
-import SHARED_STYLE from "../styles/shared.js";
 
 export class BorgNavbar extends LitElement {
-  static get styles() {
-    return [
-      SHARED_STYLE,
-      NAVBAR_STYLE,
-    ];
+  createRenderRoot() {
+    return this;
   }
+
   render() {
     return html`
     <header>
@@ -21,7 +17,7 @@ export class BorgNavbar extends LitElement {
             <span class="brand"><h1>Borg</h1></span>
           </li>
         </ul>
-      </nav>
+        </nav>
     </header>
     `;
   }

@@ -1,4 +1,3 @@
-
 /*
  * Event describing bookmark creation
  */

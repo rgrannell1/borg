@@ -9,21 +9,25 @@ export class CommonStorageAPI {
     this.credentials = credentials;
   }
 
+  headers() {
+    const { username, password } = this.credentials;
+
+    return new Headers({
+      "content-type": "application/json",
+      authorization: `Basic ${window.btoa(username + ":" + password)}`,
+    });
+  }
+
   async postContent(topic, content) {
     try {
       const body = JSON.stringify({
         content: [content],
       });
 
-      const {username, password} = this.credentials;
-
       const res = await fetch(`${this.endpoint}/content/${topic}`, {
         method: "post",
         mode: "cors",
-        headers: new Headers({
-          "content-type": "application/json",
-          authorization: `Basic ${window.btoa(username + ":" + password)}`,
-        }),
+        headers: this.headers(),
         body,
       });
 
@@ -50,5 +54,16 @@ export class CommonStorageAPI {
         state: AddBookmarkStates.ERROR,
       };
     }
+  }
+
+  async *getContent(topic, startId) {
+    const params = typeof startId !== "undefined" ? `?startId=${startId}` : "";
+
+    const res = await fetch(`${this.endpoint}/content/${topic}${params}`, {
+      mode: "cors",
+      headers: this.headers(),
+    });
+
+    // console.log(await res.text());
   }
 }

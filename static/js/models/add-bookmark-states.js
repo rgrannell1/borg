@@ -1,4 +1,3 @@
-
 export class AddBookmarkStates {
   static DEFAULT = "DEFAULT";
   static OK = "OK";

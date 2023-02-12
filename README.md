@@ -1,9 +1,6 @@
 # Borg
 
-Borg is a Chrome extension that:
-
-- bookmarks a page's selected-text using a [CloudEvent](https://cloudevents.io/)
-- sends this bookmark to an endpoint of your choice
+Borg is website that stores bookmarks to common-storage.
 
 ## Why?
 

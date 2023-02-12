@@ -1,28 +1,26 @@
 
-import {
-  openDB,
-  deleteDB,
-  wrap,
-  unwrap
-} from 'https://cdn.jsdelivr.net/npm/idb@7.1.1/+esm'
-
-export class Cache {
-  constructor(topics) {
+export class BorgCache {
+  constructor(topics, client) {
     this.topics = topics;
+    this.client = client;
+    this.events = new Map();
   }
   async init() {
-
   }
 
   async maxId(topic) {
-
+    return 0;
   }
 
   async sync() {
+    for (const topic of this.topics) {
 
+    }
   }
 
   async *getContent(topic) {
+    const startId = await this.maxId(topic);
 
+    yield* this.client.getContent(topic, startId);
   }
 }

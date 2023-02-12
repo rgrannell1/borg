@@ -2,11 +2,15 @@ import {
   html,
   LitElement,
 } from "https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js";
-import SHARED_STYLE from "../styles/shared.js";
 
 import "./add-bookmark-page.js";
 import "./show-bookmarks-page.js";
 import "./navbar.js";
+
+class BorgPages {
+  static ADD_BOOKMARK = "add-bookmark";
+  static SHOW_BOOKMARKS = "show-bookmarks";
+}
 
 /*
  * BorgApp
@@ -14,17 +18,18 @@ import "./navbar.js";
 export class BorgApp extends LitElement {
   constructor() {
     super();
-    this.page = "add-bookmark";
+    this.page = BorgPages.ADD_BOOKMARK;
+    //this.page = BorgPages.SHOW_BOOKMARKS;
   }
   static get properties() {
     return {
       page: { type: String },
     };
   }
-  static get styles() {
-    return [
-      SHARED_STYLE,
-    ];
+
+  // Awaiting https://bugs.chromium.org/p/chromium/issues/detail?id=649162
+  createRenderRoot() {
+    return this;
   }
 
   renderShowBookmarks() {
@@ -46,9 +51,9 @@ export class BorgApp extends LitElement {
   render() {
     let appPage;
 
-    if (this.page === "add-bookmark") {
+    if (this.page === BorgPages.ADD_BOOKMARK) {
       appPage = this.renderAddBookmark();
-    } else if (this.page === "show-bookmarks") {
+    } else if (this.page === BorgPages.SHOW_BOOKMARKS) {
       appPage = this.renderShowBookmarks();
     }
 

@@ -2,13 +2,10 @@ import {
   html,
   LitElement,
 } from "https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js";
-import SHARED_STYLE from "../styles/shared.js";
-import ADD_BOOKMARK_STYLE from "../styles/add-bookmark-page.js";
 
 import { CommonStorageAPI } from "../services/api.js";
 import { AddBookmarkStates } from "../models/add-bookmark-states.js";
 import * as events from "../models/events.js";
-
 
 /*
  * AddBookmarkPage
@@ -22,11 +19,9 @@ class AddBookmarkPage extends LitElement {
     this.state = AddBookmarkStates.DEFAULT;
   }
 
-  static get styles() {
-    return [
-      SHARED_STYLE,
-      ADD_BOOKMARK_STYLE,
-    ];
+  // Awaiting https://bugs.chromium.org/p/chromium/issues/detail?id=649162
+  createRenderRoot() {
+    return this;
   }
 
   static get properties() {
@@ -42,7 +37,7 @@ class AddBookmarkPage extends LitElement {
    * @param {Event} event
    */
   clearUrl(event) {
-    const $url = this.shadowRoot.getElementById("url");
+    const $url = document.getElementById("url");
 
     event.preventDefault();
     $url.value = "";
@@ -55,11 +50,9 @@ class AddBookmarkPage extends LitElement {
    * @returns {Object} credentials and url
    */
   getFormInformation(event) {
-    const tgt = event.currentTarget;
-
-    const $username = this.shadowRoot.getElementById("username");
-    const $pass = this.shadowRoot.getElementById("pass");
-    const $url = this.shadowRoot.getElementById("url");
+    const $username = document.getElementById("username");
+    const $pass = document.getElementById("pass");
+    const $url = document.getElementById("url");
 
     return {
       credentials: {
@@ -108,7 +101,12 @@ class AddBookmarkPage extends LitElement {
     <div class="borg-input-cnt">
       <label for="username">Username</label>
       <br>
-      <input class="borg-input" type="text" id="username" name="username" autocomplete="username">
+      <input
+        class="borg-input"
+        type="text"
+        id="username"
+        name="username"
+        autocomplete="username">
     </div>
     `;
   }
@@ -118,7 +116,13 @@ class AddBookmarkPage extends LitElement {
     <div class="borg-input-cnt">
       <label for="pass">Password</label>
       <br>
-      <input class="borg-input" type="password" id="pass" name="password" required autocomplete="current-password">
+      <input
+        class="borg-input"
+        type="password"
+        id="pass"
+        name="password"
+        required
+        autocomplete="current-password">
     </div>
     `;
   }
@@ -151,12 +155,6 @@ class AddBookmarkPage extends LitElement {
 }
 
 export class AddBookmarkButton extends LitElement {
-  static get styles() {
-    return [
-      SHARED_STYLE,
-      ADD_BOOKMARK_STYLE,
-    ];
-  }
 
   static get properties() {
     return {
@@ -184,6 +182,10 @@ export class AddBookmarkButton extends LitElement {
     } else {
       console.error(`unknown state: ${this.state}`);
     }
+  }
+
+  createRenderRoot() {
+    return this;
   }
 
   render() {
