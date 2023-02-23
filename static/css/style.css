@@ -30,6 +30,8 @@
   --main-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+html * { margin: 0; padding: 0; }
+
 main {
   font-family: var(--main-font);
   color: var(--font-colour);
@@ -42,6 +44,7 @@ h1 {
   margin: 0px;
   padding-right: 20px;
 }
+
 .brand {
   font-size: 1.3em;
 }
@@ -49,12 +52,12 @@ h1 {
 .navbar {
   color: var(--navbar-font-colour);
   background-color: var(--navbar-background-colour);
-  border-bottom: 4px solid var(--navbar-border-colour);
 }
 
 .navbar ul {
   margin: 0px;
   list-style: none;
+  border-bottom: 4px solid var(--navbar-border-colour);
 }
 
 .navbar ul li {
@@ -62,14 +65,18 @@ h1 {
   display: inline-block;
 }
 
+.navbar ul li:first {
+  background: green !important;
+  border-bottom: 4px solid black;
+}
+
 header {
   font-family: var(--main-font);
   color: var(--font-colour);
 }
 
-
 @media (min-width: 768px) {
-  .button-58 {
+  .submit-button {
     min-width: 170px;
   }
 }
@@ -110,7 +117,7 @@ label {
   width: 100%;
 }
 
-.button-58 {
+.submit-button {
   display: block;
   float: left;
   font-size: 1.2em;
@@ -139,16 +146,16 @@ label {
   touch-action: manipulation;
 }
 
-.button-58:active {
+.submit-button:active {
   background-color: var(--button-default-background-colour);
   border-color: var(--button-default-background-colour);
   fill: var(--button-default-background-colour);
 }
 
-.button-58:hover {
-  background-color: --button-default-hover-background-colour;
-  border-color: --button-default-hover-background-colour;
-  fill: --button-default-hover-background-colour;
+.submit-button:hover, .submit-button:focus {
+  background-color: var(--button-default-hover-background-colour);
+  border-color: var(--button-default-hover-background-colour);
+  fill: var(--button-default-hover-background-colour);
 }
 
 .button-ok {
@@ -157,7 +164,7 @@ label {
   color: var(--button-ok-colour);
 }
 
-.button-ok:hover {
+.button-ok:hover, .button-ok:focus {
   background-color: var(--button-ok-hover-background-colour);
   border-color: var(--button-ok-hover-background-colour);
   fill: var(--button-ok-hover-background-colour);
@@ -169,7 +176,7 @@ label {
   color: var(--button-error-colour);
 }
 
-.button-error:hover {
+.button-error:hover, .button-error:focus {
   background-color: var(--button-error-hover-background-colour);
   border-color: var(--button-error-hover-background-colour);
   fill: var(--button-error-hover-background-colour);
@@ -181,7 +188,7 @@ label {
   color: var(--button-unauthorized-colour);
 }
 
-.button-unauthorized:hover {
+.button-unauthorized:hover, .button-unauthorized:focus {
   background-color: var(--button-unauthorized-hover-background-colour);
   border-color: var(--button-unauthorized-hover-background-colour);
   fill: var(--button-unauthorized-hover-background-colour);

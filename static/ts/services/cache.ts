@@ -1,5 +1,10 @@
+import { CommonStorageAPI } from "./api.js";
 
 export class BorgCache {
+  topics: string[];
+  client: CommonStorageAPI;
+  events: Map<string, EventSource>;
+
   constructor(topics, client) {
     this.topics = topics;
     this.client = client;
@@ -14,7 +19,6 @@ export class BorgCache {
 
   async sync() {
     for (const topic of this.topics) {
-
     }
   }
 

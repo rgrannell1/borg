@@ -3,3 +3,6 @@
 .netlify
 node_modules/
 old/
+js-old/
+js/
+static/vendor/lit-element.js

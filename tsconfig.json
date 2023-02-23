@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "rootDir": "static/ts",
+    "outDir": "static/js",
+    "target": "ESNext",
+    "module": "ESNext",
+    "lib": [
+      "ESNext",
+      "DOM"
+    ]
+  }
+}

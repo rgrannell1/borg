@@ -1,15 +1,5 @@
 const resources = [
-  "./js/styles/add-bookmark-page.js",
-  "./js/styles/navbar.js",
-  "./js/styles/shared.js",
-  "./js/views/app.js",
-  "./js/views/show-bookmarks-page.js",
-  "./js/views/add-bookmark-page.js",
-  "./js/views/navbar.js",
-  "./js/models/events.js",
-  "./js/models/status.js",
-  "./js/models/add-bookmark-states.js",
-  "./js/services/api.js",
+  "./js/app.js",
 ];
 
 self.addEventListener("install", function (event) {

@@ -1,7 +1,7 @@
 /*
  * Event describing bookmark creation
  */
-export function AddBookmark(url) {
+export function AddBookmark(url: string) {
   const now = new Date();
   const id = `urn:bookmark:${now.getTime()}`;
 
@@ -23,8 +23,12 @@ export function AddBookmark(url) {
 /*
  * Event describing bookmark relation creation + edits
  */
-export function EditBookmarkRelations(bookmark_id, relations) {
+export function EditBookmarkRelations<T>(
+  bookmark_id: string,
+  relations: Record<string, T>,
+) {
   const now = new Date();
+  const id = `urn:bookmark_relations:${now.getTime()}`;
 
   return {
     source: "https://github.com/rgrannell1/borg/spec/edit_bookmark.json",

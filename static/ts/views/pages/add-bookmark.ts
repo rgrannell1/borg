@@ -1,11 +1,15 @@
-import {
-  html,
-  LitElement,
-} from "https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js";
+import { html, LitElement } from "../../../vendor/lit-element.js";
 
-import { CommonStorageAPI } from "../services/api.js";
-import { AddBookmarkStates } from "../models/add-bookmark-states.js";
-import * as events from "../models/events.js";
+import { CommonStorageAPI } from "../../services/api.js";
+import { AddBookmarkStates } from "../../models/add-bookmark-states.js";
+import * as events from "../../models/events.js";
+
+enum ButtonClasses {
+  SUBMIT = "submit-button",
+  OK = "button-ok",
+  ERROR = "button-error",
+  UNAUTHORIZED = "button-unauthorized",
+}
 
 /*
  * AddBookmarkPage
@@ -13,6 +17,9 @@ import * as events from "../models/events.js";
 class AddBookmarkPage extends LitElement {
   static RESET_TIME = 3_500;
   static ENDPOINT = "https://mycloud.rgrannell.xyz";
+
+  state: AddBookmarkStates;
+  totalBookmarks: number;
 
   constructor() {
     super();
@@ -26,9 +33,25 @@ class AddBookmarkPage extends LitElement {
 
   static get properties() {
     return {
-      state: { type: String },
-      totalBookmarks: { type: Number },
+      state: {
+        type: String,
+        reflect: true,
+      },
+      totalBookmarks: {
+        type: Number,
+        reflect: true,
+      },
     };
+  }
+
+  /*
+   * Don't clear the URL input field when the user presses enter.
+   */
+  keyDown(event) {
+    if (event.key === "Enter") {
+      // don't clear on enter
+      event.preventDefault();
+    }
   }
 
   /*
@@ -37,7 +60,7 @@ class AddBookmarkPage extends LitElement {
    * @param {Event} event
    */
   clearUrl(event) {
-    const $url = document.getElementById("url");
+    const $url = document.getElementById("url") as HTMLInputElement;
 
     event.preventDefault();
     $url.value = "";
@@ -50,9 +73,9 @@ class AddBookmarkPage extends LitElement {
    * @returns {Object} credentials and url
    */
   getFormInformation(event) {
-    const $username = document.getElementById("username");
-    const $pass = document.getElementById("pass");
-    const $url = document.getElementById("url");
+    const $username = document.getElementById("username") as HTMLInputElement;
+    const $pass = document.getElementById("pass") as HTMLInputElement;
+    const $url = document.getElementById("url") as HTMLInputElement;
 
     return {
       credentials: {
@@ -63,37 +86,47 @@ class AddBookmarkPage extends LitElement {
     };
   }
 
+  async postBookmark(event: Event) {
+    const { credentials, url } = this.getFormInformation(event);
+
+    const client = new CommonStorageAPI(AddBookmarkPage.ENDPOINT, credentials);
+    return await client.postContent(
+      CommonStorageAPI.TOPIC_BOOKMARKS,
+      events.AddBookmark(url),
+    );
+  }
+
+  refresh() {
+    (this as LitElement).requestUpdate();
+  }
+
   /*
    * Handle the form submission; submit the bookmark to the server.
    *
    * @param {Event} event
    */
-  async handleSubmit(event) {
+  async handleSubmit(event: Event) {
     event.preventDefault();
 
-    const { credentials, url } = this.getFormInformation(event);
-
-    const client = new CommonStorageAPI(AddBookmarkPage.ENDPOINT, credentials);
-    const res = await client.postContent(
-      CommonStorageAPI.TOPIC_BOOKMARKS,
-      events.AddBookmark(url),
-    );
-
+    const res = await this.postBookmark(event);
     if (!res.state) {
       console.error("Borg: No state returned from API call");
       return;
     }
-
-    this.state = res.state;
+    this.state = res.state as AddBookmarkStates;
+    this.refresh();
 
     if (res.total) {
       this.totalBookmarks = res.total;
     }
+    this.refresh();
 
+    // wait a moment before resetting
     if (this.state !== AddBookmarkStates.DEFAULT) {
       await new Promise((res) => setTimeout(res, AddBookmarkPage.RESET_TIME));
       this.state = AddBookmarkStates.DEFAULT;
     }
+    this.refresh();
   }
 
   renderUsernameInput() {
@@ -132,35 +165,16 @@ class AddBookmarkPage extends LitElement {
     <label for="url">URL</label>
     <br>
     <div class="borg-url-input-cnt">
-      <input class="borg-input" type="url" name="url" id="url" required autocomplete="off">
-      <button @click=${this.clearUrl} id="borg-url-clear">X</button>
+      <input
+        @keydown=${this.keyDown}
+        class="borg-input"
+        type="url" name="url" id="url" required autocomplete="off">
+
+      <button
+        @click=${this.clearUrl}
+        id="borg-url-clear">X</button>
     </div>
     `;
-  }
-
-  render() {
-    return html`
-    <form id="borg-form" method="post">
-      ${this.renderUsernameInput()}
-      ${this.renderPasswordInput()}
-      ${this.renderUrlInput()}
-
-      <br>
-
-      <borg-add-bookmark-button @click=${this.handleSubmit} state=${this.state} totalBookmarks=${this.totalBookmarks}>
-      </borg-add-bookmark-button>
-    </form>
-    `;
-  }
-}
-
-export class AddBookmarkButton extends LitElement {
-
-  static get properties() {
-    return {
-      state: { type: String },
-      totalBookmarks: { type: Number },
-    };
   }
 
   /*
@@ -184,31 +198,41 @@ export class AddBookmarkButton extends LitElement {
     }
   }
 
-  createRenderRoot() {
-    return this;
-  }
-
-  render() {
-    let classes = ["button-58"];
+  renderButton() {
+    let classes = [ButtonClasses.SUBMIT];
 
     if (this.state === AddBookmarkStates.DEFAULT) {
     } else if (this.state === AddBookmarkStates.OK) {
-      classes.push("button-ok");
+      classes.push(ButtonClasses.OK);
     } else if (this.state === AddBookmarkStates.ERROR) {
-      classes.push("button-error");
+      classes.push(ButtonClasses.ERROR);
     } else if (this.state === AddBookmarkStates.UNAUTHORIZED) {
-      classes.push("button-unauthorized");
+      classes.push(ButtonClasses.UNAUTHORIZED);
     }
 
     return html`
     <div>
-      <button @click=${this.handleSubmit} class=${
-      classes.join(" ")
-    } id="borg-submit" class="button-58" id="borg-submit" type="submit">${this.buttonText()}</button>
+      <button
+        class=${classes.join(" ")}
+        id="borg-submit"
+        type="submit">${this.buttonText()}</button>
     </div>
+    `;
+  }
+
+  render() {
+    return html`
+    <form id="borg-form" method="post" @submit=${this.handleSubmit.bind(this)}>
+      ${this.renderUsernameInput()}
+      ${this.renderPasswordInput()}
+      ${this.renderUrlInput()}
+
+      <br>
+
+      ${this.renderButton()}
+    </form>
     `;
   }
 }
 
-customElements.define("borg-add-bookmark", AddBookmarkPage);
-customElements.define("borg-add-bookmark-button", AddBookmarkButton);
+customElements.define("borg-add-bookmark", AddBookmarkPage as any);

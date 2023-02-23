@@ -1,7 +1,4 @@
-import {
-  html,
-  LitElement,
-} from "https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js";
+import { html, LitElement } from "../../../vendor/lit-element.js";
 
 export class BorgNavbar extends LitElement {
   createRenderRoot() {
@@ -23,4 +20,7 @@ export class BorgNavbar extends LitElement {
   }
 }
 
-customElements.define("borg-navbar", BorgNavbar);
+customElements.define(
+  "borg-navbar",
+  BorgNavbar as any as CustomElementConstructor,
+);

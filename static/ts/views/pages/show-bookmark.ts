@@ -1,10 +1,7 @@
-import {
-  css,
-  html,
-  LitElement,
-} from "https://cdn.jsdelivr.net/gh/lit/dist@2/core/lit-core.min.js";
-import { BorgCache } from "../services/cache.js";
-import { CommonStorageAPI } from "../services/api.js";
+import { html, LitElement } from "../../../vendor/lit-element.js";
+
+import { BorgCache } from "../../services/cache.js";
+import { CommonStorageAPI } from "../../services/api.js";
 
 class SearchBookmarks extends LitElement {
   render() {
@@ -17,16 +14,19 @@ class SearchBookmarks extends LitElement {
 }
 
 class BorgBookmarkCard extends LitElement {
+  url: string;
+  createdAt: Date;
+
   constructor() {
     super();
   }
+
   static get properties() {
     return {
       url: { type: String },
       createdAt: { type: Date },
     };
   }
-
 
   formatTime(date) {
     date = new Date(date);
@@ -86,6 +86,9 @@ class BorgCredentialsInput extends LitElement {
 class ShowBookmarksPage extends LitElement {
   static ENDPOINT = "https://mycloud.rgrannell.xyz";
 
+  bookmarks: Array<any>;
+  credentials: any;
+
   constructor() {
     super();
     this.bookmarks = [];
@@ -103,7 +106,7 @@ class ShowBookmarksPage extends LitElement {
 
     const client = new CommonStorageAPI(
       ShowBookmarksPage.ENDPOINT,
-      credentials,
+      this.credentials,
     );
     const cache = new BorgCache([
       "bookmarks",
@@ -142,7 +145,7 @@ class ShowBookmarksPage extends LitElement {
   }
 }
 
-customElements.define("borg-bookmark-card", BorgBookmarkCard);
-customElements.define("borg-credentials-input", BorgCredentialsInput);
-customElements.define("borg-search-bookmarks", SearchBookmarks);
-customElements.define("borg-show-bookmarks", ShowBookmarksPage);
+customElements.define("borg-bookmark-card", BorgBookmarkCard as any);
+customElements.define("borg-credentials-input", BorgCredentialsInput as any);
+customElements.define("borg-search-bookmarks", SearchBookmarks as any);
+customElements.define("borg-show-bookmarks", ShowBookmarksPage as any);
