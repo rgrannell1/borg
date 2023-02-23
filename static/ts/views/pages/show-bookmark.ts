@@ -145,7 +145,7 @@ class ShowBookmarksPage extends LitElement {
   }
 }
 
-customElements.define("borg-bookmark-card", BorgBookmarkCard as any);
-customElements.define("borg-credentials-input", BorgCredentialsInput as any);
-customElements.define("borg-search-bookmarks", SearchBookmarks as any);
-customElements.define("borg-show-bookmarks", ShowBookmarksPage as any);
+customElements.define("borg-bookmark-card", BorgBookmarkCard as LitElement);
+customElements.define("borg-credentials-input", BorgCredentialsInput as LitElement);
+customElements.define("borg-search-bookmarks", SearchBookmarks as LitElement);
+customElements.define("borg-show-bookmarks", ShowBookmarksPage as LitElement);

@@ -72,7 +72,7 @@ class AddBookmarkPage extends LitElement {
    * @param {Event} event
    * @returns {Object} credentials and url
    */
-  getFormInformation(event) {
+  getFormInformation() {
     const $username = document.getElementById("username") as HTMLInputElement;
     const $pass = document.getElementById("pass") as HTMLInputElement;
     const $url = document.getElementById("url") as HTMLInputElement;
@@ -86,8 +86,8 @@ class AddBookmarkPage extends LitElement {
     };
   }
 
-  async postBookmark(event: Event) {
-    const { credentials, url } = this.getFormInformation(event);
+  async postBookmark() {
+    const { credentials, url } = this.getFormInformation();
 
     const client = new CommonStorageAPI(AddBookmarkPage.ENDPOINT, credentials);
     return await client.postContent(
@@ -108,7 +108,7 @@ class AddBookmarkPage extends LitElement {
   async handleSubmit(event: Event) {
     event.preventDefault();
 
-    const res = await this.postBookmark(event);
+    const res = await this.postBookmark();
     if (!res.state) {
       console.error("Borg: No state returned from API call");
       return;
@@ -199,10 +199,9 @@ class AddBookmarkPage extends LitElement {
   }
 
   renderButton() {
-    let classes = [ButtonClasses.SUBMIT];
+    const classes = [ButtonClasses.SUBMIT];
 
-    if (this.state === AddBookmarkStates.DEFAULT) {
-    } else if (this.state === AddBookmarkStates.OK) {
+    if (this.state === AddBookmarkStates.OK) {
       classes.push(ButtonClasses.OK);
     } else if (this.state === AddBookmarkStates.ERROR) {
       classes.push(ButtonClasses.ERROR);
@@ -235,4 +234,4 @@ class AddBookmarkPage extends LitElement {
   }
 }
 
-customElements.define("borg-add-bookmark", AddBookmarkPage as any);
+customElements.define("borg-add-bookmark", AddBookmarkPage as LitElement);

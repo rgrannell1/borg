@@ -16,7 +16,7 @@ export class CommonStorageAPI {
 
     return new Headers({
       "content-type": "application/json",
-      authorization: `Basic ${window.btoa(username + ":" + password)}`,
+      authorization: `Basic ${btoa(username + ":" + password)}`,
     });
   }
 
@@ -26,24 +26,12 @@ export class CommonStorageAPI {
         content: [content],
       });
 
-      /*
       const res = await fetch(`${this.endpoint}/content/${topic}`, {
         method: "post",
         mode: "cors",
         headers: this.headers(),
         body,
       });
-      */
-      const res = {
-        status: 200,
-        json() {
-          return {
-            stats: {
-              total: 1,
-            },
-          };
-        },
-      };
 
       const status = res.status;
 
