@@ -222,13 +222,15 @@ class AddBookmarkPage extends LitElement {
   render() {
     return html`
     <form id="borg-form" method="post" @submit=${this.handleSubmit.bind(this)}>
-      ${this.renderUsernameInput()}
-      ${this.renderPasswordInput()}
-      ${this.renderUrlInput()}
+      <main>
+        ${this.renderUsernameInput()}
+        ${this.renderPasswordInput()}
+        ${this.renderUrlInput()}
 
-      <br>
+        <br>
 
-      ${this.renderButton()}
+        ${this.renderButton()}
+      </main>
     </form>
     `;
   }

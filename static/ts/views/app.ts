@@ -22,21 +22,13 @@ export class BorgApp extends LitElement {
     return this;
   }
 
-  renderShowBookmarks() {
-    return html`<borg-show-bookmarks/>`;
-  }
-
-  renderAddBookmark() {
-    return html`<borg-add-bookmark/>`;
-  }
-
   render() {
     let appPage;
 
     if (this.page === BorgPages.ADD_BOOKMARK) {
-      appPage = this.renderAddBookmark();
+      appPage = html`<borg-add-bookmark/>`;
     } else if (this.page === BorgPages.SHOW_BOOKMARKS) {
-      appPage = this.renderShowBookmarks();
+      appPage = html`<borg-show-bookmarks/>`;
     } else {
       throw new Error("Unknown page");
     }
@@ -52,4 +44,4 @@ export class BorgApp extends LitElement {
   }
 }
 
-customElements.define("borg-app", BorgApp as any);
+customElements.define("borg-app", BorgApp as LitElement);

@@ -22,5 +22,5 @@ export class BorgNavbar extends LitElement {
 
 customElements.define(
   "borg-navbar",
-  BorgNavbar as any as CustomElementConstructor,
+  BorgNavbar as LitElement,
 );

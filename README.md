@@ -2,20 +2,11 @@
 
 Borg is website that stores bookmarks to common-storage.
 
-## Why?
-
-- Pinboard might shut down
-- I want to capture text from documents, not just whole pages
-
-## What does it send?
-
-See `spec/bookmark.json`
-
 ## License
 
 The MIT License
 
-Copyright (c) 2022 Róisín Grannell
+Copyright (c) 2023 Róisín Grannell
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
