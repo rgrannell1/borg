@@ -1,4 +1,5 @@
-import { html, LitElement } from "../../../vendor/lit-element.js";
+
+import { html, LitElement } from "/home/rg/Code/ws/axon/borg/static/vendor/lit-element.js";
 
 export class BorgNavbar extends LitElement {
   createRenderRoot() {
@@ -8,19 +9,19 @@ export class BorgNavbar extends LitElement {
   render() {
     return html`
     <header>
-      <nav class="navbar">
+      <nav class="borg-navbar">
         <ul>
-          <li>
-            <span class="brand"><h1>Borg</h1></span>
+          <li class="view-button view-button-active">
+            <a href="#">Databases</a>
+          </li>
+          <li class="view-button">
+          <a href="#">About</a>
           </li>
         </ul>
-        </nav>
+      </nav>
     </header>
-    `;
+    `
   }
 }
 
-customElements.define(
-  "borg-navbar",
-  BorgNavbar as LitElement,
-);
+customElements.define("borg-navbar", BorgNavbar as LitElement);

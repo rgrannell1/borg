@@ -1,202 +1,113 @@
 
-:root {
-  --navbar-font-colour: hsl(0, 0%, 100%);
-  --navbar-background-colour: hsl(0, 100%, 50%);
-  --navbar-border-colour: hsl(0, 99%, 34%);
-  --font-colour: hsl(0, 0%, 20%);
-  --input-border: hsl(0, 0%, 0%);
 
-  /* default button colours */
-  --button-default-background-colour: hsl(216, 100%, 60%);
-  --button-default-hover-background-colour: hsl(216, 66%, 41%);
-
-  /* ok button colours */
-  --button-ok-background-colour: hsl(112, 100%, 50%);
-  --button-ok-hover-background-colour: hsl(112, 100%, 40%);
-
-  /* error button colours */
-  --button-error-background-colour: hsl(0, 100%, 50%);
-  --button-error-hover-background-colour: hsl(0, 100%, 35%);
-
-  /* unauthorized button colours */
-  --button-unauthorized-background-colour: hsl(0, 0%, 54%);
-  --button-unauthorized-hover-background-colour: hsl(0, 0%, 0%);
-
-  /* button text colours */
-  --button-error-colour: hsl(0, 0%, 100%);
-  --button-unauthorized-colour: hsl(0, 0%, 100%);
-  --button-ok-colour: hsl(217, 28%, 13%);
-
-  --main-font: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+@font-face {
+  font-family: 'Montserrat';
+  src: URL('../fonts/Montserrat-Regular.ttf') format('truetype');
 }
 
-html * { margin: 0; padding: 0; }
+
+html * {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: Montserrat;
+}
+
+.app-cnt {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: 300px 1fr;
+}
+
+borg-navbar {
+  background-color: red;
+  color: white;
+  grid-row: 1;
+  padding: 20px;
+  border-bottom: 4px solid hsl(0, 99%, 34%);
+  grid-row-start: 1;
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.borg-navbar ul {
+  list-style-type: none;
+}
+
+.borg-navbar li {
+  display: inline;
+}
+
+.view-button {
+  padding: 20px;
+}
+
+.view-button a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+}
+
+.view-button-active {
+  border-bottom: 4px solid white;
+}
+
+
+borg-sidebar {
+  grid-row-start: 2;
+  grid-column-start: 1;
+  grid-column-end: 1;
+  overflow-y: scroll;
+  height: calc(100vh - 63.5px);
+}
+
+.borg-database {
+  cursor: pointer;
+  border-bottom: 1px solid rgb(242, 242, 242);
+  padding: 20px;
+}
+
+.borg-database:hover {
+  background-color: rgb(242, 242, 242);
+}
+
+.borg-database ul {
+  list-style-type: none;
+}
+
+.borg-database-add {
+  padding: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  border-bottom: 1px solid rgb(242, 242, 242);
+}
+
+.borg-database-add:hover {
+  background-color: rgb(242, 242, 242);
+}
 
 main {
-  font-family: var(--main-font);
-  color: var(--font-colour);
-  padding: 80px 40px;
-  text-align: center;
+  background-color: pink;
+  height: 100%;
 }
 
-
-h1 {
-  margin: 0px;
-  padding-right: 20px;
-}
-
-.brand {
-  font-size: 1.3em;
-}
-
-.navbar {
-  color: var(--navbar-font-colour);
-  background-color: var(--navbar-background-colour);
-}
-
-.navbar ul {
-  margin: 0px;
-  list-style: none;
-  border-bottom: 4px solid var(--navbar-border-colour);
-}
-
-.navbar ul li {
-  padding: 15px;
-  display: inline-block;
-}
-
-.navbar ul li:first {
-  background: green !important;
-  border-bottom: 4px solid black;
-}
-
-header {
-  font-family: var(--main-font);
-  color: var(--font-colour);
-}
-
-@media (min-width: 768px) {
-  .submit-button {
-    min-width: 170px;
-  }
-}
-
-form {
-  display: inline-block;
-  font-size: 1.2em;
-  width: 100%;
-  max-width: 500px;
-}
-
-label {
-  float: left;
-  padding-left: 0px;
-}
-
-.borg-url-input-cnt {
+.frontpage-cnt {
   display: grid;
-  grid-template-columns: 9fr 1fr;
-  column-gap: 20px;
+  grid-template-rows: 6fr 2fr;
 }
 
-.borg-input-cnt {
-  margin-bottom: 10px;
+.borg-add-card-section {
+  grid-row-start: 1;
+  background-color: white;
 }
 
-.borg-input {
-  font-size: 1em;
-  padding: 5px;
-  font-size: 16px;
-  font-size: max(16px, 1em);
-  font-family: inherit;
-  box-sizing: border-box;
-  padding: 0.25em 0.5em;
-  background-color: #fff;
-  border: 2px solid var(--input-border);
-  min-width: 200px;
-  width: 100%;
+.borg-show-card-section {
+  grid-row-start: 2;
+  background-color: green;
 }
 
-.submit-button {
-  display: block;
-  float: left;
-  font-size: 1.2em;
-  align-items: center;
-  background-color: #06f;
-  border: 2px solid #06f;
-  box-sizing: border-box;
-  color: #fff;
-  cursor: pointer;
-  fill: #000;
-  font-family: Inter,sans-serif;
-  font-size: 16px;
-  font-weight: 600;
-  height: 48px;
-  justify-content: center;
-  letter-spacing: -.8px;
-  line-height: 24px;
-  min-width: 180px;
-  outline: 0;
-  padding: 0 17px;
-  text-align: center;
-  text-decoration: none;
-  transition: all .3s;
-  user-select: none;
-  -webkit-user-select: none;
-  touch-action: manipulation;
-}
-
-.submit-button:active {
-  background-color: var(--button-default-background-colour);
-  border-color: var(--button-default-background-colour);
-  fill: var(--button-default-background-colour);
-}
-
-.submit-button:hover, .submit-button:focus {
-  background-color: var(--button-default-hover-background-colour);
-  border-color: var(--button-default-hover-background-colour);
-  fill: var(--button-default-hover-background-colour);
-}
-
-.button-ok {
-  background-color: var(--button-ok-background-colour);
-  border-color: var(--button-ok-background-colour);
-  color: var(--button-ok-colour);
-}
-
-.button-ok:hover, .button-ok:focus {
-  background-color: var(--button-ok-hover-background-colour);
-  border-color: var(--button-ok-hover-background-colour);
-  fill: var(--button-ok-hover-background-colour);
-}
-
-.button-error {
-  background-color: var(--button-error-background-colour);
-  border-color: var(--button-error-background-colour);
-  color: var(--button-error-colour);
-}
-
-.button-error:hover, .button-error:focus {
-  background-color: var(--button-error-hover-background-colour);
-  border-color: var(--button-error-hover-background-colour);
-  fill: var(--button-error-hover-background-colour);
-}
-
-.button-unauthorized {
-  background-color: var(--button-unauthorized-background-colour);
-  border-color: var(--button-unauthorized-background-colour);
-  color: var(--button-unauthorized-colour);
-}
-
-.button-unauthorized:hover, .button-unauthorized:focus {
-  background-color: var(--button-unauthorized-hover-background-colour);
-  border-color: var(--button-unauthorized-hover-background-colour);
-  fill: var(--button-unauthorized-hover-background-colour);
-}
-
-.borg-bookmark {
-  text-align: left;
-  border: 1px solid #ccc;
-  margin-bottom: 10px;
-  padding: 10px 20px;
+.machine-settings {
+  font-size: 1.75em;
 }
