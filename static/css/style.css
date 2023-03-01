@@ -17,7 +17,7 @@ html {
 
 .app-cnt {
   display: grid;
-  grid-template-rows: auto auto;
+  grid-template-rows: auto auto 200px;
   grid-template-columns: 300px 1fr;
 }
 
@@ -27,7 +27,6 @@ borg-navbar {
   grid-row: 1;
   padding: 20px;
   border-bottom: 4px solid hsl(0, 99%, 34%);
-  grid-row-start: 1;
   grid-column-start: 1;
   grid-column-end: 3;
 }
@@ -57,6 +56,7 @@ borg-navbar {
 
 borg-sidebar {
   grid-row-start: 2;
+  grid-row-end: 4;
   grid-column-start: 1;
   grid-column-end: 1;
   overflow-y: scroll;
@@ -89,25 +89,50 @@ borg-sidebar {
 }
 
 main {
-  background-color: pink;
+  grid-row-start: 2;
+  grid-row-end: 4;
+  background-color: white;
   height: 100%;
 }
 
-.frontpage-cnt {
-  display: grid;
-  grid-template-rows: 6fr 2fr;
-}
-
 .borg-add-card-section {
-  grid-row-start: 1;
+  grid-row-start: 2;
   background-color: white;
 }
 
 .borg-show-card-section {
-  grid-row-start: 2;
+  grid-row-start: 3;
   background-color: green;
 }
 
 .machine-settings {
   font-size: 1.75em;
+}
+
+borg-add-database-page {
+  display: block;
+  padding: 80px 40px;
+}
+
+h3 {
+  margin-top: 20px;
+}
+
+.borg-input {
+  font-size: 1em;
+  padding: 5px;
+  font-size: 16px;
+  font-size: max(16px, 1em);
+  font-family: inherit;
+  box-sizing: border-box;
+  padding: 0.25em 0.5em;
+  background-color: #fff;
+  border: 2px solid black;
+  min-width: 200px;
+  max-width: 250px;
+  width: 100%;
+}
+
+.borg-input-cnt {
+  margin-bottom: 10px;
 }

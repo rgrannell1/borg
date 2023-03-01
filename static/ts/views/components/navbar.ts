@@ -1,5 +1,7 @@
-
-import { html, LitElement } from "/home/rg/Code/ws/axon/borg/static/vendor/lit-element.js";
+import {
+  html,
+  LitElement,
+} from "/home/rg/Code/ws/axon/borg/static/vendor/lit-element.js";
 
 export class BorgNavbar extends LitElement {
   createRenderRoot() {
@@ -20,7 +22,7 @@ export class BorgNavbar extends LitElement {
         </ul>
       </nav>
     </header>
-    `
+    `;
   }
 }
 
