@@ -80,7 +80,10 @@ export class AddDatabasePage extends LitElement {
         <br/>
       </div>
 
-      <input @click=${
+      <br/>
+
+      <input class="submit-button"
+      @click=${
       this.handleSubmit.bind(this)
     } type="button" value="Add Database"/>
 

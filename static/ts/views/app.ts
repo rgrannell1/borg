@@ -11,7 +11,7 @@ import "./pages/frontpage.js";
 import "./pages/add-database.js";
 
 type Database = {
-  name: string;
+  alias: string;
   url: string;
   topic: string;
   username: string;
@@ -44,64 +44,43 @@ export class BorgAddDatabase extends LitElement {
 }
 
 export class BorgDatabase extends LitElement {
-  name: string;
+  alias: string;
   static get properties() {
     return {
-      name: { type: String },
+      alias: { type: String },
     };
   }
 
   createRenderRoot() {
     return this;
+  }
+
+  changeSettings() {
+    const event = new CustomEvent(LitEvents.NAVIGATE_ADD_DATABASE, {
+      detail: {
+        alias: this.alias,
+      },
+      bubbles: true,
+      composed: true,
+    });
+
+    (this as LitElement).dispatchEvent(event);
   }
 
   render() {
     return html`
     <li class="borg-database">
-      <span>${this.name}</span>
-      <span class="database-settings">⌄</span>
+      <span
+        class="database-name">${this.alias}</span>
+      <span
+        @click=${ this.changeSettings }
+        class="database-settings">⚙</span>
     </li>
     `;
   }
 }
 
-export class BorgSidebar extends LitElement {
-  databases: Database[];
 
-  static get properties() {
-    return {
-      databases: {
-        type: Array,
-      },
-    };
-  }
-
-  createRenderRoot() {
-    return this;
-  }
-
-  renderDatabases() {
-    return html`
-    <ul>${
-      this.databases.map((db) => {
-        return html`<borg-database name="${db.name}"></borg-database>`;
-      })
-    }
-    </ul>
-    `;
-  }
-
-  render() {
-    return html`
-    <aside class="borg-sidebar">
-      <div>
-        <borg-add-database/>
-      </div>
-      ${this.renderDatabases()}
-    </aside>
-    `;
-  }
-}
 
 export class BorgApp extends LitElement {
   page: string;
@@ -124,37 +103,57 @@ export class BorgApp extends LitElement {
     };
   }
 
-  navigateAddDatabase() {
-    (this as LitElement).addEventListener(
-      LitEvents.NAVIGATE_ADD_DATABASE,
-      async (event) => {
-        this.page = "add-database";
-        await (this as LitElement).requestUpdate();
-      },
-    );
+  setForm(credentials: Database) {
+    const alias = document.querySelector("#alias") as HTMLInputElement;
+    const url = document.querySelector("#url") as HTMLInputElement;
+    const topic = document.querySelector("#topic") as HTMLInputElement;
+    const username = document.querySelector("#username") as HTMLInputElement;
+    const password = document.querySelector("#password") as HTMLInputElement;
+
+    alias.value = credentials.alias;
+    url.value = credentials.url;
+    topic.value = credentials.topic;
+    username.value = credentials.username;
+    password.value = credentials.password;
+
+    (this as LitElement).requestUpdate();
   }
 
-  addDatabase() {
-    (this as LitElement).addEventListener(
-      LitEvents.SUBMIT_ADD_DATABASE,
-      async (event) => {
-        this.databases = {
-          ...this.databases,
-          [event.detail.alias]: event.detail,
-        };
+  async navigateAddDatabase(event: CustomEvent) {
+    this.page = "add-database";
 
-        await (this as LitElement).render();
-      },
-    );
+    if (event?.detail?.alias) {
+      const credentials = this.databases[event.detail.alias];
+
+      this.setForm(credentials)
+    }
+
+    await (this as LitElement).requestUpdate();
   }
 
-  async connectedCallback() {
-    super.connectedCallback();
-    await this.navigateAddDatabase();
-    this.addDatabase();
+  async handleAddDatabase(event: CustomEvent) {
+    this.databases = {
+      ...this.databases,
+      [event.detail.alias]: event.detail,
+    };
+
+    await (this as LitElement).requestUpdate();
+  }
+
+  renderDatabases() {
+    return html`
+    <ul>
+      ${
+        Object.values(this.databases).map((db) => {
+          return html`<borg-database alias=${db.alias}></borg-database>`;
+        })
+      }
+    </ul>
+    `;
   }
 
   render() {
+    console.log('app: render')
     let subpage = html`<borg-frontpage></borg-frontpage>`;
 
     if (this.page === "add-database") {
@@ -162,11 +161,19 @@ export class BorgApp extends LitElement {
     }
 
     const dbs = Object.values(this.databases);
-
     return html`
-    <div class="app-cnt">
+    <div class="app-cnt"
+      @navigate-add-database=${ this.navigateAddDatabase }
+      @submit-add-database=${ this.handleAddDatabase }>
       <borg-navbar></borg-navbar>
-      <borg-sidebar .databases=${dbs}></borg-sidebar>
+
+      <aside class="borg-sidebar">
+        <div>
+          <borg-add-database/>
+        </div>
+        ${this.renderDatabases()}
+      </aside>
+
       <main>
         ${subpage}
       </main>
@@ -177,5 +184,4 @@ export class BorgApp extends LitElement {
 
 customElements.define("borg-add-database", BorgAddDatabase as LitElement);
 customElements.define("borg-database", BorgDatabase as LitElement);
-customElements.define("borg-sidebar", BorgSidebar as LitElement);
 customElements.define("borg-app", BorgApp as LitElement);
