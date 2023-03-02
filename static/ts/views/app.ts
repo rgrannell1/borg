@@ -55,6 +55,18 @@ export class BorgDatabase extends LitElement {
     return this;
   }
 
+  viewNames() {
+    const event = new CustomEvent(LitEvents.NAVIGATE_VIEW_DATABASE, {
+      detail: {
+        alias: this.alias,
+      },
+      bubbles: true,
+      composed: true,
+    });
+
+    (this as LitElement).dispatchEvent(event);
+  }
+
   changeSettings() {
     const event = new CustomEvent(LitEvents.NAVIGATE_ADD_DATABASE, {
       detail: {
@@ -71,6 +83,7 @@ export class BorgDatabase extends LitElement {
     return html`
     <li class="borg-database">
       <span
+        @click=${ this.viewNames }
         class="database-name">${this.alias}</span>
       <span
         @click=${ this.changeSettings }
@@ -131,6 +144,11 @@ export class BorgApp extends LitElement {
     await (this as LitElement).requestUpdate();
   }
 
+  async navigateViewDatabase(event: CustomEvent) {
+    this.page = "view-database";
+    await (this as LitElement).requestUpdate();
+  }
+
   async handleAddDatabase(event: CustomEvent) {
     this.databases = {
       ...this.databases,
@@ -158,12 +176,15 @@ export class BorgApp extends LitElement {
 
     if (this.page === "add-database") {
       subpage = html`<borg-add-database-page></borg-add-database-page>`;
+    } else if (this.page === "view-database") {
+      subpage = html`<borg-view-database-page></borg-view-database-page>`;
     }
 
     const dbs = Object.values(this.databases);
     return html`
     <div class="app-cnt"
       @navigate-add-database=${ this.navigateAddDatabase }
+      @navigate-view-database=${ this.navigateViewDatabase }
       @submit-add-database=${ this.handleAddDatabase }>
       <borg-navbar></borg-navbar>
 
