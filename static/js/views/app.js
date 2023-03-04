@@ -6,6 +6,7 @@ import {
 import "./pages/about.js";
 import "./components/navbar.js";
 import "./components/database.js";
+import "./components/date.js";
 import "./pages/frontpage.js";
 import "./pages/add-database.js";
 import "./pages/view-database.js";

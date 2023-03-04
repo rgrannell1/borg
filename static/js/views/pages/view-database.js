@@ -8,6 +8,26 @@ import { ClientStorage } from '../../services/client-storage.js';
 import { Assembler } from '../../services/assembler.js';
 import { DateTime } from '../../models/datetime.js';
 
+export class DateSummary extends LitElement {
+  static get properties() {
+    return {
+      date: { type: String }
+    };
+  }
+
+  createRenderRoot() {
+    return this;
+  }
+
+  render() {
+    return html`
+    <section class="date-summary">
+      <p>${ this.date }</p>
+    </section>
+    `
+  }
+}
+
 export class Card extends LitElement {
   static get properties() {
     return {
@@ -28,7 +48,7 @@ export class Card extends LitElement {
         <a href=${this.content.url}>${this.content.url}</a>
       </p>
       <br/>
-      <p>${DateTime.formatTime(date)}</p>
+      <p class="card-date">${DateTime.formatTime(date)}</p>
     </section>
     `;
   }
@@ -64,13 +84,26 @@ export class ViewDatabaseCards extends LitElement {
     }
 
     this.content = Assembler.assembleBookmarks(this.entries);
+
     this.requestUpdate();
   }
 
   render() {
     const entries = [];
 
+    let state = undefined;
     for (const entry of this.content) {
+      const date = entry.created_at;
+
+      // buggy
+      const formattedCreatedAt = DateTime.formatDate(new Date(date))
+      const formattedPreviousDate = DateTime.formatDate(new Date(state))
+
+      if (formattedCreatedAt !== formattedPreviousDate) {
+        entries.push(html`<date-summary .date=${date}></date-summary>`)
+        state = date;
+      }
+
       const elem = html`
       <li>
         <borg-card .content=${entry}></borg-card>
