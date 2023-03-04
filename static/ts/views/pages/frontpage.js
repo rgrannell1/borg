@@ -24,4 +24,4 @@ export class Frontpage extends LitElement {
   }
 }
 
-customElements.define("borg-frontpage", Frontpage as LitElement);
+customElements.define("borg-frontpage", Frontpage);

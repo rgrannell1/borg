@@ -5,10 +5,8 @@ import {
 } from "/home/rg/Code/ws/axon/borg/static/vendor/lit-element.js";
 
 import { BorgCache } from '../../services/cache.js';
-import { CommonStorageAPI } from '../../services/api.js';
 
 export class ViewDatabasePage extends LitElement {
-  database: any;
 
   static get properties() {
     return {
@@ -43,4 +41,4 @@ export class ViewDatabasePage extends LitElement {
   }
 }
 
-customElements.define("borg-view-database-page", ViewDatabasePage as LitElement);
+customElements.define("borg-view-database-page", ViewDatabasePage);

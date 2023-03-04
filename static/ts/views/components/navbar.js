@@ -3,11 +3,10 @@ import {
   LitElement,
 } from "/home/rg/Code/ws/axon/borg/static/vendor/lit-element.js";
 
-import { LitEvents } from "../../models/lit-events.js";
+import { LitEvents } from '../../models/lit-events.js';
+
 
 export class BorgNavbar extends LitElement {
-  page: string;
-
   static get properties() {
     return {
       page: {
@@ -29,7 +28,7 @@ export class BorgNavbar extends LitElement {
       composed: true,
     });
 
-    (this as LitElement).dispatchEvent(event);
+    this.dispatchEvent(event);
   }
 
   render() {
@@ -53,4 +52,4 @@ export class BorgNavbar extends LitElement {
   }
 }
 
-customElements.define("borg-navbar", BorgNavbar as LitElement);
+customElements.define("borg-navbar", BorgNavbar);

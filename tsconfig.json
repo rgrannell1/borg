@@ -4,6 +4,7 @@
     "outDir": "static/js",
     "target": "ESNext",
     "module": "ESNext",
+    "jsx": "react",
     "lib": [
       "ESNext",
       "DOM"

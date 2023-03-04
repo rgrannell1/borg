@@ -4,10 +4,7 @@ import {
   LitElement,
 } from "/home/rg/Code/ws/axon/borg/static/vendor/lit-element.js";
 
-import { LitEvents } from "../models/lit-events.js";
 import { BorgCache } from "../services/cache";
-
-import type { Database } from "../types.js";
 
 import "./pages/about.js";
 import "./components/navbar.js";
@@ -15,9 +12,9 @@ import "./pages/frontpage.js";
 import "./pages/add-database.js";
 import "./pages/view-database.js";
 
-export class BorgAddDatabase extends LitElement {
-  active: Boolean;
+import { LitEvents } from '../models/lit-events.js';
 
+export class BorgAddDatabase extends LitElement {
   static get properties() {
     return {
       active: { type: Boolean },
@@ -36,7 +33,7 @@ export class BorgAddDatabase extends LitElement {
       composed: true,
     });
 
-    (this as LitElement).dispatchEvent(event);
+    (this).dispatchEvent(event);
   }
 
   render() {
@@ -51,7 +48,6 @@ export class BorgAddDatabase extends LitElement {
 }
 
 export class BorgDatabase extends LitElement {
-  alias: string;
   static get properties() {
     return {
       alias: { type: String },
@@ -62,16 +58,17 @@ export class BorgDatabase extends LitElement {
     return this;
   }
 
-  viewNames() {
-    const event = new CustomEvent(LitEvents.NAVIGATE_VIEW_DATABASE, {
+  viewDatabase() {
+    const event = new CustomEvent(LitEvents.NAVIGATE, {
       detail: {
-        alias: this.alias,
+        component: 'view-database',
+        alias: this.alias
       },
       bubbles: true,
       composed: true,
     });
 
-    (this as LitElement).dispatchEvent(event);
+    (this).dispatchEvent(event);
   }
 
   changeSettings() {
@@ -84,14 +81,14 @@ export class BorgDatabase extends LitElement {
       composed: true,
     });
 
-    (this as LitElement).dispatchEvent(event);
+    (this).dispatchEvent(event);
   }
 
   render() {
     return html`
     <li class="borg-database">
       <span
-        @click=${ this.viewNames }
+        @click=${ this.viewDatabase }
         class="database-name">${this.alias}</span>
       <span
         title="Settings"
@@ -105,10 +102,6 @@ export class BorgDatabase extends LitElement {
 
 
 export class BorgApp extends LitElement {
-  page: string;
-  selectedDatabase?: string;
-  databases: Record<string, Database>;
-
   constructor() {
     super();
     this.page = "frontpage";
@@ -127,12 +120,12 @@ export class BorgApp extends LitElement {
     };
   }
 
-  setForm(credentials: Database) {
-    const alias = document.querySelector("#alias") as HTMLInputElement;
-    const url = document.querySelector("#url") as HTMLInputElement;
-    const topic = document.querySelector("#topic") as HTMLInputElement;
-    const username = document.querySelector("#username") as HTMLInputElement;
-    const password = document.querySelector("#password") as HTMLInputElement;
+  setForm(credentials) {
+    const alias = document.querySelector("#alias");
+    const url = document.querySelector("#url");
+    const topic = document.querySelector("#topic");
+    const username = document.querySelector("#username");
+    const password = document.querySelector("#password");
 
     alias.value = credentials.alias;
     url.value = credentials.url;
@@ -140,17 +133,10 @@ export class BorgApp extends LitElement {
     username.value = credentials.username;
     password.value = credentials.password;
 
-    (this as LitElement).requestUpdate();
+    (this).requestUpdate();
   }
 
-  async navigateViewDatabase(event: CustomEvent) {
-    this.page = "view-database";
-    this.selectedDatabase = event.detail.alias;
-
-    await (this as LitElement).requestUpdate();
-  }
-
-  async handleAddDatabase(event: CustomEvent) {
+  async handleAddDatabase(event) {
     this.databases = {
       ...this.databases,
       [event.detail.alias]: event.detail,
@@ -158,7 +144,7 @@ export class BorgApp extends LitElement {
 
     BorgCache.setDatabases(this.databases);
 
-    await (this as LitElement).requestUpdate();
+    await (this).requestUpdate();
   }
 
   renderDatabases() {
@@ -173,7 +159,7 @@ export class BorgApp extends LitElement {
     `;
   }
 
-  navigate(event: CustomEvent) {
+  navigate(event) {
     const detail = event.detail;
 
     if (detail.component === "about") {
@@ -181,20 +167,19 @@ export class BorgApp extends LitElement {
     } else if (detail.component === "add-database") {
       this.page = "add-database";
 
-      if (event?.detail?.alias) {
-        this.selectedDatabase = event?.detail?.alias
-      }
+      // if none, treat as a new database form
+      this.selectedDatabase = detail?.alias
     }
 
-    (this as LitElement).requestUpdate();
+    (this).requestUpdate();
   }
 
   render() {
-    console.log('app: render')
     let subpage = html`<borg-frontpage></borg-frontpage>`;
 
     if (this.page === "add-database") {
-      const db = this.databases[ this.selectedDatabase ];
+      const db = {...this.databases[ this.selectedDatabase ]};
+
       subpage = html`<borg-add-database-page .database=${ db }></borg-add-database-page>`;
     } else if (this.page === "view-database") {
       const db = this.databases[ this.selectedDatabase ];
@@ -207,13 +192,12 @@ export class BorgApp extends LitElement {
     return html`
     <div class="app-cnt"
       @navigate=${ this.navigate }
-      @navigate-view-database=${ this.navigateViewDatabase }
       @submit-add-database=${ this.handleAddDatabase }>
-      <borg-navbar page=${this.page}></borg-navbar>
+      <borg-navbar .page=${this.page}></borg-navbar>
 
       <aside class="borg-sidebar">
         <div>
-          <borg-add-database active=${ this.page === "add-database" }/>
+          <borg-add-database .active=${ this.page === "add-database" }/>
         </div>
         ${this.renderDatabases()}
       </aside>
@@ -226,6 +210,6 @@ export class BorgApp extends LitElement {
   }
 }
 
-customElements.define("borg-add-database", BorgAddDatabase as LitElement);
-customElements.define("borg-database", BorgDatabase as LitElement);
-customElements.define("borg-app", BorgApp as LitElement);
+customElements.define("borg-add-database", BorgAddDatabase);
+customElements.define("borg-database", BorgDatabase);
+customElements.define("borg-app", BorgApp);

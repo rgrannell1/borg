@@ -4,12 +4,7 @@ import {
   LitElement,
 } from "/home/rg/Code/ws/axon/borg/static/vendor/lit-element.js";
 
-import { LitEvents } from "../../models/lit-events.js";
-import { Database } from "../../types";
-
 export class AddDatabasePage extends LitElement {
-  database: Database
-
   static get properties() {
     return {
       database: {
@@ -21,12 +16,12 @@ export class AddDatabasePage extends LitElement {
     return this;
   }
 
-  getForm(event: Event) {
-    const alias = document.getElementById("alias") as any;
-    const url = document.getElementById("url") as any;
-    const topic = document.getElementById("topic") as any;
-    const username = document.getElementById("username") as any;
-    const password = document.getElementById("password") as any;
+  getForm(event) {
+    const alias = document.getElementById("alias");
+    const url = document.getElementById("url");
+    const topic = document.getElementById("topic");
+    const username = document.getElementById("username");
+    const password = document.getElementById("password");
 
     return {
       alias: alias.value,
@@ -37,7 +32,7 @@ export class AddDatabasePage extends LitElement {
     };
   }
 
-  handleSubmit(event: Event) {
+  handleSubmit(event) {
     event.preventDefault();
 
     const data = this.getForm(event);
@@ -46,7 +41,7 @@ export class AddDatabasePage extends LitElement {
       composed: true,
       detail: data,
     });
-    (this as LitElement).dispatchEvent(custom);
+    (this).dispatchEvent(custom);
   }
 
   render() {
@@ -104,4 +99,4 @@ export class AddDatabasePage extends LitElement {
   }
 }
 
-customElements.define("borg-add-database-page", AddDatabasePage as LitElement);
+customElements.define("borg-add-database-page", AddDatabasePage);

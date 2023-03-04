@@ -21,4 +21,4 @@ export class AboutPage extends LitElement {
   }
 }
 
-customElements.define("borg-about", AboutPage as LitElement);
+customElements.define("borg-about", AboutPage);
