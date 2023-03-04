@@ -1,7 +1,7 @@
 export default {
-  input: "./static/ts/views/app.js",
+  input: "./static/js/views/app.js",
   output: {
-    dir: "static/js",
+    dir: "static/dist",
     format: "es",
   },
 };

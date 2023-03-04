@@ -128,24 +128,39 @@ export class App extends LitElement {
     this.requestUpdate();
   }
 
-  render() {
-    console.log('app: render')
+  renderAddDatabasePage() {
+    const db = { ...this.databases[this.selectedDatabase] };
+
+    return html`<borg-add-database-page .database=${db}></borg-add-database-page>`;
+  }
+
+  renderViewDatabasePage() {
+    const db = this.databases[this.selectedDatabase];
+
+    return html`<borg-view-database-page .database=${db}></borg-view-database-page>`;
+  }
+
+  renderAboutPage() {
+    return html`<borg-about></borg-about>`;
+  }
+
+  renderSubpage() {
     let subpage = html`<borg-frontpage></borg-frontpage>`;
 
     if (this.page === Components.ADD_DATABASE) {
-      const db = { ...this.databases[this.selectedDatabase] };
-
-      subpage =
-        html`<borg-add-database-page .database=${db}></borg-add-database-page>`;
+      subpage = this.renderAddDatabasePage();
     } else if (this.page === Components.VIEW_DATABASE) {
-      const db = this.databases[this.selectedDatabase];
-      subpage =
-        html`<borg-view-database-page .database=${db}></borg-view-database-page>`;
+      subpage = this.renderViewDatabasePage();
     } else if (this.page === Components.ABOUT) {
-      subpage = html`<borg-about></borg-about>`;
+      subpage = this.renderAboutPage();
     }
 
-    const dbs = Object.values(this.databases);
+    return subpage;
+  }
+
+  render() {
+    console.log('app: render')
+
     return html`
     <div class="app-cnt"
       @navigate=${this.navigate}
@@ -160,7 +175,7 @@ export class App extends LitElement {
       </aside>
 
       <main>
-        ${subpage}
+        ${ this.renderSubpage() }
       </main>
     </div>
     `;

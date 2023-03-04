@@ -199,3 +199,25 @@ h3 {
   -webkit-user-select: none;
   touch-action: manipulation;
 }
+
+borg-view-database-page {
+  display: block;
+  height: 100%;
+}
+
+borg-view-database-cards {
+  display: block;
+  height: 100%;
+}
+
+.cards {
+  list-style: none;
+}
+
+.card {
+  display: inline-block;
+  background: rgb(239, 239, 239);
+  margin: 20px;
+  padding: 10px 15px;
+  border-radius: 10px;
+}

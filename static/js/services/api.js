@@ -54,11 +54,26 @@ export class CommonStorageAPI {
   }
 
   async *getContent(topic, startId) {
-    const params = typeof startId !== "undefined" ? `?startId=${startId}` : "";
+    while (true) {
+      console.log(`fetching from ${startId}`);
 
-    const res = await fetch(`${this.endpoint}/content/${topic}${params}`, {
-      mode: "cors",
-      headers: this.headers(),
-    });
+      const params = typeof startId !== "undefined" ? `?startId=${startId}` : "";
+
+      const res = await fetch(`${this.endpoint}/content/${topic}${params}`, {
+        mode: "cors",
+        headers: this.headers(),
+      });
+
+      const data = await res.json();
+      if (data.content.length === 0) {
+        break;
+      }
+
+      for (const content of data.content) {
+        yield content;
+      }
+
+      startId = data.lastId;
+    }
   }
 }
