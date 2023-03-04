@@ -8,20 +8,22 @@ export class AddDatabasePage extends LitElement {
   static get properties() {
     return {
       database: {
-        type: Object
-      }
-    }
+        type: Object,
+      },
+    };
   }
   createRenderRoot() {
     return this;
   }
 
-  getForm(event) {
-    const alias = document.getElementById("alias");
-    const url = document.getElementById("url");
-    const topic = document.getElementById("topic");
-    const username = document.getElementById("username");
-    const password = document.getElementById("password");
+  getForm() {
+    const $ = document.querySelector;
+
+    const alias = $("#alias");
+    const url = $("#url");
+    const topic = $("#topic");
+    const username = $("#username");
+    const password = $("#password");
 
     return {
       alias: alias.value,
@@ -32,7 +34,7 @@ export class AddDatabasePage extends LitElement {
     };
   }
 
-  handleSubmit(event) {
+  onSubmit(event) {
     event.preventDefault();
 
     const data = this.getForm(event);
@@ -41,7 +43,81 @@ export class AddDatabasePage extends LitElement {
       composed: true,
       detail: data,
     });
-    (this).dispatchEvent(custom);
+    this.dispatchEvent(custom);
+  }
+
+  renderAlias(db) {
+    return html`
+    <div class="borg-input-cnt">
+      <label for="alias">Alias</label>
+      <br/>
+      <input class="borg-input" type="text" id="alias" name="alias" value="${
+      db?.alias ?? ""
+    }"/>
+      <br/>
+    </div>
+    `;
+  }
+
+  renderUrl(db) {
+    return html`
+    <div class="borg-input-cnt">
+      <label for="url">URL</label>
+      <br/>
+      <input class="borg-input" type="url" id="url" name="url" value="${
+      db?.url ?? ""
+    }"/>
+      <br/>
+    </div>
+    `;
+  }
+
+  renderTopic(db) {
+    return html`
+    <div class="borg-input-cnt">
+      <label for="topic">Topic</label>
+      <br/>
+      <input class="borg-input" type="text" id="topic" name="topic" value="${
+      db?.topic ?? ""
+    }"/>
+      <br/>
+    </div>
+    `;
+  }
+
+  renderUsername(db) {
+    return html`
+    <div class="borg-input-cnt">
+      <label for="username">Username</label>
+      <br/>
+      <input class="borg-input" type="text" id="username" name="username" value="${
+      db?.username ?? ""
+    }"/>
+      <br/>
+    </div>
+    `;
+  }
+
+  renderPassword(db) {
+    return html`
+    <div class="borg-input-cnt">
+      <label for="password">Password</label>
+      <br/>
+      <input class="borg-input" type="password" id="password" name="password" value="${
+      db?.password ?? ""
+    }"/>
+      <br/>
+    </div>
+    `;
+  }
+
+  renderSubmitButton(db) {
+    return html`
+      <input class="submit-button"
+      @click=${
+      this.onSubmit.bind(this)
+    } type="button" value="Add Database"/>
+      `;
   }
 
   render() {
@@ -49,51 +125,18 @@ export class AddDatabasePage extends LitElement {
 
     return html`
     <form id="borg-add-machine-form">
-
-      <div class="borg-input-cnt">
-        <label for="alias">Alias</label>
-        <br/>
-        <input class="borg-input" type="text" id="alias" name="alias" value="${ db?.alias ?? '' }"/>
-        <br/>
-      </div>
-
-      <div class="borg-input-cnt">
-        <label for="url">URL</label>
-        <br/>
-        <input class="borg-input" type="url" id="url" name="url" value="${ db?.url ?? '' }"/>
-        <br/>
-      </div>
-
-      <div class="borg-input-cnt">
-        <label for="topic">Topic</label>
-        <br/>
-        <input class="borg-input" type="text" id="topic" name="topic" value="${ db?.topic ?? '' }"/>
-        <br/>
-      </div>
+      ${this.renderAlias(db)}
+      ${this.renderUrl(db)}
+      ${this.renderTopic(db)}
 
       <br/>
 
-      <div class="borg-input-cnt">
-        <label for="username">Username</label>
-        <br/>
-        <input class="borg-input" type="text" id="username" name="username" value="${ db?.username ?? '' }"/>
-        <br/>
-      </div>
-
-      <div class="borg-input-cnt">
-        <label for="password">Password</label>
-        <br/>
-        <input class="borg-input" type="password" id="password" name="password" value="${ db?.password ?? '' }"/>
-        <br/>
-      </div>
+      ${this.renderUsername(db)}
+      ${this.renderPassword(db)}
 
       <br/>
 
-      <input class="submit-button"
-      @click=${
-      this.handleSubmit.bind(this)
-    } type="button" value="Add Database"/>
-
+      ${this.renderSubmitButton(db)}
     </form>
     `;
   }

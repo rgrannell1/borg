@@ -3,15 +3,15 @@ import {
   LitElement,
 } from "/home/rg/Code/ws/axon/borg/static/vendor/lit-element.js";
 
-import { LitEvents } from '../../models/lit-events.js';
+import { LitEvents } from "../../models/lit-events.js";
+import { Components } from "../../models/components.js";
 
-
-export class BorgNavbar extends LitElement {
+export class Navbar extends LitElement {
   static get properties() {
     return {
       page: {
         type: String,
-      }
+      },
     };
   }
 
@@ -22,7 +22,7 @@ export class BorgNavbar extends LitElement {
   onAboutClick() {
     const event = new CustomEvent(LitEvents.NAVIGATE, {
       detail: {
-        component: "about"
+        component: Components.ABOUT_PAGE,
       },
       bubbles: true,
       composed: true,
@@ -32,17 +32,15 @@ export class BorgNavbar extends LitElement {
   }
 
   render() {
-    const aboutActive = this.page === 'About'
-      ? 'active'
-      : '';
+    const aboutActive = this.page === "About" ? "active" : "";
 
     return html`
     <header>
       <nav class="borg-navbar">
         <ul>
-          <li class="view-button ${ aboutActive }">
+          <li class="view-button ${aboutActive}">
           <a
-            @click=${ this.onAboutClick }
+            @click=${this.onAboutClick}
             href="#">About</a>
           </li>
         </ul>
@@ -52,4 +50,4 @@ export class BorgNavbar extends LitElement {
   }
 }
 
-customElements.define("borg-navbar", BorgNavbar);
+customElements.define("borg-navbar", Navbar);

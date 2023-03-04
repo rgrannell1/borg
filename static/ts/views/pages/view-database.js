@@ -4,10 +4,9 @@ import {
   LitElement,
 } from "/home/rg/Code/ws/axon/borg/static/vendor/lit-element.js";
 
-import { BorgCache } from '../../services/cache.js';
+import { BorgCache } from "../../services/cache.js";
 
 export class ViewDatabasePage extends LitElement {
-
   static get properties() {
     return {
       database: { type: Object },
@@ -19,12 +18,11 @@ export class ViewDatabasePage extends LitElement {
   }
 
   async connectedCallback() {
-    const cache = new BorgCache()
+    const cache = new BorgCache();
 
     await cache.init();
     //await cache.sync();
   }
-
 
   render() {
     return html`
@@ -37,7 +35,7 @@ export class ViewDatabasePage extends LitElement {
 
       </section>
     </div>
-    `
+    `;
   }
 }
 

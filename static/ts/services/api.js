@@ -1,4 +1,3 @@
-
 export class CommonStorageAPI {
   static TOPIC_BOOKMARKS = "bookmarks";
 
@@ -61,6 +60,5 @@ export class CommonStorageAPI {
       mode: "cors",
       headers: this.headers(),
     });
-
   }
 }

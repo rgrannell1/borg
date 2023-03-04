@@ -1,4 +1,3 @@
-
 import {
   css,
   html,
@@ -13,9 +12,7 @@ export class AboutPage extends LitElement {
   render() {
     return html`
       <div class="frontpage-cnt">
-
         <p>Hello</p>
-
       </div>
     `;
   }

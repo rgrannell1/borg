@@ -25,7 +25,7 @@ export function AddBookmark(url) {
  */
 export function EditBookmarkRelations(
   bookmark_id,
-  relations
+  relations,
 ) {
   const now = new Date();
   const id = `urn:bookmark_relations:${now.getTime()}`;

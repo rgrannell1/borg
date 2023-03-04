@@ -8,13 +8,15 @@ import { BorgCache } from "../services/cache";
 
 import "./pages/about.js";
 import "./components/navbar.js";
+import "./components/database.js";
 import "./pages/frontpage.js";
 import "./pages/add-database.js";
 import "./pages/view-database.js";
 
-import { LitEvents } from '../models/lit-events.js';
+import { LitEvents } from "../models/lit-events.js";
+import { Components } from "../models/components.js";
 
-export class BorgAddDatabase extends LitElement {
+export class AddDatabase extends LitElement {
   static get properties() {
     return {
       active: { type: Boolean },
@@ -27,13 +29,13 @@ export class BorgAddDatabase extends LitElement {
   onClick() {
     const event = new CustomEvent(LitEvents.NAVIGATE, {
       detail: {
-        component: 'add-database'
+        component: Components.ADD_DATABASE,
       },
       bubbles: true,
       composed: true,
     });
 
-    (this).dispatchEvent(event);
+    this.dispatchEvent(event);
   }
 
   render() {
@@ -47,64 +49,10 @@ export class BorgAddDatabase extends LitElement {
   }
 }
 
-export class BorgDatabase extends LitElement {
-  static get properties() {
-    return {
-      alias: { type: String },
-    };
-  }
-
-  createRenderRoot() {
-    return this;
-  }
-
-  viewDatabase() {
-    const event = new CustomEvent(LitEvents.NAVIGATE, {
-      detail: {
-        component: 'view-database',
-        alias: this.alias
-      },
-      bubbles: true,
-      composed: true,
-    });
-
-    (this).dispatchEvent(event);
-  }
-
-  changeSettings() {
-    const event = new CustomEvent(LitEvents.NAVIGATE, {
-      detail: {
-        component: 'add-database',
-        alias: this.alias,
-      },
-      bubbles: true,
-      composed: true,
-    });
-
-    (this).dispatchEvent(event);
-  }
-
-  render() {
-    return html`
-    <li class="borg-database">
-      <span
-        @click=${ this.viewDatabase }
-        class="database-name">${this.alias}</span>
-      <span
-        title="Settings"
-        @click=${ this.changeSettings }
-        class="database-settings">⚙</span>
-    </li>
-    `;
-  }
-}
-
-
-
-export class BorgApp extends LitElement {
+export class App extends LitElement {
   constructor() {
     super();
-    this.page = "frontpage";
+    this.page = Components.FRONTPAGE;
     this.databases = BorgCache.getDatabases();
   }
 
@@ -133,7 +81,7 @@ export class BorgApp extends LitElement {
     username.value = credentials.username;
     password.value = credentials.password;
 
-    (this).requestUpdate();
+    this.requestUpdate();
   }
 
   async handleAddDatabase(event) {
@@ -144,17 +92,17 @@ export class BorgApp extends LitElement {
 
     BorgCache.setDatabases(this.databases);
 
-    await (this).requestUpdate();
+    await this.requestUpdate();
   }
 
   renderDatabases() {
     return html`
     <ul>
       ${
-        Object.values(this.databases).map((db) => {
-          return html`<borg-database alias=${db.alias}></borg-database>`;
-        })
-      }
+      Object.values(this.databases).map((db) => {
+        return html`<borg-database alias=${db.alias}></borg-database>`;
+      })
+    }
     </ul>
     `;
   }
@@ -162,42 +110,47 @@ export class BorgApp extends LitElement {
   navigate(event) {
     const detail = event.detail;
 
-    if (detail.component === "about") {
-      this.page = "about";
-    } else if (detail.component === "add-database") {
-      this.page = "add-database";
+    if (detail.component === Components.ABOUT) {
+      this.page = Components.ABOUT;
+    } else if (detail.component === Components.ADD_DATABASE) {
+      this.page = Components.ADD_DATABASE;
 
       // if none, treat as a new database form
-      this.selectedDatabase = detail?.alias
+      this.selectedDatabase = detail?.alias;
+    } else if (detail.component === Components.VIEW_DATABASE) {
+      this.page = Components.VIEW_DATABASE;
+      this.selectedDatabase = detail.alias;
     }
 
-    (this).requestUpdate();
+    this.requestUpdate();
   }
 
   render() {
     let subpage = html`<borg-frontpage></borg-frontpage>`;
 
-    if (this.page === "add-database") {
-      const db = {...this.databases[ this.selectedDatabase ]};
+    if (this.page === Components.ADD_DATABASE) {
+      const db = { ...this.databases[this.selectedDatabase] };
 
-      subpage = html`<borg-add-database-page .database=${ db }></borg-add-database-page>`;
-    } else if (this.page === "view-database") {
-      const db = this.databases[ this.selectedDatabase ];
-      subpage = html`<borg-view-database-page .database=${db}></borg-view-database-page>`;
-    } else if (this.page === "about") {
+      subpage =
+        html`<borg-add-database-page .database=${db}></borg-add-database-page>`;
+    } else if (this.page === Components.VIEW_DATABASE) {
+      const db = this.databases[this.selectedDatabase];
+      subpage =
+        html`<borg-view-database-page .database=${db}></borg-view-database-page>`;
+    } else if (this.page === Components.ABOUT) {
       subpage = html`<borg-about></borg-about>`;
     }
 
     const dbs = Object.values(this.databases);
     return html`
     <div class="app-cnt"
-      @navigate=${ this.navigate }
-      @submit-add-database=${ this.handleAddDatabase }>
+      @navigate=${this.navigate}
+      @submit-add-database=${this.handleAddDatabase}>
       <borg-navbar .page=${this.page}></borg-navbar>
 
       <aside class="borg-sidebar">
         <div>
-          <borg-add-database .active=${ this.page === "add-database" }/>
+          <borg-add-database .active=${this.page === "add-database"}/>
         </div>
         ${this.renderDatabases()}
       </aside>
@@ -210,6 +163,5 @@ export class BorgApp extends LitElement {
   }
 }
 
-customElements.define("borg-add-database", BorgAddDatabase);
-customElements.define("borg-database", BorgDatabase);
-customElements.define("borg-app", BorgApp);
+customElements.define("borg-add-database", AddDatabase);
+customElements.define("borg-app", App);
