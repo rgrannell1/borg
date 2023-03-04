@@ -4,7 +4,7 @@ import {
   LitElement,
 } from "/home/rg/Code/ws/axon/borg/static/vendor/lit-element.js";
 
-import { LitEvents } from '../../models/lit-events.js';
+import { LitEvents } from "../../models/lit-events.js";
 
 export class AddDatabasePage extends LitElement {
   static get properties() {
@@ -114,9 +114,7 @@ export class AddDatabasePage extends LitElement {
   renderSubmitButton(db) {
     return html`
       <input class="submit-button"
-      @click=${
-      this.onSubmit.bind(this)
-    } type="button" value="Add Database"/>
+      @click=${this.onSubmit.bind(this)} type="button" value="Add Database"/>
       `;
   }
 

@@ -1,16 +1,15 @@
-
-import { CommonStorageAPI } from '../services/api.js';
-import { get, set } from '../../vendor/idb-keyval.js';
-import { LitEvents } from '../models/lit-events.js';
+import { CommonStorageAPI } from "../services/api.js";
+import { get, set } from "../../vendor/idb-keyval.js";
+import { LitEvents } from "../models/lit-events.js";
 
 export class ClientStorage {
   static async getDatabases() {
-    const db = await get('borg_databases');
+    const db = await get("borg_databases");
     return db ?? {};
   }
 
   static setDatabases(databases) {
-    return set('borg_databases', databases);
+    return set("borg_databases", databases);
   }
 
   static async getDatabaseMaxId(database) {
@@ -53,7 +52,7 @@ export class ClientStorage {
     const databases = await ClientStorage.getDatabases();
 
     for (const database of Object.values(databases)) {
-      console.log(`database: ${database.alias} sync`)
+      console.log(`database: ${database.alias} sync`);
 
       const client = new CommonStorageAPI(database.url, {
         username: database.username,

@@ -57,7 +57,9 @@ export class CommonStorageAPI {
     while (true) {
       console.log(`fetching from ${startId}`);
 
-      const params = typeof startId !== "undefined" ? `?startId=${startId}` : "";
+      const params = typeof startId !== "undefined"
+        ? `?startId=${startId}`
+        : "";
 
       const res = await fetch(`${this.endpoint}/content/${topic}${params}`, {
         mode: "cors",

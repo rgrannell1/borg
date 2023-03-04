@@ -1,7 +1,4 @@
-import {
-  html,
-  LitElement,
-} from "/home/rg/Code/ws/axon/borg/static/vendor/lit-element.js";
+import { html, LitElement } from "../../vendor/lit-element.js";
 
 import "./pages/about.js";
 import "./components/navbar.js";
@@ -161,7 +158,7 @@ export class App extends LitElement {
   }
 
   render() {
-    console.log('app: render')
+    console.log("app: render");
 
     return html`
     <div class="app-cnt"
@@ -177,13 +174,13 @@ export class App extends LitElement {
       </aside>
 
       <main>
-        ${ this.renderSubpage() }
+        ${this.renderSubpage()}
       </main>
     </div>
     `;
   }
 }
-console.log('app: loaded');
+console.log("app: loaded");
 
 customElements.define("borg-add-database", AddDatabase);
 customElements.define("borg-app", App);

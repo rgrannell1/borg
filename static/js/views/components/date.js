@@ -4,12 +4,12 @@ import {
   LitElement,
 } from "/home/rg/Code/ws/axon/borg/static/vendor/lit-element.js";
 
-import { DateTime } from '../../models/datetime.js';
+import { DateTime } from "../../models/datetime.js";
 
 export class DateSummary extends LitElement {
   static get properties() {
     return {
-      date: { type: String }
+      date: { type: String },
     };
   }
 
@@ -21,9 +21,9 @@ export class DateSummary extends LitElement {
     const title = new Date(this.date).toLocaleDateString();
     return html`
     <section class="date-summary" title=${title}>
-      <p>${ DateTime.formatDate(new Date(this.date)) }</p>
+      <p>${DateTime.formatDate(new Date(this.date))}</p>
     </section>
-    `
+    `;
   }
 }
 

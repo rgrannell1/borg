@@ -1,7 +1,5 @@
-
-
 export class DateTime {
-  static nthNumber (number) {
+  static nthNumber(number) {
     if (number > 3 && number < 21) return "th";
     switch (number % 10) {
       case 1:
@@ -16,28 +14,28 @@ export class DateTime {
   }
 
   static formatTime(date) {
-    const hours = date.getHours().toString().padStart(2, '0');
-    const minutes = date.getMinutes().toString().padStart(2, '0');
+    const hours = date.getHours().toString().padStart(2, "0");
+    const minutes = date.getMinutes().toString().padStart(2, "0");
 
-    return `${hours}:${minutes}`
+    return `${hours}:${minutes}`;
   }
 
   static formatDate(date) {
     const year = date.getFullYear();
-    const month = date.toLocaleString('en-US', {
-      month: 'long'
+    const month = date.toLocaleString("en-US", {
+      month: "long",
     });
     const day = date.getDate();
 
     if (new Date().getDate() === day) {
-      return 'Today';
+      return "Today";
     }
 
     const thisYear = new Date().getFullYear();
     if (year === thisYear) {
-      return `${day}${ DateTime.nthNumber(day) } ${month}`
+      return `${day}${DateTime.nthNumber(day)} ${month}`;
     } else {
-      return `${day}${ DateTime.nthNumber(day) } ${month}, ${year}`
+      return `${day}${DateTime.nthNumber(day)} ${month}, ${year}`;
     }
   }
 }
