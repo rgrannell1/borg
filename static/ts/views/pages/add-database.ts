@@ -5,8 +5,18 @@ import {
 } from "/home/rg/Code/ws/axon/borg/static/vendor/lit-element.js";
 
 import { LitEvents } from "../../models/lit-events.js";
+import { Database } from "../../types";
 
 export class AddDatabasePage extends LitElement {
+  database: Database
+
+  static get properties() {
+    return {
+      database: {
+        type: Object
+      }
+    }
+  }
   createRenderRoot() {
     return this;
   }
@@ -40,27 +50,29 @@ export class AddDatabasePage extends LitElement {
   }
 
   render() {
+    const db = this.database;
+
     return html`
     <form id="borg-add-machine-form">
 
       <div class="borg-input-cnt">
         <label for="alias">Alias</label>
         <br/>
-        <input class="borg-input" type="text" id="alias" name="alias"/>
+        <input class="borg-input" type="text" id="alias" name="alias" value="${ db?.alias ?? '' }"/>
         <br/>
       </div>
 
       <div class="borg-input-cnt">
         <label for="url">URL</label>
         <br/>
-        <input class="borg-input" type="url" id="url" name="url"/>
+        <input class="borg-input" type="url" id="url" name="url" value="${ db?.url ?? '' }"/>
         <br/>
       </div>
 
       <div class="borg-input-cnt">
         <label for="topic">Topic</label>
         <br/>
-        <input class="borg-input" type="text" id="topic" name="topic"/>
+        <input class="borg-input" type="text" id="topic" name="topic" value="${ db?.topic ?? '' }"/>
         <br/>
       </div>
 
@@ -69,14 +81,14 @@ export class AddDatabasePage extends LitElement {
       <div class="borg-input-cnt">
         <label for="username">Username</label>
         <br/>
-        <input class="borg-input" type="text" id="username" name="username"/>
+        <input class="borg-input" type="text" id="username" name="username" value="${ db?.username ?? '' }"/>
         <br/>
       </div>
 
       <div class="borg-input-cnt">
         <label for="password">Password</label>
         <br/>
-        <input class="borg-input" type="text" id="password" name="password"/>
+        <input class="borg-input" type="password" id="password" name="password" value="${ db?.password ?? '' }"/>
         <br/>
       </div>
 

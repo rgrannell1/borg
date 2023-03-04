@@ -20,18 +20,15 @@ export class ViewDatabasePage extends LitElement {
     return this;
   }
 
-  foo() {
-    const db = this.database;
-    const client = new CommonStorageAPI(db.url, {
-      username: db.username,
-      password: db.password
-    });
-    const cache = new BorgCache(db.topic, client)
+  async connectedCallback() {
+    const cache = new BorgCache()
+
+    await cache.init();
+    //await cache.sync();
   }
 
-  render() {
-    this.foo();
 
+  render() {
     return html`
     <div>
       <section class="cards">

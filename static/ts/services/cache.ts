@@ -1,22 +1,19 @@
 import { CommonStorageAPI } from "./api.js";
 
-export class BorgCache {
-  topics: string[];
-  client: CommonStorageAPI;
-  events: Map<string, EventSource>;
+import type { DatabaseRecord } from "../types.js";
 
+export class BorgCache {
   static BORG_DATABASES_KEY = "borg_databases";
 
-  constructor(topics, client) {
-    this.topics = topics;
-    this.client = client;
-    this.events = new Map();
+  constructor() {
+
   }
+
   async init() {
 
   }
 
-  static getDatabases() {
+  static getDatabases(): DatabaseRecord {
     const value = localStorage.getItem(BorgCache.BORG_DATABASES_KEY);
 
     if (!value) {
@@ -30,22 +27,29 @@ export class BorgCache {
     }
   }
 
-  static setDatabases(databases: Record<string, any>) {
+  static setDatabases(databases: DatabaseRecord) {
     localStorage.setItem(BorgCache.BORG_DATABASES_KEY, JSON.stringify(databases));
   }
 
-  async maxId(topic) {
-    return 0;
-  }
-
+  /*
+   * Sync all databases into the local IDB store
+   *
+   */
   async sync() {
-    for (const topic of this.topics) {
+    const databases = BorgCache.getDatabases();
+
+    for (const database of Object.values(databases)) {
+      console.log(database)
+
+      const client = new CommonStorageAPI(database.url, {
+        username: database.username,
+        password: database.password
+      });
+
+      for await (const content of client.getContent(database.topic, 0)) {
+        console.log(content);
+      }
     }
-  }
 
-  async *getContent(topic) {
-    const startId = await this.maxId(topic);
-
-    yield* this.client.getContent(topic, startId);
   }
 }
