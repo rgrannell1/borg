@@ -1,4 +1,13 @@
 
+:root, :host {
+  --font-family: 'Montserrat', sans-serif;
+  --navbar-color: hsl(0, 100%, 50%);
+  --navbar-border-color: hsl(0, 99%, 34%);
+
+  --sidebar-hover-color: rgb(170, 204, 255);
+  --sidebar-button-hover-color: rgb(137, 184, 255);
+  --sidebar-active-color: blue;
+}
 
 @font-face {
   font-family: 'Montserrat';
@@ -12,21 +21,21 @@ html * {
 }
 
 html {
-  font-family: Montserrat;
+  font-family: var(--font-family);
 }
 
 .app-cnt {
   display: grid;
   grid-template-rows: auto auto 200px;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 220px 1fr;
 }
 
 borg-navbar {
-  background-color: red;
+  background-color: var(--navbar-color);
   color: white;
   grid-row: 1;
   padding: 20px;
-  border-bottom: 4px solid hsl(0, 99%, 34%);
+  border-bottom: 4px solid var(--navbar-border-color);
   grid-column-start: 1;
   grid-column-end: 3;
 }
@@ -49,17 +58,23 @@ borg-navbar {
   font-weight: bold;
 }
 
-.view-button-active {
+.view-button.active {
   border-bottom: 4px solid white;
 }
 
 .borg-sidebar {
+  font-size: 14px;
   grid-row-start: 2;
   grid-row-end: 4;
   grid-column-start: 1;
   grid-column-end: 1;
   overflow-y: scroll;
   height: calc(100vh - 63.5px);
+  background-color: rgb(250, 250, 250);
+}
+
+.borg-sidebar::-webkit-scrollbar {
+  display: none;
 }
 
 .borg-database {
@@ -80,11 +95,11 @@ borg-navbar {
 }
 
 .database-name:hover, .database-settings:hover {
-  background-color: rgb(137, 184, 255);
+  background-color: var(--sidebar-button-hover-color);
 }
 
 .borg-database:hover {
-  background-color: rgb(181, 210, 253);
+  background-color: var(--sidebar-hover-color);
 }
 
 .borg-database ul {
@@ -98,8 +113,12 @@ borg-navbar {
   border-bottom: 1px solid rgb(242, 242, 242);
 }
 
+.borg-database-add.active {
+  border-bottom: 4px solid var(--sidebar-active-color);
+}
+
 .borg-database-add:hover {
-  background-color: rgb(242, 242, 242);
+  background-color: var(--sidebar-button-hover-color);
 }
 
 main {

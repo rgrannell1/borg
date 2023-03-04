@@ -5,12 +5,33 @@ export class BorgCache {
   client: CommonStorageAPI;
   events: Map<string, EventSource>;
 
+  static BORG_DATABASES_KEY = "borg_databases";
+
   constructor(topics, client) {
     this.topics = topics;
     this.client = client;
     this.events = new Map();
   }
   async init() {
+
+  }
+
+  static getDatabases() {
+    const value = localStorage.getItem(BorgCache.BORG_DATABASES_KEY);
+
+    if (!value) {
+      return {}
+    } else {
+      try {
+        return JSON.parse(value);
+      } catch (err) {
+        return {}
+      }
+    }
+  }
+
+  static setDatabases(databases: Record<string, any>) {
+    localStorage.setItem(BorgCache.BORG_DATABASES_KEY, JSON.stringify(databases));
   }
 
   async maxId(topic) {
