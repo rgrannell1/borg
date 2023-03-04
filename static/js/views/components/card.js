@@ -22,10 +22,14 @@ export class Card extends LitElement {
     const title = date.toLocaleString();
     const url = this.content.url;
 
+    const urlTitle = url.length > 85
+      ? url.slice(0, 85) + "..."
+      : url;
+
     return html`
     <section class="card">
       <p>
-        <a href=${url}>${url}</a>
+        <a href=${url} target="_blank">${urlTitle}</a>
       </p>
       <br/>
       <p class="card-date" title=${title}>${DateTime.formatTime(date)}</p>

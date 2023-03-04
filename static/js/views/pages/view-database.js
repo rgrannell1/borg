@@ -94,7 +94,9 @@ export class ViewDatabasePage extends LitElement {
   render() {
     return html`
     <borg-view-database-cards .database=${this.database}></borg-view-database-cards>
-    <section class="input-card"></section>
+    <section class="input-card">
+      <input type="url" placeholder="URL" />
+    </section>
     `;
   }
 }
