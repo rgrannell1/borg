@@ -21,7 +21,7 @@ export class ViewDatabasePage extends LitElement {
     const cache = new BorgCache();
 
     await cache.init();
-    //await cache.sync();
+    await cache.sync();
   }
 
   render() {

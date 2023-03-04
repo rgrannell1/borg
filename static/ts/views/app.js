@@ -1,10 +1,7 @@
 import {
-  css,
   html,
   LitElement,
 } from "/home/rg/Code/ws/axon/borg/static/vendor/lit-element.js";
-
-import { BorgCache } from "../services/cache";
 
 import "./pages/about.js";
 import "./components/navbar.js";
@@ -13,6 +10,7 @@ import "./pages/frontpage.js";
 import "./pages/add-database.js";
 import "./pages/view-database.js";
 
+import { ClientStorage } from "../services/client-storage.js";
 import { LitEvents } from "../models/lit-events.js";
 import { Components } from "../models/components.js";
 
@@ -53,7 +51,13 @@ export class App extends LitElement {
   constructor() {
     super();
     this.page = Components.FRONTPAGE;
-    this.databases = BorgCache.getDatabases();
+    this.databases = {};
+  }
+
+  async connectedCallback() {
+    super.connectedCallback();
+    this.databases = await ClientStorage.getDatabases();
+    this.requestUpdate();
   }
 
   createRenderRoot() {
@@ -90,8 +94,7 @@ export class App extends LitElement {
       [event.detail.alias]: event.detail,
     };
 
-    BorgCache.setDatabases(this.databases);
-
+    await ClientStorage.setDatabases(this.databases);
     await this.requestUpdate();
   }
 
@@ -126,6 +129,7 @@ export class App extends LitElement {
   }
 
   render() {
+    console.log('app: render')
     let subpage = html`<borg-frontpage></borg-frontpage>`;
 
     if (this.page === Components.ADD_DATABASE) {
@@ -162,6 +166,7 @@ export class App extends LitElement {
     `;
   }
 }
+console.log('app: loaded');
 
 customElements.define("borg-add-database", AddDatabase);
 customElements.define("borg-app", App);

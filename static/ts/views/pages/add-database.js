@@ -4,6 +4,8 @@ import {
   LitElement,
 } from "/home/rg/Code/ws/axon/borg/static/vendor/lit-element.js";
 
+import { LitEvents } from '../../models/lit-events.js';
+
 export class AddDatabasePage extends LitElement {
   static get properties() {
     return {
@@ -17,13 +19,11 @@ export class AddDatabasePage extends LitElement {
   }
 
   getForm() {
-    const $ = document.querySelector;
-
-    const alias = $("#alias");
-    const url = $("#url");
-    const topic = $("#topic");
-    const username = $("#username");
-    const password = $("#password");
+    const alias = document.querySelector("#alias");
+    const url = document.querySelector("#url");
+    const topic = document.querySelector("#topic");
+    const username = document.querySelector("#username");
+    const password = document.querySelector("#password");
 
     return {
       alias: alias.value,
