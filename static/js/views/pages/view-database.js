@@ -28,32 +28,6 @@ export class DateSummary extends LitElement {
   }
 }
 
-export class Card extends LitElement {
-  static get properties() {
-    return {
-      content: { type: Object }
-    };
-  }
-
-  createRenderRoot() {
-    return this;
-  }
-
-  render() {
-    const date = new Date(this.content.created_at);
-
-    return html`
-    <section class="card">
-      <p>
-        <a href=${this.content.url}>${this.content.url}</a>
-      </p>
-      <br/>
-      <p class="card-date">${DateTime.formatTime(date)}</p>
-    </section>
-    `;
-  }
-}
-
 export class ViewDatabaseCards extends LitElement {
   static get properties() {
     return {
@@ -146,6 +120,5 @@ export class ViewDatabasePage extends LitElement {
   }
 }
 
-customElements.define("borg-card", Card);
 customElements.define("borg-view-database-cards", ViewDatabaseCards);
 customElements.define("borg-view-database-page", ViewDatabasePage);

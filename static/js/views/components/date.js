@@ -18,7 +18,7 @@ export class DateSummary extends LitElement {
   }
 
   render() {
-    const title = new Date(this.date).toLocaleString();
+    const title = new Date(this.date).toLocaleDateString();
     return html`
     <section class="date-summary" title=${title}>
       <p>${ DateTime.formatDate(new Date(this.date)) }</p>
