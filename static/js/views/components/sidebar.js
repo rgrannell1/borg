@@ -32,9 +32,13 @@ export class AddDatabase extends LitElement {
     const active = this.active && !this.selectedDatabase ? "active" : "";
 
     return html`
-    <div class="borg-database-add ${active}" @click=${this.broadcastAddDatabase}>
-      <h2 class="sidebar-heading">Databases</h2>
-    </div>
+    <li class="borg-database-add">
+      <span class="sidebar-heading">Databases</span>
+      <span
+      @click=${this.broadcastAddDatabase}
+        id="add-database"
+        class="${active}">+</span>
+    </li>
     `;
   }
 }

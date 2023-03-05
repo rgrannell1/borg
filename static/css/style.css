@@ -82,10 +82,6 @@ borg-sidebar {
   background-color: var(--sidebar-background-color);
 }
 
-.sidebar-heading {
-  font-size: 14px;
-  font-weight: bold;
-}
 
 borg-sidebar::-webkit-scrollbar {
   display: none;
@@ -104,12 +100,16 @@ borg-sidebar::-webkit-scrollbar {
 
 .database-name {
   grid-column-start: 1;
-  padding: 20px;
+  padding: 15px;
+  margin: 5px;
+  border-radius: 5px;
 }
 
 .database-settings {
   grid-column-start: 2;
-  padding: 20px;
+  padding: 15px;
+  margin: 5px;
+  border-radius: 5px;
 }
 
 .database-name:hover, .database-settings:hover {
@@ -125,19 +125,12 @@ borg-sidebar::-webkit-scrollbar {
 }
 
 .borg-database-add {
-  padding: 20px;
   cursor: pointer;
   font-weight: bold;
   border-bottom: 1px solid rgb(225, 225, 225);
 }
 
-.borg-database-add.active {
-  background-color: var(--sidebar-button-hover-color);
-}
 
-.borg-database-add:hover {
-  background-color: var(--sidebar-button-hover-color);
-}
 
 .borg-add-card-section {
   background-color: white;
@@ -278,4 +271,37 @@ borg-card-input {
 
 #submit-bookmark {
   grid-column: 2 / 2;
+}
+
+borg-database-add h2 {
+  display: inline;
+}
+
+.borg-database-add {
+  display: grid;
+  cursor: pointer;
+  grid-template-columns: 4fr 1fr;
+}
+
+#add-database:hover {
+  background-color: var(--sidebar-button-hover-color);
+}
+
+#add-database.active {
+  background-color: var(--sidebar-button-hover-color);
+}
+
+.sidebar-heading {
+  grid-column: 1 / 1;
+  padding: 10px;
+  margin: 10px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+#add-database {
+  border-radius: 5px;
+  grid-column-start: 2;
+  padding: 10px;
+  margin: 10px;
 }
