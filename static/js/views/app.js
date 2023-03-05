@@ -117,8 +117,8 @@ export class App extends LitElement {
   navigate(event) {
     const detail = event.detail;
 
-    if (detail.component === Components.ABOUT) {
-      this.page = Components.ABOUT;
+    if (detail.component === Components.ABOUT_PAGE) {
+      this.page = Components.ABOUT_PAGE;
     } else if (detail.component === Components.ADD_DATABASE) {
       this.page = Components.ADD_DATABASE;
 

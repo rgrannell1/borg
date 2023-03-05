@@ -32,7 +32,7 @@ export class Navbar extends LitElement {
   }
 
   render() {
-    const aboutActive = this.page === "About" ? "active" : "";
+    const aboutActive = this.page === "about" ? "active" : "";
 
     return html`
     <header>
