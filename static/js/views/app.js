@@ -173,9 +173,7 @@ export class App extends LitElement {
         ${this.renderDatabases()}
       </aside>
 
-      <main>
-        ${this.renderSubpage()}
-      </main>
+      ${this.renderSubpage()}
     </div>
     `;
   }
