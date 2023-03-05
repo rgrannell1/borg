@@ -2,9 +2,9 @@ import {
   css,
   html,
   LitElement,
-} from "/home/rg/Code/ws/axon/borg/static/vendor/lit-element.js";
+} from "../../../../../vendor/lit-element.js";
 
-import { DateTime } from "../../models/datetime.js";
+import { DateTime } from  "../../../../models/datetime.js";
 
 export class Card extends LitElement {
   static get properties() {

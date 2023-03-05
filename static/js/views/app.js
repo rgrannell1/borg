@@ -1,13 +1,11 @@
 import { html, LitElement } from "../../vendor/lit-element.js";
 
-import "./pages/about.js";
 import "./components/navbar.js";
 import "./components/database.js";
-import "./components/date.js";
-import "./components/card.js";
-import "./pages/frontpage.js";
-import "./pages/add-database.js";
-import "./pages/view-database.js";
+import "./pages/about/page.js";
+import "./pages/frontpage/page.js";
+import "./pages/add-database/page.js";
+import "./pages/view-database/page.js";
 
 import { ClientStorage } from "../services/client-storage.js";
 import { LitEvents } from "../models/lit-events.js";

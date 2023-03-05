@@ -2,9 +2,9 @@ import {
   css,
   html,
   LitElement,
-} from "/home/rg/Code/ws/axon/borg/static/vendor/lit-element.js";
+} from "../../../../vendor/lit-element.js";
 
-import { LitEvents } from "../../models/lit-events.js";
+import { LitEvents } from "../../../models/lit-events.js";
 
 export class AddDatabasePage extends LitElement {
   static get properties() {
@@ -51,7 +51,7 @@ export class AddDatabasePage extends LitElement {
     <div class="borg-input-cnt">
       <label for="alias">Alias</label>
       <br/>
-      <input class="borg-input" type="text" id="alias" name="alias" value="${
+      <input class="borg-input borg-input-narrow" type="text" id="alias" name="alias" value="${
       db?.alias ?? ""
     }"/>
       <br/>
@@ -64,7 +64,7 @@ export class AddDatabasePage extends LitElement {
     <div class="borg-input-cnt">
       <label for="url">URL</label>
       <br/>
-      <input class="borg-input" type="url" id="url" name="url" value="${
+      <input class="borg-input borg-input-narrow" type="url" id="url" name="url" value="${
       db?.url ?? ""
     }"/>
       <br/>
@@ -77,7 +77,7 @@ export class AddDatabasePage extends LitElement {
     <div class="borg-input-cnt">
       <label for="topic">Topic</label>
       <br/>
-      <input class="borg-input" type="text" id="topic" name="topic" value="${
+      <input class="borg-input borg-input-narrow" type="text" id="topic" name="topic" value="${
       db?.topic ?? ""
     }"/>
       <br/>
@@ -90,7 +90,7 @@ export class AddDatabasePage extends LitElement {
     <div class="borg-input-cnt">
       <label for="username">Username</label>
       <br/>
-      <input class="borg-input" type="text" id="username" name="username" value="${
+      <input class="borg-input borg-input-narrow" type="text" id="username" name="username" value="${
       db?.username ?? ""
     }"/>
       <br/>
@@ -103,7 +103,7 @@ export class AddDatabasePage extends LitElement {
     <div class="borg-input-cnt">
       <label for="password">Password</label>
       <br/>
-      <input class="borg-input" type="password" id="password" name="password" value="${
+      <input class="borg-input borg-input-narrow" type="password" id="password" name="password" value="${
       db?.password ?? ""
     }"/>
       <br/>

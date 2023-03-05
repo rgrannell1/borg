@@ -4,7 +4,7 @@ import {
   LitElement,
 } from "/home/rg/Code/ws/axon/borg/static/vendor/lit-element.js";
 
-import { DateTime } from "../../models/datetime.js";
+import { DateTime } from "../../../../models/datetime.js";
 
 export class DateSummary extends LitElement {
   static get properties() {

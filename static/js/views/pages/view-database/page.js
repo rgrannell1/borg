@@ -4,14 +4,21 @@ import {
   LitElement,
 } from "/home/rg/Code/ws/axon/borg/static/vendor/lit-element.js";
 
-import { ClientStorage } from "../../services/client-storage.js";
-import { Assembler } from "../../services/assembler.js";
-import { DateTime } from "../../models/datetime.js";
+import { ClientStorage } from "../../../services/client-storage.js";
+import { Assembler } from "../../../services/assembler.js";
+import { DateTime } from "../../../models/datetime.js";
+
+import './components/date.js';
+import './components/card.js';
 
 export class SearchBar extends LitElement {
+  createRenderRoot() {
+    return this;
+  }
+
   render() {
     return html`
-    <input class="borg-input" placeholder="Search" />
+    <input id="search-cards" class="borg-input" placeholder="Search" />
     `;
   }
 }

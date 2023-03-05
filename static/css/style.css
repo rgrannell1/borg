@@ -157,7 +157,7 @@ h3 {
 }
 
 .borg-input {
-  font-size: 1em;
+  font-size: 16px;
   padding: 5px;
   font-size: 16px;
   font-size: max(16px, 1em);
@@ -166,15 +166,17 @@ h3 {
   padding: 0.25em 0.5em;
   background-color: #fff;
   border: 2px solid black;
+  width: 100%;
+}
+
+.borg-input-narrow {
   min-width: 200px;
   max-width: 250px;
-  width: 100%;
 }
 
 .borg-input-cnt {
   margin-bottom: 10px;
 }
-
 
 .submit-button {
   display: block;
@@ -234,7 +236,7 @@ h3 {
 borg-view-database-page {
   display: grid;
   grid-row: 2 / 4;
-  grid-template-rows: 50px auto 80px;
+  grid-template-rows: auto auto 80px;
   grid-template-columns: 1fr;
 }
 
@@ -249,7 +251,7 @@ borg-search-bar {
   grid-row: 1 / 2;
   grid-column: 1;
   background-color: var(--sidebar-background-color);
-  padding: 20px;
+  padding: 10px;
 }
 
 .input-card {
