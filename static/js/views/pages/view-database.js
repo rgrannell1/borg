@@ -8,6 +8,14 @@ import { ClientStorage } from "../../services/client-storage.js";
 import { Assembler } from "../../services/assembler.js";
 import { DateTime } from "../../models/datetime.js";
 
+export class SearchBar extends LitElement {
+  render() {
+    return html`
+    <input class="borg-input" placeholder="Search" />
+    `;
+  }
+}
+
 export class ViewDatabaseCards extends LitElement {
   static get properties() {
     return {
@@ -106,6 +114,8 @@ export class ViewDatabasePage extends LitElement {
 
   render() {
     return html`
+    <borg-search-bar></borg-search-bar>
+
     <borg-view-database-cards .database=${this.database}></borg-view-database-cards>
 
     <section class="input-card">
@@ -116,5 +126,6 @@ export class ViewDatabasePage extends LitElement {
   }
 }
 
+customElements.define("borg-search-bar", SearchBar);
 customElements.define("borg-view-database-cards", ViewDatabaseCards);
 customElements.define("borg-view-database-page", ViewDatabasePage);

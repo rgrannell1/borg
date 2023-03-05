@@ -27,7 +27,7 @@ export class DateTime {
     });
     const day = date.getDate();
 
-    if (new Date().getDate() === day) {
+    if (new Date().getDate() === day && new Date().getMonth() === date.getMonth() && new Date().getFullYear() === year) {
       return "Today";
     }
 
