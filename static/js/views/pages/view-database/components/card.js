@@ -3,6 +3,8 @@ import { css, html, LitElement } from "../../../../../vendor/lit-element.js";
 import { DateTime } from "../../../../models/datetime.js";
 
 export class Card extends LitElement {
+  static TEXT_CUTOFF = 85;
+
   static get properties() {
     return {
       content: { type: Object },
@@ -18,7 +20,9 @@ export class Card extends LitElement {
     const title = date.toLocaleString();
     const url = this.content.url;
 
-    const urlTitle = url.length > 85 ? url.slice(0, 85) + "..." : url;
+    const urlTitle = url.length > Card.TEXT_CUTOFF
+      ? url.slice(0, Card.TEXT_CUTOFF) + "..."
+      : url;
 
     return html`
     <section class="card">

@@ -1,5 +1,4 @@
 import {
-  css,
   html,
   LitElement,
 } from "../../../../../vendor/lit-element.js";
@@ -7,6 +6,12 @@ import {
 import { LitEvents } from '../../../../models/lit-events.js';
 
 export class SearchBar extends LitElement {
+  static get properties() {
+    return {
+      query: { type: String },
+    };
+  }
+
   createRenderRoot() {
     return this;
   }
@@ -27,8 +32,9 @@ export class SearchBar extends LitElement {
     return html`
     <input
       id="search-cards"
-      @keydown=${this.broadcastQuery}
       class="borg-input"
+      value=${this.query}
+      @keyup=${this.broadcastQuery}
       placeholder="Search" />
     `;
   }

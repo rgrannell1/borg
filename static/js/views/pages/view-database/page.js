@@ -9,6 +9,7 @@ import "./components/date.js";
 import "./components/card.js";
 import "./components/search-bar.js";
 import "./components/cards-panel.js";
+import "./components/card-input.js";
 
 export class ViewDatabasePage extends LitElement {
   static get properties() {
@@ -29,25 +30,17 @@ export class ViewDatabasePage extends LitElement {
     this.requestUpdate();
   }
 
-  onSubmit() {
-  }
-
   render() {
     return html`
-    <borg-search-bar></borg-search-bar>
+    <borg-search-bar
+      .query=${this.query}></borg-search-bar>
 
     <borg-cards-panel
       .query=${this.query}
       .database=${this.database}></borg-cards-panel>
 
-    <section class="input-card">
-      <input id="bookmark-url" type="url" class="borg-input" placeholder="URL" />
-      <input
-        @submit=${this.onSubmit}
-        class="submit-button"
-        type="button"
-        value="▷"/>
-    </section>
+    <borg-card-input
+      .database=${this.database}></borg-card-input>
     `;
   }
 }

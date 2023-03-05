@@ -11,13 +11,11 @@ export class Frontpage extends LitElement {
   render() {
     return html`
       <div class="frontpage-cnt">
-
         <section class="borg-show-card-section">
         </section>
 
         <section class="borg-add-card-section">
         </section>
-
       </div>
     `;
   }
