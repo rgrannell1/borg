@@ -10,6 +10,7 @@
   --sidebar-background-color: rgb(245, 245, 245);
 
   --card-background: rgb(245, 245, 245);
+  --card-box-shadow: rgba(11, 20, 26, 0.13) 0px 1px 0.5px 0px;
   --link-color: hsl(211, 100%, 50%);
 }
 
@@ -81,6 +82,11 @@ borg-sidebar {
   background-color: var(--sidebar-background-color);
 }
 
+.sidebar-heading {
+  font-size: 14px;
+  font-weight: bold;
+}
+
 borg-sidebar::-webkit-scrollbar {
   display: none;
 }
@@ -122,7 +128,7 @@ borg-sidebar::-webkit-scrollbar {
   padding: 20px;
   cursor: pointer;
   font-weight: bold;
-  border-bottom: 1px solid rgb(242, 242, 242);
+  border-bottom: 1px solid rgb(225, 225, 225);
 }
 
 .borg-database-add.active {
@@ -216,6 +222,7 @@ h3 {
   margin: 20px;
   padding: 15px 15px 10px 15px;
   border-radius: 10px;
+  box-shadow: var(--card-box-shadow);
 }
 
 .date-summary {
@@ -226,6 +233,7 @@ h3 {
   padding: 10px 15px;
   border-radius: 10px;
   margin-left: 10%;
+  box-shadow: var(--card-box-shadow);
 }
 
 .card-date {

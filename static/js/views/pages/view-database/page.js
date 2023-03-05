@@ -30,6 +30,13 @@ export class ViewDatabasePage extends LitElement {
     this.requestUpdate();
   }
 
+  async handleAddBookmark(event) {
+    // update button state
+    // fetch
+    // append
+    // refresh
+  }
+
   render() {
     return html`
     <borg-search-bar
@@ -40,6 +47,7 @@ export class ViewDatabasePage extends LitElement {
       .database=${this.database}></borg-cards-panel>
 
     <borg-card-input
+      @submit-add-bookmark=${this.handleAddBookmark}
       .database=${this.database}></borg-card-input>
     `;
   }

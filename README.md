@@ -2,6 +2,8 @@
 
 Borg is website that stores bookmarks to common-storage.
 
+![Borg UI](./screenshot.png)
+
 ## License
 
 The MIT License

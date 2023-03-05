@@ -33,7 +33,7 @@ export class AddDatabase extends LitElement {
 
     return html`
     <div class="borg-database-add ${active}" @click=${this.broadcastAddDatabase}>
-      <div>Databases</div>
+      <h2 class="sidebar-heading">Databases</h2>
     </div>
     `;
   }

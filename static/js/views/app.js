@@ -11,6 +11,7 @@ import "./pages/view-database/page.js";
 
 import { ClientStorage } from "../services/client-storage.js";
 import { Components } from "../models/components.js";
+import { LitEvents } from "../models/lit-events.js";
 
 export class App extends LitElement {
   constructor() {
