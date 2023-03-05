@@ -4,8 +4,8 @@
   --navbar-color: hsl(0, 100%, 50%);
   --navbar-border-color: hsl(0, 99%, 34%);
 
-  --sidebar-hover-color: rgb(170, 204, 255);
-  --sidebar-button-hover-color: rgb(137, 184, 255);
+  --sidebar-hover-color: rgb(209, 227, 255);
+  --sidebar-button-hover-color: rgb(188, 215, 255);
   --sidebar-active-color: blue;
   --sidebar-background-color: rgb(245, 245, 245);
 
@@ -100,19 +100,19 @@ borg-sidebar::-webkit-scrollbar {
 
 .database-name {
   grid-column-start: 1;
-  padding: 15px;
-  margin: 5px;
+  padding: 12px;
+  margin: 8px;
   border-radius: 5px;
 }
 
 .database-settings {
   grid-column-start: 2;
-  padding: 15px;
-  margin: 5px;
+  padding: 12px;
+  margin: 8px;
   border-radius: 5px;
 }
 
-.database-name:hover, .database-settings:hover {
+.database-settings:hover {
   background-color: var(--sidebar-button-hover-color);
 }
 

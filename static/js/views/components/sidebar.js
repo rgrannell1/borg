@@ -35,7 +35,8 @@ export class AddDatabase extends LitElement {
     <li class="borg-database-add">
       <span class="sidebar-heading">Databases</span>
       <span
-      @click=${this.broadcastAddDatabase}
+        title="Add Database"
+        @click=${this.broadcastAddDatabase}
         id="add-database"
         class="${active}">+</span>
     </li>
