@@ -1,13 +1,22 @@
 export class Assembler {
   static assembleBookmarks(events) {
     const bookmarks = [];
+
+    const idSet = new Set();
+
     for (const event of events) {
       if (event.type !== "xyz.rgrannell.bookmark.add.v1") {
         continue;
       }
 
-      const bookmark = JSON.parse(event.data);
-      bookmarks.push(bookmark);
+      // bug workaround!
+      const data = JSON.parse(event.data);
+      if (idSet.has(data.id)) {
+        continue;
+      }
+
+      bookmarks.push(data);
+      idSet.add(data.id);
     }
 
     bookmarks.sort((left, right) => {

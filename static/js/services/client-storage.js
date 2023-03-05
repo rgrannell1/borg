@@ -64,12 +64,15 @@ export class ClientStorage {
 
       ClientStorage.broadcastSyncing(database.alias);
 
+      let contentId = maxId;
+
       for await (const content of client.getContent(database.topic, maxId)) {
         currentContent.push(content.value);
-
-        await ClientStorage.setDatabaseMaxId(database, content.id);
-        await ClientStorage.setDatabaseContent(database, currentContent);
+        contentId = content.id;
       }
+
+      await ClientStorage.setDatabaseContent(database, currentContent);
+      await ClientStorage.setDatabaseMaxId(database, contentId);
 
       ClientStorage.broadcastSynced(database.alias);
     }

@@ -32,38 +32,46 @@ export class ViewDatabaseCards extends LitElement {
       return;
     }
 
-    this.entries = [];
-    for (const entry of await ClientStorage.getDatabaseContent(this.database)) {
-      this.entries.push(entry);
-    }
-
-    this.content = Assembler.assembleBookmarks(this.entries);
+    this.content = Assembler.assembleBookmarks(
+      await ClientStorage.getDatabaseContent(this.database)
+    );
 
     this.requestUpdate();
   }
 
+  renderDate(date) {
+    return html`
+    <li>
+      <date-summary .date=${date}></date-summary>
+    </li>
+    `;
+  }
+
+  renderCard(entry) {
+    return html`
+    <li>
+      <borg-card .content=${entry}></borg-card>
+    </li>
+    `;
+  }
+
   render() {
     const entries = [];
+    let lastDate = undefined;
 
-    let state = undefined;
     for (const entry of this.content) {
       const date = entry.created_at;
 
       // buggy
-      const formattedCreatedAt = DateTime.formatDate(new Date(date));
-      const formattedPreviousDate = DateTime.formatDate(new Date(state));
+      const createdAt = DateTime.formatDate(new Date(date));
+      const previousDate = DateTime.formatDate(new Date(lastDate));
 
-      if (formattedCreatedAt !== formattedPreviousDate) {
-        entries.push(html`<date-summary .date=${date}></date-summary>`);
-        state = date;
+      if (createdAt !== previousDate) {
+        entries.push(this.renderDate(date));
+        lastDate = date;
       }
 
-      const elem = html`
-      <li>
-        <borg-card .content=${entry}></borg-card>
-      </li>`;
-
-      entries.push(elem);
+      entries.push(this.renderCard(entry));
     }
 
     return html`
@@ -89,6 +97,7 @@ export class ViewDatabasePage extends LitElement {
     super.connectedCallback();
 
     await ClientStorage.sync();
+    this.requestUpdate();
   }
 
   onSubmit() {
