@@ -19,7 +19,7 @@ export class Navbar extends LitElement {
     return this;
   }
 
-  onAboutClick() {
+  broadcastAboutNavigation() {
     const event = new CustomEvent(LitEvents.NAVIGATE, {
       detail: {
         component: Components.ABOUT_PAGE,
@@ -40,7 +40,7 @@ export class Navbar extends LitElement {
         <ul>
           <li class="view-button ${aboutActive}">
           <a
-            @click=${this.onAboutClick}
+            @click=${this.broadcastAboutNavigation}
             href="#">About</a>
           </li>
         </ul>

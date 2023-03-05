@@ -15,7 +15,7 @@ export class Database extends LitElement {
     return this;
   }
 
-  viewDatabase() {
+  broadcastViewDatabase() {
     const event = new CustomEvent(LitEvents.NAVIGATE, {
       detail: {
         component: Components.VIEW_DATABASE,
@@ -28,7 +28,7 @@ export class Database extends LitElement {
     this.dispatchEvent(event);
   }
 
-  changeSettings() {
+  broadcastChangeSettings() {
     const event = new CustomEvent(LitEvents.NAVIGATE, {
       detail: {
         component: Components.ADD_DATABASE,
@@ -47,11 +47,11 @@ export class Database extends LitElement {
     return html`
     <li class="borg-database ${active}">
       <span
-        @click=${this.viewDatabase}
+        @click=${this.broadcastViewDatabase}
         class="database-name">${this.alias}</span>
       <span
         title="Settings"
-        @click=${this.changeSettings}
+        @click=${this.broadcastChangeSettings}
         class="database-settings">⚙</span>
     </li>
     `;

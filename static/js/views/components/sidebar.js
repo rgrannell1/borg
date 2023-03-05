@@ -16,7 +16,7 @@ export class AddDatabase extends LitElement {
     return this;
   }
 
-  onClick() {
+  broadcastAddDatabase() {
     const event = new CustomEvent(LitEvents.NAVIGATE, {
       detail: {
         component: Components.ADD_DATABASE,
@@ -32,7 +32,7 @@ export class AddDatabase extends LitElement {
     const active = this.active && !this.selectedDatabase ? "active" : "";
 
     return html`
-    <div class="borg-database-add ${active}" @click=${this.onClick}>
+    <div class="borg-database-add ${active}" @click=${this.broadcastAddDatabase}>
       <div>Databases</div>
     </div>
     `;

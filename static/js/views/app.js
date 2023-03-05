@@ -34,6 +34,7 @@ export class App extends LitElement {
       page: { type: String },
       selectedDatabase: { type: String },
       databases: { type: Object },
+      query: { type: String }
     };
   }
 
@@ -45,6 +46,10 @@ export class App extends LitElement {
 
     await ClientStorage.setDatabases(this.databases);
     await this.requestUpdate();
+  }
+
+  async handleSearch(event) {
+    this.query = event.detail.query;
   }
 
   navigate(event) {
@@ -74,7 +79,7 @@ export class App extends LitElement {
   renderViewDatabasePage() {
     const db = this.databases[this.selectedDatabase];
 
-    return html`<borg-view-database-page .database=${db}></borg-view-database-page>`;
+    return html`<borg-view-database-page .database=${db} .query=${this.query}></borg-view-database-page>`;
   }
 
   renderAboutPage() {
@@ -101,7 +106,9 @@ export class App extends LitElement {
     return html`
     <div class="app-cnt"
       @navigate=${this.navigate}
+      @search=${this.handleSearch}
       @submit-add-database=${this.handleAddDatabase}>
+
       <borg-navbar
         .page=${this.page}>
       </borg-navbar>

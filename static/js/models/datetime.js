@@ -20,6 +20,10 @@ export class DateTime {
     return `${hours}:${minutes}`;
   }
 
+  static verbalDate(date) {
+
+  }
+
   static formatDate(date) {
     const year = date.getFullYear();
     const month = date.toLocaleString("en-US", {
