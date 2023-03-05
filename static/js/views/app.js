@@ -17,6 +17,7 @@ export class AddDatabase extends LitElement {
   static get properties() {
     return {
       active: { type: Boolean },
+      selectedDatabase: { type: String },
     };
   }
   createRenderRoot() {
@@ -36,7 +37,9 @@ export class AddDatabase extends LitElement {
   }
 
   render() {
-    const active = this.active ? "active" : "";
+    const active = this.active && !this.selectedDatabase
+      ? "active"
+      : "";
 
     return html`
     <div class="borg-database-add ${active}" @click=${this.onClick}>
@@ -170,7 +173,7 @@ export class App extends LitElement {
 
       <aside class="borg-sidebar">
         <div>
-          <borg-add-database .active=${this.page === "add-database"}/>
+          <borg-add-database .selectedDatabase=${this.selectedDatabase} .active=${this.page === "add-database"}/>
         </div>
         ${this.renderDatabases()}
       </aside>
