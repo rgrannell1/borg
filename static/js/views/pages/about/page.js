@@ -1,8 +1,4 @@
-import {
-  css,
-  html,
-  LitElement,
-} from "../../../../vendor/lit-element.js";
+import { css, html, LitElement } from "../../../../vendor/lit-element.js";
 
 export class AboutPage extends LitElement {
   createRenderRoot() {

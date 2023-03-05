@@ -1,10 +1,6 @@
-import {
-  css,
-  html,
-  LitElement,
-} from "../../../../../vendor/lit-element.js";
+import { css, html, LitElement } from "../../../../../vendor/lit-element.js";
 
-import { DateTime } from  "../../../../models/datetime.js";
+import { DateTime } from "../../../../models/datetime.js";
 
 export class Card extends LitElement {
   static get properties() {
@@ -22,9 +18,7 @@ export class Card extends LitElement {
     const title = date.toLocaleString();
     const url = this.content.url;
 
-    const urlTitle = url.length > 85
-      ? url.slice(0, 85) + "..."
-      : url;
+    const urlTitle = url.length > 85 ? url.slice(0, 85) + "..." : url;
 
     return html`
     <section class="card">

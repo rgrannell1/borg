@@ -8,8 +8,8 @@ import { ClientStorage } from "../../../services/client-storage.js";
 import { Assembler } from "../../../services/assembler.js";
 import { DateTime } from "../../../models/datetime.js";
 
-import './components/date.js';
-import './components/card.js';
+import "./components/date.js";
+import "./components/card.js";
 
 export class SearchBar extends LitElement {
   createRenderRoot() {
@@ -48,7 +48,7 @@ export class ViewDatabaseCards extends LitElement {
     }
 
     this.content = Assembler.assembleBookmarks(
-      await ClientStorage.getDatabaseContent(this.database)
+      await ClientStorage.getDatabaseContent(this.database),
     );
 
     this.requestUpdate();
@@ -116,7 +116,6 @@ export class ViewDatabasePage extends LitElement {
   }
 
   onSubmit() {
-
   }
 
   render() {
