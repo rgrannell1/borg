@@ -91,12 +91,17 @@ export class ViewDatabasePage extends LitElement {
     await ClientStorage.sync();
   }
 
+  onSubmit() {
+
+  }
+
   render() {
     return html`
     <borg-view-database-cards .database=${this.database}></borg-view-database-cards>
+
     <section class="input-card">
       <input id="bookmark-url" type="url" class="borg-input" placeholder="URL" />
-      <input class="submit-button" type="button" value="▷"/>
+      <input @submit=${this.onSubmit} class="submit-button" type="button" value="▷"/>
     </section>
     `;
   }

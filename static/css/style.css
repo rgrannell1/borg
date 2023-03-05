@@ -7,6 +7,10 @@
   --sidebar-hover-color: rgb(170, 204, 255);
   --sidebar-button-hover-color: rgb(137, 184, 255);
   --sidebar-active-color: blue;
+  --sidebar-background-color: rgb(245, 245, 245);
+
+  --card-background: rgb(245, 245, 245);
+  --link-color: hsl(211, 100%, 50%);
 }
 
 @font-face {
@@ -22,6 +26,10 @@ html * {
 
 html {
   font-family: var(--font-family);
+}
+
+a {
+  color: var(--link-color);
 }
 
 .app-cnt {
@@ -71,7 +79,7 @@ borg-navbar {
   grid-column-end: 1;
   overflow-y: scroll;
   height: calc(100vh - 63.5px);
-  background-color: rgb(250, 250, 250);
+  background-color: var(--sidebar-background-color);
 }
 
 .borg-sidebar::-webkit-scrollbar {
@@ -82,7 +90,11 @@ borg-navbar {
   display: grid;
   grid-template-columns: 4fr 1fr;
   cursor: pointer;
-  border-bottom: 1px solid rgb(242, 242, 242);
+  border-bottom: 1px solid rgb(225, 225, 225);
+}
+
+.borg-database.active {
+  background-color: var(--sidebar-button-hover-color);
 }
 
 .database-name {
@@ -115,13 +127,12 @@ borg-navbar {
 }
 
 .borg-database-add.active {
-  border-bottom: 4px solid var(--sidebar-active-color);
+  background-color: var(--sidebar-button-hover-color);
 }
 
 .borg-database-add:hover {
   background-color: var(--sidebar-button-hover-color);
 }
-
 
 .borg-add-card-section {
   background-color: white;
@@ -200,7 +211,7 @@ h3 {
 
 .card {
   display: inline-block;
-  background: rgb(239, 239, 239);
+  background: var(--card-background);
   margin: 20px;
   padding: 15px 15px 10px 15px;
   border-radius: 10px;
@@ -237,7 +248,7 @@ borg-view-database-cards {
 .input-card {
   grid-row: 2 / 2;
   grid-column: 1;
-  background-color: rgb(250, 250, 250);
+  background-color: var(--sidebar-background-color);
   padding: 20px;
   display: grid;
   grid-template-columns: 6fr 1fr 1fr;

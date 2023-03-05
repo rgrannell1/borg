@@ -102,7 +102,9 @@ export class App extends LitElement {
     <ul>
       ${
       Object.values(this.databases).map((db) => {
-        return html`<borg-database alias=${db.alias}></borg-database>`;
+        const active = this.selectedDatabase === db.alias;
+
+        return html`<borg-database .active=${active} .alias=${db.alias}></borg-database>`;
       })
     }
     </ul>

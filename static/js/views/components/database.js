@@ -7,6 +7,7 @@ export class Database extends LitElement {
   static get properties() {
     return {
       alias: { type: String },
+      active: { type: Boolean },
     };
   }
 
@@ -41,8 +42,10 @@ export class Database extends LitElement {
   }
 
   render() {
+    const active = this.active ? "active" : "";
+
     return html`
-    <li class="borg-database">
+    <li class="borg-database ${active}">
       <span
         @click=${this.viewDatabase}
         class="database-name">${this.alias}</span>
