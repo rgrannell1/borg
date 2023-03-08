@@ -13,7 +13,8 @@ export const AppEvents = {
   ADD_CARD: "add-card",
   // add a new database to the sidebar
   ADD_DATABASE: "add-database",
-
+  // add concept to a card
+  ADD_CONCEPT: "add-concept",
   // delete a database
   DELETE_DATABASE: "delete-database",
   // announce a database is being synced

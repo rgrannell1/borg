@@ -31,6 +31,15 @@ export class ClientStorage {
     return set(`borg_database_${database.alias}_content`, content);
   }
 
+  static async getConcepts() {
+    const concepts = await get("borg_concepts");
+    return concepts ?? [];
+  }
+
+  static async setConcepts(concepts) {
+    return set("borg_concepts", concepts);
+  }
+
   static async *sync() {
     const databases = await ClientStorage.getDatabases();
 

@@ -28,20 +28,69 @@ export class AddDatabase extends LitElement {
   }
 
   render() {
-    const active = this.active && !this.selectedDatabase ? "active" : "";
+    const classList = ['sidebar-heading-button'];
+
+    if (this.active && !this.selectedDatabase) {
+      classList.push("active");
+    }
 
     return html`
-    <li class="borg-database-add">
-      <span class="sidebar-heading">Databases</span>
+    <li class="borg-sidebar-heading">
+      <span class="sidebar-heading">Topics</span>
       <span
-        title="Add Database"
+        title="Add Topic"
         @click=${this.broadcastAddDatabase}
-        id="add-database"
-        class="${active}">+</span>
+        id="add-topic"
+        class="${classList.join(' ')}">+</span>
     </li>
     `;
   }
 }
+
+export class AddConcept extends LitElement {
+  static get properties() {
+    return {
+      active: { type: Boolean },
+    };
+  }
+
+  createRenderRoot() {
+    return this;
+  }
+
+  broadcastAddConcept() {
+    const event = new CustomEvent(AppEvents.NAVIGATE, {
+      detail: {
+        component: Components.ADD_CONCEPT,
+      },
+      bubbles: true,
+      composed: true,
+    });
+
+    this.dispatchEvent(event);
+  }
+
+  render() {
+    const classList = ['sidebar-heading-button'];
+
+    if (this.active && !this.selectedDatabase) {
+      classList.push("active");
+    }
+
+    return html`
+    <li class="borg-sidebar-heading">
+      <span class="sidebar-heading">Concepts</span>
+      <span
+        title="Add Concept"
+        @click=${this.broadcastAddConcept}
+        id="add-concept"
+        class="${classList.join(' ')}">+</span>
+    </li>
+    `;
+  }
+}
+
+
 
 export class Sidebar extends LitElement {
   static get properties() {
@@ -77,11 +126,12 @@ export class Sidebar extends LitElement {
     <aside class="borg-sidebar">
       <borg-add-database .active=${this.page === "add-database"} .selectedDatabase=${this.selectedDatabase}></borg-add-database>
       ${this.renderDatabases()}
-      <br/>
+      <borg-add-concept .active=${this.page === "add-concept"}></borg-add-concept>
     </aside>
     `;
   }
 }
 
 customElements.define("borg-add-database", AddDatabase);
+customElements.define("borg-add-concept", AddConcept);
 customElements.define("borg-sidebar", Sidebar);

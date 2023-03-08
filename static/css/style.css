@@ -146,7 +146,7 @@ borg-sidebar ul {
   list-style-type: none;
 }
 
-.borg-database-add {
+.borg-sidebar-heading {
   font-weight: bold;
   border-bottom: 1px solid rgb(225, 225, 225);
 }
@@ -164,14 +164,14 @@ borg-sidebar ul {
   font-size: 1.75em;
 }
 
-borg-add-database-page {
+borg-add-database-page, borg-add-concept-page {
   display: block;
   padding: 40px;
   min-width: 400px;
   padding: 60px 13%;
 }
 
-borg-add-database-page h2 {
+borg-add-database-page h2, borg-add-concept-page h2 {
   margin-bottom: 20px;
   border-bottom: 2px solid #c9c9c9;
 }
@@ -181,7 +181,7 @@ borg-add-database-page h2 {
   padding: 10px 0;
 }
 
-borg-add-database-page h3 {
+borg-add-database-page h3, borg-add-concept-page h3 {
   margin-bottom: 20px;
 }
 
@@ -324,16 +324,16 @@ borg-database-add h2 {
   display: inline;
 }
 
-.borg-database-add {
+.borg-sidebar-heading {
   display: grid;
   grid-template-columns: 4fr 1fr;
 }
 
-#add-database:hover {
+.sidebar-heading-button:hover {
   background-color: var(--sidebar-button-hover-color);
 }
 
-#add-database.active {
+.sidebar-heading-button.active {
   background-color: var(--sidebar-button-hover-color);
 }
 
@@ -345,7 +345,7 @@ borg-database-add h2 {
   font-weight: bold;
 }
 
-#add-database {
+.sidebar-heading-button {
   cursor: pointer;
   border-radius: 5px;
   grid-column-start: 2;
@@ -384,7 +384,7 @@ borg-database-add h2 {
 }
 
 .borg-database.syncing {
-	background: linear-gradient(-45deg, var(--sidebar-hover-color), rgb(111, 166, 255));
+	background: linear-gradient(-45deg, var(--sidebar-hover-color), rgb(111, 157, 255));
 	background-size: 400% 400%;
 	animation: sync-gradient 5s ease infinite;
 }

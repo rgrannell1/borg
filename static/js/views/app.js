@@ -7,11 +7,11 @@ import "./components/sidebar.js";
 import "./pages/about/page.js";
 import "./pages/frontpage/page.js";
 import "./pages/add-database/page.js";
+import "./pages/add-concept/page.js";
 import "./pages/view-database/page.js";
 
 import { ClientStorage } from "../services/client-storage.js";
 import { Components } from "../models/components.js";
-import { AppEvents } from "../models/app-events.js";
 
 export class App extends LitElement {
   constructor() {
@@ -36,7 +36,8 @@ export class App extends LitElement {
       page: { type: String },
       selectedDatabase: { type: String },
       databases: { type: Object },
-      syncState: { type: Object }
+      syncState: { type: Object },
+      concepts: { type: Object },
     };
   }
 
@@ -64,6 +65,15 @@ export class App extends LitElement {
 
     await ClientStorage.setDatabases(this.databases);
     this.selectedDatabase = event.detail.alias;
+  }
+
+  async handleAddConcept(event) {
+    this.concepts = {
+      ...this.concepts,
+      [event.detail.alias]: event.detail,
+    };
+
+    await ClientStorage.setConcepts(this.concepts);
   }
 
   async handleDatabaseSyncing(event) {
@@ -95,6 +105,8 @@ export class App extends LitElement {
     } else if (detail.component === Components.VIEW_DATABASE) {
       this.page = Components.VIEW_DATABASE;
       this.selectedDatabase = detail.alias;
+    } else if (detail.component === Components.ADD_CONCEPT) {
+      this.page = Components.ADD_CONCEPT;
     }
 
     this.requestUpdate();
@@ -125,6 +137,8 @@ export class App extends LitElement {
       subpage = this.renderViewDatabasePage();
     } else if (this.page === Components.ABOUT) {
       subpage = this.renderAboutPage();
+    } else if (this.page === Components.ADD_CONCEPT) {
+      subpage = html`<borg-add-concept-page></borg-add-concept-page>`;
     }
 
     return subpage;
@@ -140,6 +154,7 @@ export class App extends LitElement {
       @delete-database=${this.handleDeleteDatabase}
       @database-syncing=${this.handleDatabaseSyncing}
       @database-synced=${this.handleDatabaseSynced}
+      @add-concept=${this.handleAddConcept}
       @add-database=${this.handleAddDatabase}>
 
       <borg-navbar

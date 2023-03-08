@@ -139,7 +139,7 @@ export class AddDatabasePage extends LitElement {
   }
 
   renderSubmitButton() {
-    const text = this.database ? "Edit Database" : "Add Database";
+    const text = this.database ? "Update Topic" : "Add Topic";
 
     return html`
       <button
@@ -155,13 +155,13 @@ export class AddDatabasePage extends LitElement {
         class="submit-button danger"
         class="delete-button"
         @click=${this.onDelete}
-        type="submit">Delete Database</button>
+        type="submit">Remove Topic</button>
       `;
   }
 
   render() {
     const db = this.database;
-    const text = this.database ? "Edit Database" : "Add Database";
+    const text = this.database ? "Update Topic" : "Add Topic";
 
     const buttons = this.database
       ? html`
