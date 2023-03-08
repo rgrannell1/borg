@@ -21,7 +21,6 @@ export class DateTime {
   }
 
   static verbalDate(date) {
-
   }
 
   static formatDate(date) {

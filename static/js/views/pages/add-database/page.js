@@ -1,6 +1,6 @@
 import { css, html, LitElement } from "../../../../vendor/lit-element.js";
 
-import { LitEvents } from "../../../models/lit-events.js";
+import { AppEvents } from "../../../models/app-events.js";
 
 export class AddDatabasePage extends LitElement {
   static get properties() {
@@ -34,7 +34,25 @@ export class AddDatabasePage extends LitElement {
     event.preventDefault();
 
     const data = this.getForm(event);
-    const custom = new CustomEvent(LitEvents.SUBMIT_ADD_DATABASE, {
+
+    if (!data.alias) {
+      return;
+    }
+
+    const custom = new CustomEvent(AppEvents.ADD_DATABASE, {
+      bubbles: true,
+      composed: true,
+      detail: data,
+    });
+    this.dispatchEvent(custom);
+  }
+
+  onDelete(event) {
+    event.preventDefault();
+
+    const data = this.getForm(event);
+
+    const custom = new CustomEvent(AppEvents.DELETE_DATABASE, {
       bubbles: true,
       composed: true,
       detail: data,
@@ -45,9 +63,9 @@ export class AddDatabasePage extends LitElement {
   renderAlias(db) {
     return html`
     <div class="borg-input-cnt">
-      <label for="alias">Alias</label>
+      <label title="A memorable name for this common-storage topic" for="alias">Alias</label>
       <br/>
-      <input class="borg-input borg-input-narrow" type="text" id="alias" name="alias" value="${
+      <input spellcheck="false" ?readonly=${this.database} class="borg-input borg-input-narrow" type="text" id="alias" name="alias" value="${
       db?.alias ?? ""
     }"/>
       <br/>
@@ -58,9 +76,9 @@ export class AddDatabasePage extends LitElement {
   renderUrl(db) {
     return html`
     <div class="borg-input-cnt">
-      <label for="url">URL</label>
+      <label title="A common-storage server URL" for="url">URL</label>
       <br/>
-      <input class="borg-input borg-input-narrow" type="url" id="url" name="url" value="${
+      <input spellcheck="false" class="borg-input borg-input-narrow" type="url" id="url" name="url" value="${
       db?.url ?? ""
     }"/>
       <br/>
@@ -71,9 +89,9 @@ export class AddDatabasePage extends LitElement {
   renderTopic(db) {
     return html`
     <div class="borg-input-cnt">
-      <label for="topic">Topic</label>
+      <label title="A common-storage topic"  for="topic">Topic</label>
       <br/>
-      <input class="borg-input borg-input-narrow" type="text" id="topic" name="topic" value="${
+      <input spellcheck="false" class="borg-input borg-input-narrow" type="text" id="topic" name="topic" value="${
       db?.topic ?? ""
     }"/>
       <br/>
@@ -81,12 +99,25 @@ export class AddDatabasePage extends LitElement {
     `;
   }
 
+  renderAuthenticationScheme(db) {
+    return html`
+    <div class="borg-input-cnt">
+      <label title="An authentication-scheme" for="authentication-scheme">Scheme</label>
+      <br/>
+
+      <select class="borg-selector" name="authentication-scheme">
+        <option value="Basic Authentication">Basic Authentication</option>
+      </select>
+    </div>
+    `
+  }
+
   renderUsername(db) {
     return html`
     <div class="borg-input-cnt">
-      <label for="username">Username</label>
+      <label title="A username with read-write permission to this topic" for="username">Username</label>
       <br/>
-      <input class="borg-input borg-input-narrow" type="text" id="username" name="username" value="${
+      <input spellcheck="false" class="borg-input borg-input-narrow" type="text" id="username" name="username" value="${
       db?.username ?? ""
     }"/>
       <br/>
@@ -97,9 +128,9 @@ export class AddDatabasePage extends LitElement {
   renderPassword(db) {
     return html`
     <div class="borg-input-cnt">
-      <label for="password">Password</label>
+      <label title="A password with read-write permission to this topic" for="password">Password</label>
       <br/>
-      <input class="borg-input borg-input-narrow" type="password" id="password" name="password" value="${
+      <input spellcheck="false" class="borg-input borg-input-narrow" type="password" id="password" name="password" value="${
       db?.password ?? ""
     }"/>
       <br/>
@@ -107,32 +138,60 @@ export class AddDatabasePage extends LitElement {
     `;
   }
 
-  renderSubmitButton(db) {
+  renderSubmitButton() {
+    const text = this.database ? "Edit Database" : "Add Database";
+
     return html`
       <button
         class="submit-button"
         @click=${this.onSubmit}
-        type="submit">Add Database</button>
+        type="submit">${text}</button>
+      `;
+  }
+
+  renderDeleteButton() {
+    return html`
+      <button
+        class="submit-button danger"
+        class="delete-button"
+        @click=${this.onDelete}
+        type="submit">Delete Database</button>
       `;
   }
 
   render() {
     const db = this.database;
+    const text = this.database ? "Edit Database" : "Add Database";
+
+    const buttons = this.database
+      ? html`
+        ${this.renderSubmitButton()}
+        <div class="button-divider"></div>
+        ${this.renderDeleteButton()}`
+      : html`${this.renderSubmitButton()}`;
 
     return html`
+    <h2>${text}</h2>
+
     <form id="borg-add-machine-form">
+
+    <h3>Database Settings</h3>
+
       ${this.renderAlias(db)}
       ${this.renderUrl(db)}
       ${this.renderTopic(db)}
 
-      <br/>
+      <div class="divider"></div>
 
+      <h3>Authentication</h3>
+
+      ${this.renderAuthenticationScheme(db)}
       ${this.renderUsername(db)}
       ${this.renderPassword(db)}
 
       <br/>
 
-      ${this.renderSubmitButton(db)}
+      ${buttons}
     </form>
     `;
   }

@@ -1,6 +1,7 @@
 import { css, html, LitElement } from "../../../../../vendor/lit-element.js";
 
 import { DateTime } from "../../../../models/datetime.js";
+import { AppEvents } from "../../../../models/app-events.js";
 
 export class Card extends LitElement {
   static TEXT_CUTOFF = 85;
@@ -15,6 +16,16 @@ export class Card extends LitElement {
     return this;
   }
 
+  broadcastViewCard(event) {
+    const dispatched = new CustomEvent(AppEvents.VIEW_CARD, {
+      detail: { content: this.content },
+      bubbles: true,
+      composed: true,
+    });
+
+    this.dispatchEvent(dispatched);
+  }
+
   render() {
     const date = new Date(this.content.created_at);
     const title = date.toLocaleString();
@@ -25,7 +36,7 @@ export class Card extends LitElement {
       : url;
 
     return html`
-    <section class="card">
+    <section class="card" @click=${this.broadcastViewCard}>
       <p>
         <a href=${url} target="_blank">${urlTitle}</a>
       </p>

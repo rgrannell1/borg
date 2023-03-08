@@ -30,19 +30,19 @@ export class CommonStorageAPI {
 
       const status = res.status;
 
-      if (status === Status.UNAUTHORIZED) {
+      if (status === 401) {
         return {
-          state: AddBookmarkStates.UNAUTHORIZED,
+          state: 'unauthorised',
         };
-      } else if (status === Status.OK) {
+      } else if (status === 200) {
         const body = await res.json();
         return {
-          state: AddBookmarkStates.OK,
+          state: 'ok',
           total: body.stats.total,
         };
       } else {
         return {
-          state: AddBookmarkStates.ERROR,
+          state: 'error',
         };
       }
     } catch (err) {

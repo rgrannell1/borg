@@ -1,9 +1,6 @@
-import {
-  html,
-  LitElement,
-} from "../../../../../vendor/lit-element.js";
+import { html, LitElement } from "../../../../../vendor/lit-element.js";
 
-import { LitEvents } from '../../../../models/lit-events.js';
+import { AppEvents } from "../../../../models/app-events.js";
 
 export class SearchBar extends LitElement {
   static get properties() {
@@ -19,7 +16,7 @@ export class SearchBar extends LitElement {
   broadcastQuery(event) {
     const query = event.target.value;
 
-    const dispatched = new CustomEvent(LitEvents.SEARCH, {
+    const dispatched = new CustomEvent(AppEvents.SEARCH, {
       detail: { query },
       bubbles: true,
       composed: true,
@@ -34,6 +31,7 @@ export class SearchBar extends LitElement {
       id="search-cards"
       class="borg-input"
       value=${this.query}
+      spellcheck="false"
       @keyup=${this.broadcastQuery}
       placeholder="Search" />
     `;

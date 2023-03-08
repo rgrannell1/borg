@@ -48,6 +48,7 @@ export class CardsPanel extends LitElement {
     `;
   }
 
+
   renderCard(entry) {
     return html`
     <li>
@@ -61,7 +62,7 @@ export class CardsPanel extends LitElement {
       return true;
     }
 
-    return entry.url.includes(this.query);
+    return entry.url.toLowerCase().includes(this.query);
   }
 
   render() {
@@ -70,7 +71,7 @@ export class CardsPanel extends LitElement {
 
     for (const entry of this.content) {
       if (!this.matchesSet(entry)) {
-        continue
+        continue;
       }
 
       const date = entry.created_at;
@@ -87,11 +88,19 @@ export class CardsPanel extends LitElement {
       entries.push(this.renderCard(entry));
     }
 
-    return html`
-    <ol class="cards">
-      ${entries}
-    </ol>
-    `;
+    if (entries.length > 0) {
+      return html`
+      <ol class="cards">
+        ${entries}
+      </ol>
+      `;
+    } else {
+      return html`
+      <div class="empty">
+        <p>Nothing yet!</p>
+      </div>
+      `;
+    }
   }
 }
 

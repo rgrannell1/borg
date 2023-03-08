@@ -11,13 +11,14 @@ import "./pages/view-database/page.js";
 
 import { ClientStorage } from "../services/client-storage.js";
 import { Components } from "../models/components.js";
-import { LitEvents } from "../models/lit-events.js";
+import { AppEvents } from "../models/app-events.js";
 
 export class App extends LitElement {
   constructor() {
     super();
     this.page = Components.FRONTPAGE;
     this.databases = {};
+    this.syncState = {};
   }
 
   async connectedCallback() {
@@ -35,8 +36,24 @@ export class App extends LitElement {
       page: { type: String },
       selectedDatabase: { type: String },
       databases: { type: Object },
-      query: { type: String }
+      syncState: { type: Object }
     };
+  }
+
+  async handleDeleteDatabase(event) {
+    const alias = event.detail.alias;
+
+    await ClientStorage.clearCards({
+      alias
+    });
+
+    delete this.databases[alias];
+    this.databases = { ...this.databases };
+
+    await ClientStorage.setDatabases(this.databases);
+
+    delete this.selectedDatabase;
+    await this.requestUpdate();
   }
 
   async handleAddDatabase(event) {
@@ -46,7 +63,19 @@ export class App extends LitElement {
     };
 
     await ClientStorage.setDatabases(this.databases);
-    await this.requestUpdate();
+    this.selectedDatabase = event.detail.alias;
+  }
+
+  async handleDatabaseSyncing(event) {
+    this.syncState[event.detail.alias] = 'syncing';
+    this.syncState = { ...this.syncState };
+  }
+
+  async handleDatabaseSynced(event) {
+    this.syncState[event.detail.alias] = 'synced';
+
+    // todo create a flashy animation
+    this.syncState = { ...this.syncState };
   }
 
   async handleSearch(event) {
@@ -72,7 +101,7 @@ export class App extends LitElement {
   }
 
   renderAddDatabasePage() {
-    const db = { ...this.databases[this.selectedDatabase] };
+    const db = this.databases[this.selectedDatabase];
 
     return html`<borg-add-database-page .database=${db}></borg-add-database-page>`;
   }
@@ -108,7 +137,10 @@ export class App extends LitElement {
     <div class="app-cnt"
       @navigate=${this.navigate}
       @search=${this.handleSearch}
-      @submit-add-database=${this.handleAddDatabase}>
+      @delete-database=${this.handleDeleteDatabase}
+      @database-syncing=${this.handleDatabaseSyncing}
+      @database-synced=${this.handleDatabaseSynced}
+      @add-database=${this.handleAddDatabase}>
 
       <borg-navbar
         .page=${this.page}>
@@ -116,6 +148,7 @@ export class App extends LitElement {
 
       <borg-sidebar
         .page=${this.page}
+        .syncState=${this.syncState}
         .selectedDatabase=${this.selectedDatabase}
         .databases=${this.databases}>
       </borg-sidebar>

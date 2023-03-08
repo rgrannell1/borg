@@ -3,7 +3,7 @@ import {
   LitElement,
 } from "/home/rg/Code/ws/axon/borg/static/vendor/lit-element.js";
 
-import { LitEvents } from "../../models/lit-events.js";
+import { AppEvents } from "../../models/app-events.js";
 import { Components } from "../../models/components.js";
 
 export class Navbar extends LitElement {
@@ -20,7 +20,7 @@ export class Navbar extends LitElement {
   }
 
   broadcastAboutNavigation() {
-    const event = new CustomEvent(LitEvents.NAVIGATE, {
+    const event = new CustomEvent(AppEvents.NAVIGATE, {
       detail: {
         component: Components.ABOUT_PAGE,
       },

@@ -14,8 +14,12 @@ import "./components/card-input.js";
 export class ViewDatabasePage extends LitElement {
   static get properties() {
     return {
+      focusedCard: { type: Object },
+      totalBookmarks: { type: Number },
+      saveState: { type: String },
       database: { type: Object },
       query: { type: String },
+      syncTime: { type: Date }
     };
   }
 
@@ -26,15 +30,40 @@ export class ViewDatabasePage extends LitElement {
   async connectedCallback() {
     super.connectedCallback();
 
-    await ClientStorage.sync();
+    for await (const event of ClientStorage.sync()) {
+      this.dispatchEvent(event);
+    };
+
+    this.syncTime = new Date();
     this.requestUpdate();
   }
 
-  async handleAddBookmark(event) {
-    // update button state
-    // fetch
-    // append
-    // refresh
+  resetButton() {
+    setTimeout(() => {
+      if (this.saveState !== "saving") {
+        this.saveState = "default";
+        this.requestUpdate();
+      }
+    }, 3_500);
+  }
+
+  async addCard(event) {
+    this.saveState = "saving";
+    const res = await ClientStorage.writeCard(this.database, event.detail.url);
+
+    this.totalBookmarks = res.totalBookmarks;
+    this.saveState = res.state;
+
+    this.resetButton();
+
+    for await (const event of ClientStorage.sync()) {
+      this.dispatchEvent(event);
+    };
+    this.syncTime = new Date();
+  }
+
+  viewCard(event) {
+    this.focusedCard = event.detail.content;
   }
 
   render() {
@@ -43,11 +72,15 @@ export class ViewDatabasePage extends LitElement {
       .query=${this.query}></borg-search-bar>
 
     <borg-cards-panel
+      @view-card=${this.viewCard}
+      .syncTime=${this.syncTime}
       .query=${this.query}
       .database=${this.database}></borg-cards-panel>
 
     <borg-card-input
-      @submit-add-bookmark=${this.handleAddBookmark}
+      @add-card=${this.addCard}
+      .saveState=${this.saveState}
+      .focusedCard=${this.focusedCard}
       .database=${this.database}></borg-card-input>
     `;
   }

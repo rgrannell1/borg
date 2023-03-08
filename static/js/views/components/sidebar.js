@@ -1,7 +1,6 @@
-
 import { html, LitElement } from "../../../vendor/lit-element.js";
 
-import { LitEvents } from "../../models/lit-events.js";
+import { AppEvents } from "../../models/app-events.js";
 import { Components } from "../../models/components.js";
 
 export class AddDatabase extends LitElement {
@@ -17,7 +16,7 @@ export class AddDatabase extends LitElement {
   }
 
   broadcastAddDatabase() {
-    const event = new CustomEvent(LitEvents.NAVIGATE, {
+    const event = new CustomEvent(AppEvents.NAVIGATE, {
       detail: {
         component: Components.ADD_DATABASE,
       },
@@ -50,6 +49,7 @@ export class Sidebar extends LitElement {
       page: { type: String },
       selectedDatabase: { type: String },
       databases: { type: Object },
+      syncState: { type: Object },
     };
   }
 
@@ -63,8 +63,9 @@ export class Sidebar extends LitElement {
       ${
       Object.values(this.databases).map((db) => {
         const active = this.selectedDatabase === db.alias;
+        const syncing = this.syncState[db.alias] === 'syncing';
 
-        return html`<borg-database .active=${active} .alias=${db.alias}></borg-database>`;
+        return html`<borg-database .syncing=${syncing} .active=${active} .alias=${db.alias}></borg-database>`;
       })
     }
     </ul>
@@ -74,14 +75,11 @@ export class Sidebar extends LitElement {
   render() {
     return html`
     <aside class="borg-sidebar">
-    <div>
-      <borg-add-database .selectedDatabase=${this.selectedDatabase} .active=${
-    this.page === "add-database"
-}/>
-    </div>
-    ${this.renderDatabases()}
-  </aside>
-    `
+      <borg-add-database .active=${this.page === "add-database"} .selectedDatabase=${this.selectedDatabase}></borg-add-database>
+      ${this.renderDatabases()}
+      <br/>
+    </aside>
+    `;
   }
 }
 

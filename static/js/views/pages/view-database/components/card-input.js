@@ -1,26 +1,23 @@
-import {
-  html,
-  LitElement,
-} from "../../../../../vendor/lit-element.js";
+import { html, LitElement } from "../../../../../vendor/lit-element.js";
 
 import "./date.js";
 import "./card.js";
 import "./search-bar.js";
 import "./cards-panel.js";
-import { LitEvents } from "../../../../models/lit-events.js";
+import { AppEvents } from "../../../../models/app-events.js";
 
 export class CardInput extends LitElement {
   constructor() {
     super();
-    this.database = {};
-    this.state = "default";
+    this.saveState = "default";
   }
 
   static get properties() {
     return {
       database: { type: Object },
-      state: { type: String },
+      saveState: { type: String },
       bookmarkCount: { type: Number },
+      focusedCard: { type: Object },
     };
   }
 
@@ -37,10 +34,10 @@ export class CardInput extends LitElement {
       return;
     }
 
-    const dispatched = new CustomEvent(LitEvents.ADD_CARD, {
+    const dispatched = new CustomEvent(AppEvents.ADD_CARD, {
       detail: {
         alias: this.database.alias,
-        url
+        url,
       },
       bubbles: true,
       composed: true,
@@ -50,36 +47,45 @@ export class CardInput extends LitElement {
   }
 
   buttonText() {
-    if (this.state === 'default') {
-      return 'Assimilate';
-    } else if (this.state === 'ok') {
+    const state = this.saveState;
+
+    if (state === "ok") {
       return this.bookmarkCount
         ? `Assimilated ${this.bookmarkCount}`
         : `Assimilated`;
-    } else if (this.state === 'error') {
-      return 'Failed';
-    } else if (this.state === 'unauthorized') {
-      return 'Not Authorised';
+    } else if (state === "error") {
+      return "Failed";
+    } else if (state === "unauthorized") {
+      return "Not Authorised";
+    } else if (state === "saving") {
+      return "Assimilating...";
+    } else {
+      return "Assimilate";
     }
   }
 
   render() {
-    const classes = ['submit-button'];
+    const state = this.saveState;
+    const classes = ["submit-button"];
 
-    if (this.state === 'ok') {
-      classes.push('submit-ok');
-    } else if (this.state === 'error') {
-      classes.push('submit-error');
-    } else if (this.state === 'unauthorized') {
-      classes.push('submit-unauthorized');
+    if (state === "ok") {
+      classes.push("submit-ok");
+    } else if (state === "saving") {
+      classes.push("submit-saving");
+    } else if (state === "error") {
+      classes.push("submit-error");
+    } else if (state === "unauthorized") {
+      classes.push("submit-unauthorized");
     }
 
+    // todo handle focused card
+
     return html`
-    <input id="bookmark-url" type="url" class="borg-input" placeholder="URL" />
+    <input spellcheck="false" id="bookmark-url" type="url" class="borg-input" placeholder="URL" />
     <button
       id="submit-bookmark"
-      class="${classes.join(' ')}"
-      @submit=${this.broadcastAddCard}>${this.buttonText()}</button>
+      class="${classes.join(" ")}"
+      @click=${this.broadcastAddCard}>${this.buttonText()}</button>
     `;
   }
 }

@@ -12,7 +12,29 @@
   --card-background: rgb(245, 245, 245);
   --card-box-shadow: rgba(11, 20, 26, 0.13) 0px 1px 0.5px 0px;
   --link-color: hsl(211, 100%, 50%);
+  --input-focus-color: blue;
+
+  /* default button colours */
+  --submit-default-background-colour: hsl(216, 100%, 60%);
+  --submit-default-hover-background-colour: hsl(216, 66%, 41%);
+
+  /* ok button colours */
+  --submit-ok-colour: hsl(217, 28%, 13%);
+  --submit-ok-background-colour: hsl(112, 100%, 50%);
+  --submit-ok-hover-background-colour: hsl(112, 100%, 40%);
+
+  /* error button colours */
+  --submit-error-colour: hsl(0, 0%, 100%);
+  --submit-error-background-colour: hsl(0, 100%, 50%);
+  --submit-error-hover-background-colour: hsl(0, 100%, 35%);
+
+  /* unauthorized button colours */
+  --submit-unauthorized-colour: hsl(0, 0%, 100%);
+  --submit-unauthorized-background-colour: hsl(0, 0%, 54%);
+  --submit-unauthorized-hover-background-colour: hsl(0, 0%, 0%);
 }
+
+
 
 @font-face {
   font-family: 'Montserrat';
@@ -102,14 +124,14 @@ borg-sidebar::-webkit-scrollbar {
   grid-column-start: 1;
   padding: 12px;
   margin: 8px;
-  border-radius: 5px;
+  border-radius: 7px;
 }
 
 .database-settings {
   grid-column-start: 2;
   padding: 12px;
   margin: 8px;
-  border-radius: 5px;
+  border-radius: 7px;
 }
 
 .database-settings:hover {
@@ -120,17 +142,14 @@ borg-sidebar::-webkit-scrollbar {
   background-color: var(--sidebar-hover-color);
 }
 
-.borg-database ul {
+borg-sidebar ul {
   list-style-type: none;
 }
 
 .borg-database-add {
-  cursor: pointer;
   font-weight: bold;
   border-bottom: 1px solid rgb(225, 225, 225);
 }
-
-
 
 .borg-add-card-section {
   background-color: white;
@@ -147,7 +166,23 @@ borg-sidebar::-webkit-scrollbar {
 
 borg-add-database-page {
   display: block;
-  padding: 80px 40px;
+  padding: 40px;
+  min-width: 400px;
+  padding: 60px 13%;
+}
+
+borg-add-database-page h2 {
+  margin-bottom: 20px;
+  border-bottom: 2px solid #c9c9c9;
+}
+
+.divider {
+  display: block;
+  padding: 10px 0;
+}
+
+borg-add-database-page h3 {
+  margin-bottom: 20px;
 }
 
 h3 {
@@ -174,6 +209,12 @@ h3 {
 
 .borg-input-cnt {
   margin-bottom: 10px;
+}
+
+.borg-input:focus, .borg-input-narrow:focus {
+  outline: none;
+  border: 2px solid var(--input-focus-color);
+  color: blue;
 }
 
 .submit-button {
@@ -205,11 +246,17 @@ h3 {
   touch-action: manipulation;
 }
 
+.submit-button.danger {
+  background-color: #f00;
+  border: 2px solid #f00;
+}
+
 .cards {
   list-style: none;
 }
 
 .card {
+  cursor: pointer;
   display: inline-block;
   background: var(--card-background);
   margin: 20px;
@@ -279,7 +326,6 @@ borg-database-add h2 {
 
 .borg-database-add {
   display: grid;
-  cursor: pointer;
   grid-template-columns: 4fr 1fr;
 }
 
@@ -300,8 +346,57 @@ borg-database-add h2 {
 }
 
 #add-database {
+  cursor: pointer;
   border-radius: 5px;
   grid-column-start: 2;
   padding: 10px;
   margin: 10px;
+}
+
+.submit-ok {
+  background-color: var(--submit-ok-background-colour);
+  border-color: var(--submit-ok-background-colour);
+  color: var(--submit-ok-colour);
+}
+
+.submit-error {
+  background-color: var(--submit-error-background-colour);
+  border-color: var(--submit-error-background-colour);
+  color: var(--submit-error-colour);
+}
+
+.borg-selector {
+  font-size: 16px;
+  padding: 5px;
+  font-size: 16px;
+  font-size: max(16px, 1em);
+  font-family: inherit;
+  box-sizing: border-box;
+  padding: 0.25em 0.5em;
+  background-color: #fff;
+  border: 2px solid black;
+}
+
+.borg-input[readonly] {
+  outline: none;
+  border: 2px solid grey;
+  color: grey;
+}
+
+.borg-database.syncing {
+	background: linear-gradient(-45deg, var(--sidebar-hover-color), rgb(111, 166, 255));
+	background-size: 400% 400%;
+	animation: sync-gradient 5s ease infinite;
+}
+
+@keyframes sync-gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
 }

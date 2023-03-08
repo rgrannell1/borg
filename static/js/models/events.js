@@ -45,3 +45,24 @@ export function EditBookmarkRelations(
     }),
   };
 }
+
+/*
+ * Event deleting a bookmark
+ */
+export function DeleteBookmarkRelations(bookmark_id) {
+  const now = new Date();
+  const id = `urn:bookmark_deletion:${now.getTime()}`;
+
+  return {
+    source: "https://github.com/rgrannell1/borg/spec/bookmark.json",
+    id,
+    time: now.toISOString(),
+    type: "xyz.rgrannell.bookmark.delete.v1",
+    specversion: "1.0",
+    datacontenttype: "application/json",
+    data: JSON.stringify({
+      id,
+      created_at: now.toISOString(),
+    }),
+  };
+}
