@@ -94,7 +94,6 @@ export class App extends LitElement {
 
   navigate(event) {
     const detail = event.detail;
-
     if (detail.component === Components.ABOUT_PAGE) {
       this.page = Components.ABOUT_PAGE;
     } else if (detail.component === Components.ADD_DATABASE) {
@@ -135,7 +134,7 @@ export class App extends LitElement {
       subpage = this.renderAddDatabasePage();
     } else if (this.page === Components.VIEW_DATABASE) {
       subpage = this.renderViewDatabasePage();
-    } else if (this.page === Components.ABOUT) {
+    } else if (this.page === Components.ABOUT_PAGE) {
       subpage = this.renderAboutPage();
     } else if (this.page === Components.ADD_CONCEPT) {
       subpage = html`<borg-add-concept-page></borg-add-concept-page>`;

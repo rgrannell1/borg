@@ -8,7 +8,7 @@ export class AboutPage extends LitElement {
   render() {
     return html`
       <div class="frontpage-cnt">
-        <p>Hello</p>
+        <h2>About</h2>
       </div>
     `;
   }
