@@ -1,0 +1,104 @@
+
+/*
+ * Field input
+ *
+ */
+.borg-input {
+  font-size: 16px;
+  padding: 5px;
+  font-size: 16px;
+  font-size: max(16px, 1em);
+  font-family: inherit;
+  box-sizing: border-box;
+  padding: 0.25em 0.5em;
+  background-color: #fff;
+  border: 2px solid black;
+  width: 100%;
+}
+
+.borg-input-cnt {
+  margin-bottom: 10px;
+}
+
+.borg-input:focus, .borg-input-narrow:focus {
+  outline: none;
+  border: 2px solid var(--input-focus-color);
+  color: blue;
+}
+
+.borg-input[readonly] {
+  outline: none;
+  border: 2px solid grey;
+  color: grey;
+}
+
+.borg-input-narrow {
+  min-width: 200px;
+  max-width: 250px;
+}
+
+/*
+ * Input Selector
+ *
+ */
+.borg-selector {
+  font-size: 16px;
+  padding: 5px;
+  font-size: 16px;
+  font-size: max(16px, 1em);
+  font-family: inherit;
+  box-sizing: border-box;
+  padding: 0.25em 0.5em;
+  background-color: #fff;
+  border: 2px solid black;
+}
+
+/*
+ * Submit buttons
+ *
+ */
+.submit-button {
+  display: block;
+  float: left;
+  font-size: 1.2em;
+  align-items: center;
+  background-color: #06f;
+  border: 2px solid #06f;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  fill: #000;
+  font-family: Inter,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  height: 48px;
+  justify-content: center;
+  letter-spacing: -.8px;
+  line-height: 24px;
+  min-width: 180px;
+  outline: 0;
+  padding: 0 17px;
+  text-align: center;
+  text-decoration: none;
+  transition: all .3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.submit-button.danger {
+  background-color: #f00;
+  border: 2px solid #f00;
+}
+
+.submit-ok {
+  background-color: var(--submit-ok-background-colour);
+  border-color: var(--submit-ok-background-colour);
+  color: var(--submit-ok-colour);
+}
+
+.submit-error {
+  background-color: var(--submit-error-background-colour);
+  border-color: var(--submit-error-background-colour);
+  color: var(--submit-error-colour);
+}

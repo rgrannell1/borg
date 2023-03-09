@@ -2,7 +2,5 @@
 # Local Netlify folder
 .netlify
 node_modules/
-old/
-js-old/
-js/
+dist/
 static/vendor/lit-element.js

@@ -1,10 +1,5 @@
-import { Status } from "../models/status.js";
-import { AddBookmarkStates } from "../models/add-bookmark-states.js";
-
 export class CommonStorageAPI {
   static TOPIC_BOOKMARKS = "bookmarks";
-  endpoint: string;
-  credentials: { username: string; password: string };
 
   constructor(endpoint, credentials) {
     this.endpoint = endpoint;
@@ -20,7 +15,7 @@ export class CommonStorageAPI {
     });
   }
 
-  async postContent<T>(topic: string, content: T) {
+  async postContent(topic, content) {
     try {
       const body = JSON.stringify({
         content: [content],
@@ -35,19 +30,19 @@ export class CommonStorageAPI {
 
       const status = res.status;
 
-      if (status === Status.UNAUTHORIZED) {
+      if (status === 401) {
         return {
-          state: AddBookmarkStates.UNAUTHORIZED,
+          state: 'unauthorised',
         };
-      } else if (status === Status.OK) {
+      } else if (status === 200) {
         const body = await res.json();
         return {
-          state: AddBookmarkStates.OK,
+          state: 'ok',
           total: body.stats.total,
         };
       } else {
         return {
-          state: AddBookmarkStates.ERROR,
+          state: 'error',
         };
       }
     } catch (err) {
@@ -59,13 +54,28 @@ export class CommonStorageAPI {
   }
 
   async *getContent(topic, startId) {
-    const params = typeof startId !== "undefined" ? `?startId=${startId}` : "";
+    while (true) {
+      console.log(`fetching from ${startId}`);
 
-    const res = await fetch(`${this.endpoint}/content/${topic}${params}`, {
-      mode: "cors",
-      headers: this.headers(),
-    });
+      const params = typeof startId !== "undefined"
+        ? `?startId=${startId}`
+        : "";
 
-    // console.log(await res.text());
+      const res = await fetch(`${this.endpoint}/content/${topic}${params}`, {
+        mode: "cors",
+        headers: this.headers(),
+      });
+
+      const data = await res.json();
+      if (data.content.length === 0) {
+        break;
+      }
+
+      for (const content of data.content) {
+        yield content;
+      }
+
+      startId = data.lastId;
+    }
   }
 }

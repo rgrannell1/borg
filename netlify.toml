@@ -1,5 +1,6 @@
 [build]
   publish = "static"
+  command = "npx rollup --config rollup.config.js"
 
 [[headers]]
   for = "/*"

@@ -1,0 +1,63 @@
+
+:root, :host {
+  --font-family: 'Montserrat', sans-serif;
+  --navbar-color: hsl(0, 100%, 50%);
+  --navbar-border-color: hsl(0, 99%, 34%);
+  --navbar-hover-color: rgb(205, 1, 1);
+
+  --sidebar-hover-color: rgb(209, 227, 255);
+  --sidebar-button-hover-color: rgb(188, 215, 255);
+  --sidebar-active-color: blue;
+  --sidebar-background-color: rgb(245, 245, 245);
+  --sidebar-border-color: rgb(225, 225, 225);
+
+  --card-background: rgb(245, 245, 245);
+  --card-box-shadow: rgba(11, 20, 26, 0.13) 0px 1px 0.5px 0px;
+  --link-color: hsl(211, 100%, 50%);
+  --input-focus-color: blue;
+
+  /* sync animation */
+  --sidebar-sync-colour-from: rgb(209, 227, 255);
+  --sidebar-sync-colour-to: rgb(111, 157, 255);
+
+  /* default button colours */
+  --submit-default-background-colour: hsl(216, 100%, 60%);
+  --submit-default-hover-background-colour: hsl(216, 66%, 41%);
+
+  /* ok button colours */
+  --submit-ok-colour: hsl(217, 28%, 13%);
+  --submit-ok-background-colour: hsl(112, 100%, 50%);
+  --submit-ok-hover-background-colour: hsl(112, 100%, 40%);
+
+  /* error button colours */
+  --submit-error-colour: hsl(0, 0%, 100%);
+  --submit-error-background-colour: hsl(0, 100%, 50%);
+  --submit-error-hover-background-colour: hsl(0, 100%, 35%);
+
+  /* unauthorized button colours */
+  --submit-unauthorized-colour: hsl(0, 0%, 100%);
+  --submit-unauthorized-background-colour: hsl(0, 0%, 54%);
+  --submit-unauthorized-hover-background-colour: hsl(0, 0%, 0%);
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: URL('../fonts/Montserrat-Regular.ttf') format('truetype');
+}
+
+html * {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-family);
+}
+
+a {
+  color: var(--link-color);
+}
+
+h3 {
+  margin-top: 20px;
+}
