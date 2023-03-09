@@ -1,0 +1,52 @@
+
+/*
+ * Add Database Panels
+ *
+ */
+borg-add-database-page, borg-add-concept-page {
+  display: block;
+  padding: 40px;
+  min-width: 400px;
+  padding: 60px 13%;
+}
+
+borg-add-database-page h2, borg-add-concept-page h2 {
+  margin-bottom: 20px;
+  border-bottom: 2px solid #c9c9c9;
+}
+
+.divider {
+  display: block;
+  padding: 10px 0;
+}
+
+borg-add-database-page h3, borg-add-concept-page h3 {
+  margin-bottom: 20px;
+}
+
+/*
+ * Logs
+ *
+ */
+.log-panel {
+  background-color: black;
+  max-height: 500px;
+  color: white;
+}
+
+.log-panel-cnt {
+  padding: 20px;
+  border-radius: 7px;
+}
+
+.log-panel-cnt:hover {
+  background-color: var(--sidebar-button-hover-color);
+}
+
+.log-time {
+  color: cyan;
+}
+
+.log-message {
+
+}

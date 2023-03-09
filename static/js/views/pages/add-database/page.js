@@ -2,11 +2,19 @@ import { css, html, LitElement } from "../../../../vendor/lit-element.js";
 
 import { AppEvents } from "../../../models/app-events.js";
 
+import './components/log-panel.js';
+
 export class AddDatabasePage extends LitElement {
   static get properties() {
     return {
       database: {
         type: Object,
+      },
+      logs: {
+        type: Array,
+      },
+      lastUpdateTime: {
+        type: Date,
       },
     };
   }
@@ -170,12 +178,15 @@ export class AddDatabasePage extends LitElement {
         ${this.renderDeleteButton()}`
       : html`${this.renderSubmitButton()}`;
 
-    return html`
+      return html`
     <h2>${text}</h2>
 
-    <form id="borg-add-machine-form">
+    <borg-log-panel
+      .logs=${this.logs}
+      .lastUpdateTime=${this.lastUpdateTime}></borg-log-panel>
 
-    <h3>Database Settings</h3>
+    <form id="borg-add-machine-form">
+      <h3>Database Settings</h3>
 
       ${this.renderAlias(db)}
       ${this.renderUrl(db)}

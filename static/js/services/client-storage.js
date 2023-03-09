@@ -3,6 +3,44 @@ import { del, get, set } from "../../vendor/idb-keyval.js";
 import { AppEvents } from "../models/app-events.js";
 import * as events from "../models/events.js";
 
+class ClientStorageEvents {
+  static databaseSyncing(alias, maxId) {
+    return  new CustomEvent(AppEvents.DATABASE_SYNCING, {
+      detail: {
+        alias,
+        maxId,
+        time: new Date()
+      },
+      bubbles: true,
+      composed: true,
+    });
+  }
+
+  static databaseSynced(alias) {
+    return new CustomEvent(AppEvents.DATABASE_SYNCED, {
+      detail: {
+        alias,
+        time: new Date()
+      },
+      bubbles: true,
+      composed: true,
+    });
+  }
+
+  static databaseSyncError(database, maxId, error) {
+    return new CustomEvent(AppEvents.DATABASE_SYNC_ERROR, {
+      detail: {
+        database,
+        maxId,
+        error: err,
+        time: new Date()
+      },
+      bubbles: true,
+      composed: true,
+    });
+  }
+}
+
 export class ClientStorage {
   static async getDatabases() {
     const db = await get("borg_databases");
@@ -31,6 +69,10 @@ export class ClientStorage {
     return set(`borg_database_${database.alias}_content`, content);
   }
 
+  static async databaseFetch() {
+
+  }
+
   static async getConcepts() {
     const concepts = await get("borg_concepts");
     return concepts ?? [];
@@ -54,27 +96,26 @@ export class ClientStorage {
       const maxId = await ClientStorage.getDatabaseMaxId(database);
       const currentContent = await ClientStorage.getDatabaseContent(database);
 
-      yield new CustomEvent(AppEvents.DATABASE_SYNCING, {
-        detail: { alias: database.alias },
-        bubbles: true,
-        composed: true,
-      });
+      // announce we are syncing
+      yield ClientStorageEvents.databaseSyncing(database.alias, maxId);
 
       let contentId = maxId;
 
-      for await (const content of client.getContent(database.topic, maxId)) {
-        currentContent.push(content.value);
-        contentId = content.id;
+      try {
+        for await (const content of client.getContent(database.topic, maxId)) {
+          currentContent.push(content.value);
+          contentId = content.id;
+        }
+      } catch (err) {
+        yield ClientStorageEvents.databaseSyncError(database, contentId, err);
+        continue;
       }
 
       await ClientStorage.setDatabaseContent(database, currentContent);
       await ClientStorage.setDatabaseMaxId(database, contentId);
 
-      yield new CustomEvent(AppEvents.DATABASE_SYNCED, {
-        detail: { alias: database.alias },
-        bubbles: true,
-        composed: true,
-      });
+      // announce we are done syncing this database
+      yield ClientStorageEvents.databaseSynced(database.alias);
     }
   }
 

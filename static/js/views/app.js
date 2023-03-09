@@ -19,6 +19,8 @@ export class App extends LitElement {
     this.page = Components.FRONTPAGE;
     this.databases = {};
     this.syncState = {};
+    this.logs = {};
+    this.showSidebar = true;
   }
 
   async connectedCallback() {
@@ -38,6 +40,7 @@ export class App extends LitElement {
       databases: { type: Object },
       syncState: { type: Object },
       concepts: { type: Object },
+      showSidebar: { type: Boolean },
     };
   }
 
@@ -79,6 +82,17 @@ export class App extends LitElement {
   async handleDatabaseSyncing(event) {
     this.syncState[event.detail.alias] = 'syncing';
     this.syncState = { ...this.syncState };
+
+    // todo create a class
+    if (!this.logs[event.detail.alias]) {
+      this.logs[event.detail.alias] = [];
+    }
+
+    this.logs[event.detail.alias].push({
+      message: `Syncing from max-id ${event.detail.maxId}`,
+      time: event.detail.time
+    });
+    this.requestUpdate();
   }
 
   async handleDatabaseSynced(event) {
@@ -86,6 +100,17 @@ export class App extends LitElement {
 
     // todo create a flashy animation
     this.syncState = { ...this.syncState };
+
+    this.logs[event.detail.alias].push({
+      message: `Synced`,
+      time: event.detail.time
+    });
+    this.requestUpdate();
+  }
+
+  async handleToggleBurgerMenu(event) {
+    this.showSidebar = !this.showSidebar;
+    console.log("showSidebar", this.showSidebar);
   }
 
   async handleSearch(event) {
@@ -95,6 +120,8 @@ export class App extends LitElement {
   navigate(event) {
     const detail = event.detail;
     if (detail.component === Components.ABOUT_PAGE) {
+      delete this.selectedDatabase;
+
       this.page = Components.ABOUT_PAGE;
     } else if (detail.component === Components.ADD_DATABASE) {
       this.page = Components.ADD_DATABASE;
@@ -105,6 +132,7 @@ export class App extends LitElement {
       this.page = Components.VIEW_DATABASE;
       this.selectedDatabase = detail.alias;
     } else if (detail.component === Components.ADD_CONCEPT) {
+      delete this.selectedDatabase;
       this.page = Components.ADD_CONCEPT;
     }
 
@@ -114,7 +142,11 @@ export class App extends LitElement {
   renderAddDatabasePage() {
     const db = this.databases[this.selectedDatabase];
 
-    return html`<borg-add-database-page .database=${db}></borg-add-database-page>`;
+    return html`<borg-add-database-page
+      .logs=${this.logs[this.selectedDatabase] ?? []}
+      .lastUpdateTime="PLACEHOLDER"
+      .database=${db}>
+    </borg-add-database-page>`;
   }
 
   renderViewDatabasePage() {
@@ -146,13 +178,19 @@ export class App extends LitElement {
   render() {
     console.log("app: render");
 
+    const classList = ["app-cnt"];
+    if (this.showSidebar) {
+      classList.push("show-sidebar");
+    }
+
     return html`
-    <div class="app-cnt"
+    <div class="${ classList.join(' ') }"
       @navigate=${this.navigate}
       @search=${this.handleSearch}
       @delete-database=${this.handleDeleteDatabase}
       @database-syncing=${this.handleDatabaseSyncing}
       @database-synced=${this.handleDatabaseSynced}
+      @toggle-burger-menu=${this.handleToggleBurgerMenu}
       @add-concept=${this.handleAddConcept}
       @add-database=${this.handleAddDatabase}>
 

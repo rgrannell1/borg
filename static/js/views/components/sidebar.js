@@ -90,7 +90,19 @@ export class AddConcept extends LitElement {
   }
 }
 
+export class SidebarDivider extends LitElement {
+  createRenderRoot() {
+    return this;
+  }
 
+  render() {
+    return html`
+    <li class="borg-sidebar-heading">
+      <span class="sidebar-heading"></span>
+    </li>
+    `;
+  }
+}
 
 export class Sidebar extends LitElement {
   static get properties() {
@@ -126,12 +138,15 @@ export class Sidebar extends LitElement {
     <aside class="borg-sidebar">
       <borg-add-database .active=${this.page === "add-database"} .selectedDatabase=${this.selectedDatabase}></borg-add-database>
       ${this.renderDatabases()}
+
+      <borg-sidebar-divider></borg-sidebar-divider>
       <borg-add-concept .active=${this.page === "add-concept"}></borg-add-concept>
     </aside>
     `;
   }
 }
 
+customElements.define("borg-sidebar-divider", SidebarDivider);
 customElements.define("borg-add-database", AddDatabase);
 customElements.define("borg-add-concept", AddConcept);
 customElements.define("borg-sidebar", Sidebar);

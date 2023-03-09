@@ -31,14 +31,30 @@ export class Navbar extends LitElement {
     this.dispatchEvent(event);
   }
 
-  render() {
-    const aboutActive = this.page === "about" ? "active" : "";
+  broadcastBurgerToggle() {
+    const event = new CustomEvent(AppEvents.TOGGLE_BURGER_MENU, {
+      detail: {
 
+      },
+      bubbles: true,
+      composed: true,
+    });
+
+    this.dispatchEvent(event);
+  }
+
+  render() {
     return html`
     <header>
       <nav class="borg-navbar">
         <ul>
-          <li class="view-button ${aboutActive}">
+          <li class="navbar-button">
+            <a
+              @click=${this.broadcastBurgerToggle}
+              href="#">☰</a>
+          </li>
+
+          <li class="navbar-button ${this.page === "about" ? "active" : ""}">
           <a
             @click=${this.broadcastAboutNavigation}
             href="#">About</a>

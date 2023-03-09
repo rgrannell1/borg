@@ -21,4 +21,8 @@ export const AppEvents = {
   DATABASE_SYNCING: "database-syncing",
   // announce a database has been synced
   DATABASE_SYNCED: "database-synced",
+  // toggle the burger menu
+  TOGGLE_BURGER_MENU: "toggle-burger-menu",
+  // database sync error
+  DATABASE_SYNC_ERROR: "database-sync-error",
 };
