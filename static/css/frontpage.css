@@ -7,10 +7,14 @@
   display: grid;
   grid-template-rows: 60px calc(100vh - (60px + 100px)) 100px;
   grid-template-columns: 0 1fr;
+  transition: all 0.2s;
+
 }
 
 .app-cnt.show-sidebar {
   grid-template-columns: 180px 1fr;
+  transition: all 0.2s;
+
 }
 
 /*
