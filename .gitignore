@@ -4,3 +4,4 @@
 node_modules/
 dist/
 static/vendor/lit-element.js
+.env
