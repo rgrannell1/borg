@@ -1,3 +1,5 @@
+import { AppEvents } from '../static/js/app-events.js';
+
 const resources = [
   "./dist/app.js",
   "./css/globals.css",
@@ -22,3 +24,17 @@ self.addEventListener("fetch", function (event) {
     }),
   );
 });
+
+// fetch
+
+function onAddCard(event) {
+  event.ports[0].postMessage({ type: 'synced' });
+}
+
+function routeMessage(event) {
+  if (event.data.type === AppEvents.ADD_CARD) {
+    onAddCard();
+  }
+}
+
+self.addEventListener('message', routeMessage);

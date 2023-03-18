@@ -15,7 +15,7 @@ export class AddDatabase extends LitElement {
     return this;
   }
 
-  broadcastAddDatabase() {
+  broadcastAddTopic() {
     const event = new CustomEvent(AppEvents.NAVIGATE, {
       detail: {
         component: Components.ADD_DATABASE,
@@ -39,7 +39,7 @@ export class AddDatabase extends LitElement {
       <span class="sidebar-heading">Topics</span>
       <span
         title="Add Topic"
-        @click=${this.broadcastAddDatabase}
+        @click=${this.broadcastAddTopic}
         id="add-topic"
         class="${classList.join(' ')}">+</span>
     </li>
@@ -141,7 +141,7 @@ export class Sidebar extends LitElement {
 
       <borg-sidebar-divider></borg-sidebar-divider>
       <borg-add-concept .active=${this.page === "add-concept"}></borg-add-concept>
-    </aside>
+      </aside>
     `;
   }
 }

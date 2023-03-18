@@ -15,6 +15,41 @@ export class CommonStorageAPI {
     });
   }
 
+  async postTopic(topic) {
+    try {
+      const res = await fetch(`${this.endpoint}/topic/${topic}`, {
+        method: "post",
+        mode: "cors",
+        headers: this.headers(),
+        body: JSON.stringify({
+          description: "A topic created by borg"
+        })
+      });
+
+      const status = res.status;
+
+      if (status === 401) {
+        return {
+          state: 'unauthorised',
+        };
+      } else if (status === 200) {
+        return {
+          state: 'ok',
+        };
+      } else {
+        return {
+          state: 'error',
+          reason: `Unexpected status code: ${status}`,
+        };
+      }
+    } catch (err) {
+      return {
+        state: 'error',
+        reason: err
+      }
+    }
+  }
+
   async postContent(topic, content) {
     try {
       const body = JSON.stringify({

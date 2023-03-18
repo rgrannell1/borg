@@ -18,7 +18,9 @@
   },
   "homepage": "https://github.com/rgrannell1/borg#readme",
   "devDependencies": {
-    "@rollup/plugin-typescript": "^11.0.0"
+    "@rollup/plugin-typescript": "^11.0.0",
+    "rollup": "^3.19.1",
+    "rollup-plugin-replace": "^2.2.0"
   },
   "dependencies": {
     "sass": "^1.58.3",

@@ -60,11 +60,14 @@ export class App extends LitElement {
     await this.requestUpdate();
   }
 
-  async handleAddDatabase(event) {
+  async handleAddTopic(event) {
     this.databases = {
       ...this.databases,
       [event.detail.alias]: event.detail,
     };
+
+    const res = await ClientStorage.writeTopic(event.detail, event.detail.topic);
+    console.log("add-topic-res", res);
 
     await ClientStorage.setDatabases(this.databases);
     this.selectedDatabase = event.detail.alias;
@@ -170,6 +173,8 @@ export class App extends LitElement {
       subpage = this.renderAboutPage();
     } else if (this.page === Components.ADD_CONCEPT) {
       subpage = html`<borg-add-concept-page></borg-add-concept-page>`;
+    } else if (this.page === Components.VIEW_DELETED) {
+      subpage = html`<borg-view-deleted-page></borg-view-deleted-page>`;
     }
 
     return subpage;
@@ -192,7 +197,7 @@ export class App extends LitElement {
       @database-synced=${this.handleDatabaseSynced}
       @toggle-burger-menu=${this.handleToggleBurgerMenu}
       @add-concept=${this.handleAddConcept}
-      @add-database=${this.handleAddDatabase}>
+      @add-database=${this.handleAddTopic}>
 
       <borg-navbar
         .page=${this.page}>

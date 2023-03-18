@@ -32,7 +32,7 @@ class ClientStorageEvents {
       detail: {
         database,
         maxId,
-        error: err,
+        error,
         time: new Date()
       },
       bubbles: true,
@@ -117,6 +117,15 @@ export class ClientStorage {
       // announce we are done syncing this database
       yield ClientStorageEvents.databaseSynced(database.alias);
     }
+  }
+
+  static async writeTopic(database, topic) {
+    const client = new CommonStorageAPI(database.url, {
+      username: database.username,
+      password: database.password,
+    });
+
+    return await client.postTopic(topic);
   }
 
   static async writeCard(database, url) {

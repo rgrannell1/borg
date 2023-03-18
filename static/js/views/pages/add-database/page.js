@@ -4,6 +4,20 @@ import { AppEvents } from "../../../models/app-events.js";
 
 import './components/log-panel.js';
 
+export class ViewDeletedCards extends LitElement {
+  createRenderRoot() {
+    return this;
+  }
+
+  render() {
+    return html`
+    <div>
+
+    </div>
+    `
+  }
+}
+
 export class AddDatabasePage extends LitElement {
   static get properties() {
     return {
@@ -185,6 +199,11 @@ export class AddDatabasePage extends LitElement {
       .logs=${this.logs}
       .lastUpdateTime=${this.lastUpdateTime}></borg-log-panel>
 
+    <h2>Deleted Cards</h2>
+
+    <borg-view-deleted-cards>
+    </borg-view-deleted-cards>
+
     <form id="borg-add-machine-form">
       <h3>Database Settings</h3>
 
@@ -208,4 +227,5 @@ export class AddDatabasePage extends LitElement {
   }
 }
 
+customElements.define("borg-view-deleted-cards", ViewDeletedCards);
 customElements.define("borg-add-database-page", AddDatabasePage);
