@@ -24,6 +24,10 @@ borg-add-database-page h3, borg-add-concept-page h3 {
   margin-bottom: 20px;
 }
 
+borg-log-entry {
+  display: flex;
+}
+
 /*
  * Logs
  *
@@ -35,8 +39,9 @@ borg-add-database-page h3, borg-add-concept-page h3 {
 }
 
 .log-panel-cnt {
-  padding: 20px;
   border-radius: 7px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 }
 
 .log-panel-cnt:hover {
@@ -47,6 +52,6 @@ borg-add-database-page h3, borg-add-concept-page h3 {
   color: cyan;
 }
 
-.log-message {
-
+summary h3 {
+  display: inline;
 }

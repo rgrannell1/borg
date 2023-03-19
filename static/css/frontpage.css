@@ -5,16 +5,15 @@
  */
 .app-cnt {
   display: grid;
-  grid-template-rows: 60px calc(100vh - (60px + 100px)) 100px;
+  grid-template-rows: 60px auto 100px;
   grid-template-columns: 0 1fr;
   transition: all 0.2s;
-
+  min-height: 100vh;
 }
 
 .app-cnt.show-sidebar {
   grid-template-columns: 180px 1fr;
   transition: all 0.2s;
-
 }
 
 /*
@@ -71,7 +70,7 @@ borg-sidebar {
   grid-column-start: 1;
   grid-column-end: 1;
   overflow-y: scroll;
-  height: calc(100vh - 63.5px);
+  height: 100%;
   background-color: var(--sidebar-background-color);
 }
 
