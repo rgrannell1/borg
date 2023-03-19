@@ -37,11 +37,11 @@ export class Card extends LitElement {
 
     return html`
     <section class="card" @click=${this.broadcastViewCard}>
-      <p>
+      <p class="card-url">
         <a href=${url} target="_blank">${urlTitle}</a>
       </p>
-      <br/>
       <p class="card-date" title=${title}>${DateTime.formatTime(date)}</p>
+      <span class="delete-card" role="button">x</span>
     </section>
     `;
   }
