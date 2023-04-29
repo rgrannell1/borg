@@ -4,8 +4,8 @@ const resources = [
   "./css/globals.css",
   "./css/frontpage.css",
   "./css/inputs.css",
-  "./css/add-database.css",
-  "./css/view-database.css",
+  "./css/pages/add-database.css",
+  "./css/pages/view-database.css",
 ];
 
 self.addEventListener("install", function (event) {
@@ -24,7 +24,7 @@ self.addEventListener("fetch", function (event) {
   );
 });
 
-// fetch
+// communication between application and service-worker
 
 function onAddCard(event) {
   event.ports[0].postMessage({ type: 'synced' });
