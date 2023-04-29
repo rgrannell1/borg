@@ -11,9 +11,25 @@
   min-height: 100vh;
 }
 
-.app-cnt.show-sidebar {
-  grid-template-columns: 180px 1fr;
-  transition: all 0.2s;
+
+
+
+@media (max-width: 600px) {
+  .app-cnt.show-sidebar {
+    grid-template-columns: 1fr 0;
+    transition: all 0.2s;
+  }
+
+  .app-cnt.show-sidebar borg-view-database-page {
+    display: none;
+  }
+}
+
+@media (min-width: 601px) {
+  .app-cnt.show-sidebar {
+    grid-template-columns: 180px 1fr;
+    transition: all 0.2s;
+  }
 }
 
 /*

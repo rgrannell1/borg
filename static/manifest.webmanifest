@@ -1,12 +1,14 @@
 {
   "name": "Borg",
   "short_name": "Borg",
+  "description": "Save Bookmarks to a Common-Storage server",
   "start_url": "/",
   "share_target": {
-    "action": "/",
-    "method": "GET",
+    "action": "/_web-share-target",
+    "method": "POST",
+    "enctype": "multipart/form-data",
     "params": {
-      "url": "link"
+      "url": "url"
     }
   },
   "icons": [
