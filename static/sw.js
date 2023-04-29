@@ -1,4 +1,3 @@
-import { AppEvents } from '../static/js/app-events.js';
 
 const resources = [
   "./dist/app.js",
