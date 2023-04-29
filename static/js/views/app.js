@@ -12,6 +12,7 @@ import "./pages/view-database/page.js";
 
 import { ClientStorage } from "../services/client-storage.js";
 import { Components } from "../models/components.js";
+import { UrlRoute } from "../services/url.js";
 
 export class App extends LitElement {
   constructor() {
@@ -117,7 +118,12 @@ export class App extends LitElement {
   }
 
   async handleSearch(event) {
+    UrlRoute.setState({
+      query: event.detail.query,
+    });
+
     this.query = event.detail.query;
+    this.requestUpdate();
   }
 
   navigate(event) {
@@ -138,6 +144,12 @@ export class App extends LitElement {
       delete this.selectedDatabase;
       this.page = Components.ADD_CONCEPT;
     }
+
+    // given the navigation change, update the URL
+    UrlRoute.setState({
+      page: this.page,
+      topic: this.selectedDatabase,
+    });
 
     this.requestUpdate();
   }

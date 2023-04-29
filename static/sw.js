@@ -32,7 +32,7 @@ function onAddCard(event) {
 }
 
 function routeMessage(event) {
-  if (event.data.type === AppEvents.ADD_CARD) {
+  if (event.data.type === 'add-card') {
     onAddCard();
   }
 }

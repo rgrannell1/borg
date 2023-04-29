@@ -14,7 +14,6 @@
   width: fit-content;
   grid-row-gap: 10px;
   grid-column-gap: 20px;
-
   background: var(--card-background);
   margin: 15px;
   padding: 15px 15px 10px 15px;
@@ -35,7 +34,7 @@
 
 .date-summary {
   display: inline-block;
-  background: rgb(86, 117, 255);
+  background: var(--date-summary-color);
   color: white;
   padding: 10px 15px;
   border-radius: 10px;
@@ -91,6 +90,8 @@ borg-cards-panel {
   grid-row: 2 / 3;
   grid-column: 1;
   height: 100%;
+  /* don't ask */
+  max-height: calc(100vh - 61px - 80px - 49px);
 }
 
 borg-search-bar {

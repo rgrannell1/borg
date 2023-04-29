@@ -29,6 +29,8 @@ export class SearchBar extends LitElement {
     return html`
     <input
       id="search-cards"
+      enterkeyhint="search"
+      inputmode="text"
       class="borg-input"
       value=${this.query}
       spellcheck="false"

@@ -51,13 +51,13 @@ export class Navbar extends LitElement {
           <li class="navbar-button">
             <a
               @click=${this.broadcastBurgerToggle}
-              href="#">☰</a>
+              href="">☰</a>
           </li>
 
           <li class="navbar-button ${this.page === "about" ? "active" : ""}">
           <a
             @click=${this.broadcastAboutNavigation}
-            href="#">About</a>
+            href="">About</a>
           </li>
         </ul>
       </nav>

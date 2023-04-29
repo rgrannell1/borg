@@ -1,9 +1,9 @@
 
 :root, :host {
   --font-family: 'Montserrat', sans-serif;
-  --navbar-color: hsl(0, 100%, 50%);
-  --navbar-border-color: hsl(0, 99%, 34%);
-  --navbar-hover-color: rgb(205, 1, 1);
+  --navbar-color: black;
+  --navbar-border-color: black;
+  --navbar-hover-color: hsl(0, 0%, 24%);
 
   --sidebar-hover-color: rgb(209, 227, 255);
   --sidebar-button-hover-color: rgb(188, 215, 255);
@@ -15,6 +15,8 @@
   --card-box-shadow: rgba(11, 20, 26, 0.13) 0px 1px 0.5px 0px;
   --link-color: hsl(211, 100%, 50%);
   --input-focus-color: blue;
+
+  --date-summary-color: hsl(229, 100%, 67%);
 
   /* sync animation */
   --sidebar-sync-colour-from: rgb(209, 227, 255);

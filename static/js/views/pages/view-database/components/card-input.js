@@ -81,7 +81,14 @@ export class CardInput extends LitElement {
     // todo handle focused card
 
     return html`
-    <input spellcheck="false" id="bookmark-url" type="url" class="borg-input" placeholder="URL" />
+    <input
+      spellcheck="false"
+      id="bookmark-url"
+      inputmode="url"
+      type="url"
+      enterhint="send"
+      class="borg-input"
+      placeholder="URL" />
     <button
       id="submit-bookmark"
       class="${classes.join(" ")}"

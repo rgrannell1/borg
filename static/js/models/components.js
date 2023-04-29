@@ -5,3 +5,10 @@ export const Components = {
   ADD_CONCEPT: "add-concept",
   FRONTPAGE: "frontpage"
 };
+
+export const ComponentPaths = {
+  [Components.ABOUT_PAGE]: "/about",
+  [Components.VIEW_DATABASE]: "/topic",
+  [Components.ADD_DATABASE]: "/topic/edit",
+  [Components.FRONTPAGE]: "/"
+}

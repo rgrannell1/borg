@@ -11,6 +11,7 @@ import { DateTime } from "../../../../models/datetime.js";
 export class CardsPanel extends LitElement {
   static get properties() {
     return {
+      page: { type: Number },
       query: { type: String },
       database: { type: Object },
       content: { type: Array },
@@ -69,7 +70,20 @@ export class CardsPanel extends LitElement {
     const entries = [];
     let lastDate = undefined;
 
+    const skip = (this.page ?? 0) * 50;
+
+    let idx = 0;
     for (const entry of this.content) {
+      idx++;
+
+      if (idx < skip) {
+        //continue;
+      }
+
+      if (idx > skip + 50) {
+        //break;
+      }
+
       if (!this.matchesSet(entry)) {
         continue;
       }
@@ -84,14 +98,13 @@ export class CardsPanel extends LitElement {
         entries.push(this.renderDate(date));
         lastDate = date;
       }
-
-      entries.push(this.renderCard(entry));
     }
 
     if (entries.length > 0) {
       return html`
       <ol class="cards">
         ${entries}
+        <div class="card-sentinel"></div>
       </ol>
       `;
     } else {
