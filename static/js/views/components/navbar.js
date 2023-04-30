@@ -31,6 +31,18 @@ export class Navbar extends LitElement {
     this.dispatchEvent(event);
   }
 
+  broadcastNotificationsToggle() {
+    const event = new CustomEvent(AppEvents.TOGGLE_NOTIFICATIONS, {
+      detail: {
+
+      },
+      bubbles: true,
+      composed: true,
+    });
+
+    this.dispatchEvent(event);
+  }
+
   broadcastBurgerToggle() {
     const event = new CustomEvent(AppEvents.TOGGLE_BURGER_MENU, {
       detail: {
@@ -58,6 +70,13 @@ export class Navbar extends LitElement {
           <a
             @click=${this.broadcastAboutNavigation}
             href="#">About</a>
+
+          <li class="navbar-button navbar-divider"> </li>
+
+          <li
+            @click=${this.broadcastNotificationsToggle}
+            class="navbar-button navbar-bell-icon">
+            <a href="#">🔔</a>
           </li>
         </ul>
       </nav>

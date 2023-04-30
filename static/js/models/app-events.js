@@ -23,6 +23,8 @@ export const AppEvents = {
   DATABASE_SYNCED: "database-synced",
   // toggle the burger menu
   TOGGLE_BURGER_MENU: "toggle-burger-menu",
+  // toggle notifications
+  TOGGLE_NOTIFICATIONS: "toggle-notifications",
   // database sync error
   DATABASE_SYNC_ERROR: "database-sync-error",
 };

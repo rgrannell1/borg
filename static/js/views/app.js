@@ -23,6 +23,7 @@ export class App extends LitElement {
     this.syncState = {};
     this.logs = {};
     this.showSidebar = true;
+    this.showNotifications = false;
   }
 
   async connectedCallback() {
@@ -43,6 +44,7 @@ export class App extends LitElement {
       syncState: { type: Object },
       concepts: { type: Object },
       showSidebar: { type: Boolean },
+      showNotifications: { type: Boolean },
     };
   }
 
@@ -115,7 +117,10 @@ export class App extends LitElement {
 
   async handleToggleBurgerMenu(event) {
     this.showSidebar = !this.showSidebar;
-    console.log("showSidebar", this.showSidebar);
+  }
+
+  async handleToggleNotifications(event) {
+    this.showNotifications = !this.showNotifications;
   }
 
   async handleSearch(event) {
@@ -213,6 +218,7 @@ export class App extends LitElement {
       @database-syncing=${this.handleDatabaseSyncing}
       @database-synced=${this.handleDatabaseSynced}
       @toggle-burger-menu=${this.handleToggleBurgerMenu}
+      @toggle-notifications=${this.handleToggleNotifications}
       @add-concept=${this.handleAddConcept}
       @add-database=${this.handleAddTopic}>
 

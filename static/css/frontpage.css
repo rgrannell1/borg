@@ -76,6 +76,11 @@ borg-navbar {
   border-bottom: 6px solid white;
 }
 
+/* yes, I know this is bad, but I don't want to refactor the navbar yet */
+.navbar-divider {
+  margin-left: calc(100cqw - 260px);
+}
+
 /*
  * Sidebar
  *
