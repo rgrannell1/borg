@@ -13,6 +13,7 @@ import "./pages/view-database/page.js";
 import { ClientStorage } from "../services/client-storage.js";
 import { Components } from "../models/components.js";
 import { UrlRoute } from "../services/url.js";
+import { Media } from '../services/media.js';
 
 export class App extends LitElement {
   constructor() {
@@ -134,9 +135,13 @@ export class App extends LitElement {
       this.page = Components.ABOUT_PAGE;
     } else if (detail.component === Components.ADD_DATABASE) {
       this.page = Components.ADD_DATABASE;
-
       // if none, treat as a new database form
       this.selectedDatabase = detail?.alias;
+
+      // if we're on a narrow device, hide the sidebar
+      if (Media.isNarrowDevice()) {
+        this.showSidebar = false;
+      }
     } else if (detail.component === Components.VIEW_DATABASE) {
       this.page = Components.VIEW_DATABASE;
       this.selectedDatabase = detail.alias;

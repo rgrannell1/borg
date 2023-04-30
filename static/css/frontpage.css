@@ -11,17 +11,19 @@
   min-height: 100vh;
 }
 
-
-
-
 @media (max-width: 600px) {
   .app-cnt.show-sidebar {
     grid-template-columns: 1fr 0;
     transition: all 0.2s;
   }
 
-  .app-cnt.show-sidebar borg-view-database-page {
+  .app-cnt.show-sidebar > * {
     display: none;
+  }
+
+  .app-cnt.show-sidebar > borg-sidebar,
+  .app-cnt.show-sidebar > borg-navbar {
+    display: block;
   }
 }
 

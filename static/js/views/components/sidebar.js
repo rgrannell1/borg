@@ -134,7 +134,6 @@ export class Sidebar extends LitElement {
   }
 
   render() {
-    //<borg-add-concept .active=${this.page === "add-concept"}></borg-add-concept>
     return html`
     <aside class="borg-sidebar">
       <borg-add-database .active=${this.page === "add-database"} .selectedDatabase=${this.selectedDatabase}></borg-add-database>
