@@ -14,7 +14,7 @@ import "./pages/view-database/page.js";
 import { ClientStorage } from "../services/client-storage.js";
 import { Components } from "../models/components.js";
 import { UrlRoute } from "../services/url.js";
-import { Media } from '../services/media.js';
+import { Media } from "../services/media.js";
 
 export class App extends LitElement {
   constructor() {
@@ -53,7 +53,7 @@ export class App extends LitElement {
     const alias = event.detail.alias;
 
     await ClientStorage.clearCards({
-      alias
+      alias,
     });
 
     delete this.databases[alias];
@@ -71,7 +71,10 @@ export class App extends LitElement {
       [event.detail.alias]: event.detail,
     };
 
-    const res = await ClientStorage.writeTopic(event.detail, event.detail.topic);
+    const res = await ClientStorage.writeTopic(
+      event.detail,
+      event.detail.topic,
+    );
     console.log("add-topic-res", res);
 
     await ClientStorage.setDatabases(this.databases);
@@ -88,40 +91,45 @@ export class App extends LitElement {
   }
 
   async handleDatabaseSyncing(event) {
-    this.syncState[event.detail.alias] = 'syncing';
+    this.syncState[event.detail.alias] = "syncing";
     this.syncState = { ...this.syncState };
 
     this.notifications.push({
-      status: 'info',
+      status: "info",
       message: `Syncing ${event.detail.alias} from #${event.detail.maxId}`,
-      time: event.detail.time
+      time: event.detail.time,
     });
 
     this.notifications = [...this.notifications];
   }
 
   async handleDatabaseSyncError(event) {
-    delete this.syncState[event.detail.alias];
+    this.syncState[event.detail.alias] = "synced";
+
+    // todo create a flashy animation
+    this.syncState = { ...this.syncState };
 
     this.notifications.push({
-      status: 'error',
-      message: `Failed to sync ${event.detail.alias}\n${error.message}`,
-      time: event.detail.time
+      status: "error",
+      message: `Failed to sync ${event.detail.alias}\n${
+        event.detail?.error?.message ?? ""
+      }`,
+      time: event.detail.time,
     });
 
     this.notifications = [...this.notifications];
   }
 
   async handleDatabaseSynced(event) {
-    this.syncState[event.detail.alias] = 'synced';
+    this.syncState[event.detail.alias] = "synced";
 
     // todo create a flashy animation
     this.syncState = { ...this.syncState };
 
     this.notifications.push({
-      status: 'info',
+      status: "info",
       message: `Synced ${event.detail.alias}`,
-      time: event.detail.time
+      time: event.detail.time,
     });
 
     this.notifications = [...this.notifications];
@@ -238,7 +246,7 @@ export class App extends LitElement {
     }
 
     return html`
-    <div class="${ classList.join(' ') }"
+    <div class="${classList.join(" ")}"
       @navigate=${this.navigate}
       @search=${this.handleSearch}
       @delete-database=${this.handleDeleteDatabase}

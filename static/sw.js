@@ -1,4 +1,3 @@
-
 const resources = [
   "./dist/app.js",
   "./css/globals.css",
@@ -23,8 +22,8 @@ async function getWindowURL(event) {
     const client = await clients.get(clientId);
     return new URL(client.url);
   } else {
-    const allClients = await clients.matchAll({type: 'window'});
-    const filtered = allClients.filter(client => client.id === clientId);
+    const allClients = await clients.matchAll({ type: "window" });
+    const filtered = allClients.filter((client) => client.id === clientId);
 
     if (filtered.length > 0) {
       return new URL(filtered[0].url);
@@ -36,22 +35,24 @@ async function receiveShare(event) {
   const formData = await event.request.formData();
 
   const windowUrl = await getWindowURL(event);
-  const redirectUrl = '/'
+  const redirectUrl = "/";
 
   event.ports[0].postMessage({
-    type: 'share-target',
+    type: "share-target",
     data: {
-      url: formData.length()
-    }
+      url: formData.length(),
+    },
   });
 
-
-  return Response.redirect('/', 303);
+  return Response.redirect("/", 303);
 }
 
 self.addEventListener("fetch", function (event) {
   // -- intercept web-shares to Borg
-  if (event.request.method === 'POST' && event.request?.url?.pathname === '/_web-share-target') {
+  if (
+    event.request.method === "POST" &&
+    event.request?.url?.pathname === "/_web-share-target"
+  ) {
     return receiveShare(event);
   }
 
@@ -66,13 +67,13 @@ self.addEventListener("fetch", function (event) {
 // communication between application and service-worker
 
 function onAddCard(event) {
-  event.ports[0].postMessage({ type: 'synced' });
+  event.ports[0].postMessage({ type: "synced" });
 }
 
 function routeMessage(event) {
-  if (event.data.type === 'add-card') {
+  if (event.data.type === "add-card") {
     onAddCard();
   }
 }
 
-self.addEventListener('message', routeMessage);
+self.addEventListener("message", routeMessage);

@@ -28,7 +28,7 @@ export class AddDatabase extends LitElement {
   }
 
   render() {
-    const classList = ['sidebar-heading-button'];
+    const classList = ["sidebar-heading-button"];
 
     if (this.active && !this.selectedDatabase) {
       classList.push("active");
@@ -41,7 +41,7 @@ export class AddDatabase extends LitElement {
         title="Add Topic"
         @click=${this.broadcastAddTopic}
         id="add-topic"
-        class="${classList.join(' ')}">+</span>
+        class="${classList.join(" ")}">+</span>
     </li>
     `;
   }
@@ -71,7 +71,7 @@ export class AddConcept extends LitElement {
   }
 
   render() {
-    const classList = ['sidebar-heading-button'];
+    const classList = ["sidebar-heading-button"];
 
     if (this.active && !this.selectedDatabase) {
       classList.push("active");
@@ -84,7 +84,7 @@ export class AddConcept extends LitElement {
         title="Add Concept"
         @click=${this.broadcastAddConcept}
         id="add-concept"
-        class="${classList.join(' ')}">+</span>
+        class="${classList.join(" ")}">+</span>
     </li>
     `;
   }
@@ -124,7 +124,7 @@ export class Sidebar extends LitElement {
       ${
       Object.values(this.databases).map((db) => {
         const active = this.selectedDatabase === db.alias;
-        const syncing = this.syncState[db.alias] === 'syncing';
+        const syncing = this.syncState[db.alias] === "syncing";
 
         return html`<borg-database .syncing=${syncing} .active=${active} .alias=${db.alias}></borg-database>`;
       })
@@ -136,7 +136,9 @@ export class Sidebar extends LitElement {
   render() {
     return html`
     <aside class="borg-sidebar">
-      <borg-add-database .active=${this.page === "add-database"} .selectedDatabase=${this.selectedDatabase}></borg-add-database>
+      <borg-add-database .active=${
+      this.page === "add-database"
+    } .selectedDatabase=${this.selectedDatabase}></borg-add-database>
       ${this.renderDatabases()}
 
       <borg-sidebar-divider></borg-sidebar-divider>

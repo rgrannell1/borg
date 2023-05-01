@@ -10,7 +10,7 @@ export class AddConceptPage extends LitElement {
     <h2>Add Concept</h2>
 
 
-    `
+    `;
   }
 }
 

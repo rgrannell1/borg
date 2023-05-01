@@ -33,9 +33,7 @@ export class Navbar extends LitElement {
 
   broadcastNotificationsToggle() {
     const event = new CustomEvent(AppEvents.TOGGLE_NOTIFICATIONS, {
-      detail: {
-
-      },
+      detail: {},
       bubbles: true,
       composed: true,
     });
@@ -45,9 +43,7 @@ export class Navbar extends LitElement {
 
   broadcastBurgerToggle() {
     const event = new CustomEvent(AppEvents.TOGGLE_BURGER_MENU, {
-      detail: {
-
-      },
+      detail: {},
       bubbles: true,
       composed: true,
     });

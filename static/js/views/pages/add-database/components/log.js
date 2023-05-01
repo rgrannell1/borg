@@ -1,4 +1,3 @@
-
 import { css, html, LitElement } from "../../../../../vendor/lit-element.js";
 
 import { AppEvents } from "../../../../models/app-events.js";
@@ -8,7 +7,7 @@ export class Log extends LitElement {
     return {
       log: {
         type: Object,
-      }
+      },
     };
   }
 
@@ -24,7 +23,7 @@ export class Log extends LitElement {
       <span class="log-time">[${time}]</span>
       <span class="log-message">${this.log.message}</span>
     </div>
-    `
+    `;
   }
 }
 

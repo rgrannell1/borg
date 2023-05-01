@@ -5,11 +5,11 @@ import * as events from "../models/events.js";
 
 class ClientStorageEvents {
   static databaseSyncing(alias, maxId) {
-    return  new CustomEvent(AppEvents.DATABASE_SYNCING, {
+    return new CustomEvent(AppEvents.DATABASE_SYNCING, {
       detail: {
         alias,
         maxId,
-        time: new Date()
+        time: new Date(),
       },
       bubbles: true,
       composed: true,
@@ -20,7 +20,7 @@ class ClientStorageEvents {
     return new CustomEvent(AppEvents.DATABASE_SYNCED, {
       detail: {
         alias,
-        time: new Date()
+        time: new Date(),
       },
       bubbles: true,
       composed: true,
@@ -33,7 +33,7 @@ class ClientStorageEvents {
         database,
         maxId,
         error,
-        time: new Date()
+        time: new Date(),
       },
       bubbles: true,
       composed: true,
@@ -70,7 +70,6 @@ export class ClientStorage {
   }
 
   static async databaseFetch() {
-
   }
 
   static async getConcepts() {
@@ -110,7 +109,10 @@ export class ClientStorage {
 
           // periodically update to show sync-status
           if (contentId % 250 === 0) {
-            yield ClientStorageEvents.databaseSyncing(database.alias, contentId);
+            yield ClientStorageEvents.databaseSyncing(
+              database.alias,
+              contentId,
+            );
           }
         }
       } catch (err) {
@@ -141,8 +143,7 @@ export class ClientStorage {
       password: database.password,
     });
 
-    return await client.postContent(database.topic,
-      events.AddBookmark(url));
+    return await client.postContent(database.topic, events.AddBookmark(url));
   }
 
   static async clearCards(database) {

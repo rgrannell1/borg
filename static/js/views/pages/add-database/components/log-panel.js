@@ -1,7 +1,6 @@
-
 import { css, html, LitElement } from "../../../../../vendor/lit-element.js";
 
-import './log.js';
+import "./log.js";
 
 export class LogPanel extends LitElement {
   static get properties() {
@@ -11,7 +10,7 @@ export class LogPanel extends LitElement {
       },
       logs: {
         type: Array,
-      }
+      },
     };
   }
 
@@ -23,7 +22,10 @@ export class LogPanel extends LitElement {
     let lastUpdateTime;
 
     for (const log of this.logs) {
-      if (!lastUpdateTime || (log.time > lastUpdateTime && log.message.includes('Synced'))) {
+      if (
+        !lastUpdateTime ||
+        (log.time > lastUpdateTime && log.message.includes("Synced"))
+      ) {
         lastUpdateTime = log.time;
       }
     }
@@ -54,13 +56,15 @@ export class LogPanel extends LitElement {
 
       <pre class="log-panel">
         <code>
-        ${ this.logs.map(log => {
-          return html`<borg-log-entry .log=${log}></borg-log-entry>`;
-        }) }
+        ${
+      this.logs.map((log) => {
+        return html`<borg-log-entry .log=${log}></borg-log-entry>`;
+      })
+    }
         </code>
       </pre>
     </details>
-    `
+    `;
   }
 }
 

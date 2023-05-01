@@ -19,7 +19,7 @@ export class ViewDatabasePage extends LitElement {
       saveState: { type: String },
       database: { type: Object },
       query: { type: String },
-      syncTime: { type: Date }
+      syncTime: { type: Date },
     };
   }
 
@@ -32,7 +32,7 @@ export class ViewDatabasePage extends LitElement {
 
     for await (const event of ClientStorage.sync()) {
       this.dispatchEvent(event);
-    };
+    }
 
     this.syncTime = new Date();
     this.requestUpdate();
@@ -58,7 +58,7 @@ export class ViewDatabasePage extends LitElement {
 
     for await (const event of ClientStorage.sync()) {
       this.dispatchEvent(event);
-    };
+    }
     this.syncTime = new Date();
   }
 

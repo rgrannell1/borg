@@ -2,7 +2,7 @@ import { css, html, LitElement } from "../../../../vendor/lit-element.js";
 
 import { AppEvents } from "../../../models/app-events.js";
 
-import './components/log-panel.js';
+import "./components/log-panel.js";
 
 export class ViewDeletedCards extends LitElement {
   createRenderRoot() {
@@ -14,7 +14,7 @@ export class ViewDeletedCards extends LitElement {
     <div>
 
     </div>
-    `
+    `;
   }
 }
 
@@ -131,7 +131,7 @@ export class AddDatabasePage extends LitElement {
         <option value="Basic Authentication">Basic Authentication</option>
       </select>
     </div>
-    `
+    `;
   }
 
   renderUsername(db) {
@@ -192,7 +192,7 @@ export class AddDatabasePage extends LitElement {
         ${this.renderDeleteButton()}`
       : html`${this.renderSubmitButton()}`;
 
-      return html`
+    return html`
     <h2>${text}</h2>
 
     <borg-view-deleted-cards>

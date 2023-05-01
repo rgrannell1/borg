@@ -53,7 +53,7 @@ export class Database extends LitElement {
     }
 
     return html`
-    <li class="${classList.join(' ')}">
+    <li class="${classList.join(" ")}">
       <span
         @click=${this.broadcastViewDatabase}
         class="database-name">${this.alias}</span>

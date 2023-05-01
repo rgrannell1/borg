@@ -1,6 +1,5 @@
 import { html, LitElement } from "../../../vendor/lit-element.js";
 
-
 export class Notification extends LitElement {
   static get properties() {
     return {
@@ -15,11 +14,15 @@ export class Notification extends LitElement {
   }
 
   statusText() {
-    if (this.status === 'info') {
-      return 'Info';
+    if (this.status === "info") {
+      return "Info";
     }
 
-    return '';
+    if (this.status === "error") {
+      return "Error";
+    }
+
+    return "";
   }
 
   render() {
@@ -51,16 +54,14 @@ export class Notifications extends LitElement {
   }
 
   render() {
-    const notifications = this.notifications.map(notification => {
-      return html`<borg-notification
-        status=${notification.status}
-        time=${notification.time}
-        message=${notification.message}></borg-notification>`
-    })
-
-    console.log(notifications)
-    console.log('notification re-render')
-    console.log('xxxxxx')
+    const notifications = this.notifications
+      .slice(-5)
+      .map((notification) => {
+        return html`<borg-notification
+          status=${notification.status}
+          time=${notification.time}
+          message=${notification.message}></borg-notification>`;
+      });
 
     return html`
     <ul>

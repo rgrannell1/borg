@@ -8,7 +8,7 @@ export const AppEvents = {
   // update a search query
   SEARCH: "search",
   // view a bookmark or card
-  VIEW_CARD: 'view-card',
+  VIEW_CARD: "view-card",
   // add a new bookmark or card
   ADD_CARD: "add-card",
   // add a new database to the sidebar

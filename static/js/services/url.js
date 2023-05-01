@@ -1,11 +1,8 @@
-
-import { ComponentPaths } from '../models/components.js';
+import { ComponentPaths } from "../models/components.js";
 
 export class UrlRoute {
   static getState() {
-    return {
-
-    }
+    return {};
   }
   static setState(params) {
     const url = new URL(location);
@@ -22,7 +19,6 @@ export class UrlRoute {
       url.hash = params.topic
         ? `#${ComponentPaths[params.page]}/${params.topic}`
         : `#${ComponentPaths[params.page]}`;
-
     }
 
     history.pushState({}, "", url);

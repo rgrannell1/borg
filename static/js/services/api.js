@@ -22,31 +22,31 @@ export class CommonStorageAPI {
         mode: "cors",
         headers: this.headers(),
         body: JSON.stringify({
-          description: "A topic created by borg"
-        })
+          description: "A topic created by borg",
+        }),
       });
 
       const status = res.status;
 
       if (status === 401) {
         return {
-          state: 'unauthorised',
+          state: "unauthorised",
         };
       } else if (status === 200) {
         return {
-          state: 'ok',
+          state: "ok",
         };
       } else {
         return {
-          state: 'error',
+          state: "error",
           reason: `Unexpected status code: ${status}`,
         };
       }
     } catch (err) {
       return {
-        state: 'error',
-        reason: err
-      }
+        state: "error",
+        reason: err,
+      };
     }
   }
 
@@ -67,17 +67,17 @@ export class CommonStorageAPI {
 
       if (status === 401) {
         return {
-          state: 'unauthorised',
+          state: "unauthorised",
         };
       } else if (status === 200) {
         const body = await res.json();
         return {
-          state: 'ok',
+          state: "ok",
           total: body.stats.total,
         };
       } else {
         return {
-          state: 'error',
+          state: "error",
         };
       }
     } catch (err) {

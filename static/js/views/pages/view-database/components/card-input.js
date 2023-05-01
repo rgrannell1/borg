@@ -50,9 +50,7 @@ export class CardInput extends LitElement {
     const state = this.saveState;
 
     if (state === "ok") {
-      return this.bookmarkCount
-        ? `Added ${this.bookmarkCount}`
-        : `Added`;
+      return this.bookmarkCount ? `Added ${this.bookmarkCount}` : `Added`;
     } else if (state === "error") {
       return "Failed";
     } else if (state === "unauthorized") {

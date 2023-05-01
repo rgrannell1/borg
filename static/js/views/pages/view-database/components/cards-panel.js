@@ -48,7 +48,6 @@ export class CardsPanel extends LitElement {
     `;
   }
 
-
   renderCard(entry) {
     return html`
     <li>
