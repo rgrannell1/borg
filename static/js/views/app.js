@@ -100,6 +100,18 @@ export class App extends LitElement {
     this.notifications = [...this.notifications];
   }
 
+  async handleDatabaseSyncError(event) {
+    delete this.syncState[event.detail.alias];
+
+    this.notifications.push({
+      status: 'error',
+      message: `Failed to sync ${event.detail.alias}\n${error.message}`,
+      time: event.detail.time
+    });
+
+    this.notifications = [...this.notifications];
+  }
+
   async handleDatabaseSynced(event) {
     this.syncState[event.detail.alias] = 'synced';
 
@@ -231,6 +243,7 @@ export class App extends LitElement {
       @search=${this.handleSearch}
       @delete-database=${this.handleDeleteDatabase}
       @database-syncing=${this.handleDatabaseSyncing}
+      @database-sync-error=${this.handleDatabaseSyncError}
       @database-synced=${this.handleDatabaseSynced}
       @toggle-burger-menu=${this.handleToggleBurgerMenu}
       @toggle-notifications=${this.handleToggleNotifications}

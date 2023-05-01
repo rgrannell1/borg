@@ -107,6 +107,11 @@ export class ClientStorage {
         for await (const content of client.getContent(database.topic, maxId)) {
           currentContent.push(content.value);
           contentId = content.id;
+
+          // periodically update to show sync-status
+          if (contentId % 250 === 0) {
+            yield ClientStorageEvents.databaseSyncing(database.alias, contentId);
+          }
         }
       } catch (err) {
         yield ClientStorageEvents.databaseSyncError(database, contentId, err);
