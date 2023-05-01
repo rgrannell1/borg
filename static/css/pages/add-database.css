@@ -6,13 +6,14 @@
 borg-add-database-page, borg-add-concept-page {
   display: block;
   padding: 40px;
-  min-width: 400px;
   padding: 60px 13%;
 }
 
 borg-add-database-page h2, borg-add-concept-page h2 {
   margin-bottom: 20px;
   border-bottom: 2px solid #c9c9c9;
+  max-width: 300px;
+
 }
 
 .divider {

@@ -195,8 +195,6 @@ export class AddDatabasePage extends LitElement {
       return html`
     <h2>${text}</h2>
 
-    <h2>Deleted Cards</h2>
-
     <borg-view-deleted-cards>
     </borg-view-deleted-cards>
 
