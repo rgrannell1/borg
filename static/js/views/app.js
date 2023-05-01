@@ -22,7 +22,7 @@ export class App extends LitElement {
     this.page = Components.FRONTPAGE;
     this.databases = {};
     this.syncState = {};
-    this.logs = {};
+    this.notifications = [];
     this.showSidebar = true;
     this.showNotifications = false;
   }
@@ -91,16 +91,13 @@ export class App extends LitElement {
     this.syncState[event.detail.alias] = 'syncing';
     this.syncState = { ...this.syncState };
 
-    // todo create a class
-    if (!this.logs[event.detail.alias]) {
-      this.logs[event.detail.alias] = [];
-    }
-
-    this.logs[event.detail.alias].push({
-      message: `Syncing from max-id ${event.detail.maxId}`,
+    this.notifications.push({
+      status: 'info',
+      message: `Syncing ${event.detail.alias} from #${event.detail.maxId}`,
       time: event.detail.time
     });
-    this.requestUpdate();
+
+    this.notifications = [...this.notifications];
   }
 
   async handleDatabaseSynced(event) {
@@ -109,11 +106,13 @@ export class App extends LitElement {
     // todo create a flashy animation
     this.syncState = { ...this.syncState };
 
-    this.logs[event.detail.alias].push({
-      message: `Synced`,
+    this.notifications.push({
+      status: 'info',
+      message: `Synced ${event.detail.alias}`,
       time: event.detail.time
     });
-    this.requestUpdate();
+
+    this.notifications = [...this.notifications];
   }
 
   async handleToggleBurgerMenu(event) {
@@ -180,7 +179,6 @@ export class App extends LitElement {
     const db = this.databases[this.selectedDatabase];
 
     return html`<borg-add-database-page
-      .logs=${this.logs[this.selectedDatabase] ?? []}
       .lastUpdateTime="PLACEHOLDER"
       .database=${db}>
     </borg-add-database-page>`;
@@ -250,7 +248,9 @@ export class App extends LitElement {
         .databases=${this.databases}>
       </borg-sidebar>
 
-      <borg-notifications></borg-notifications>
+      <borg-notifications
+        .notifications=${this.notifications}>
+      </borg-notifications>
 
       ${this.renderSubpage()}
     </div>

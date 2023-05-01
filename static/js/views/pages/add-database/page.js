@@ -195,10 +195,6 @@ export class AddDatabasePage extends LitElement {
       return html`
     <h2>${text}</h2>
 
-    <borg-log-panel
-      .logs=${this.logs}
-      .lastUpdateTime=${this.lastUpdateTime}></borg-log-panel>
-
     <h2>Deleted Cards</h2>
 
     <borg-view-deleted-cards>

@@ -1,16 +1,12 @@
 import { html, LitElement } from "../../../vendor/lit-element.js";
 
-import { AppEvents } from "../../models/app-events.js";
-import { Components } from "../../models/components.js";
-
-
 
 export class Notification extends LitElement {
   static get properties() {
     return {
       status: { type: String },
-      date: { type: Date },
-      content: { type: String },
+      time: { type: Date },
+      message: { type: String },
     };
   }
 
@@ -33,10 +29,10 @@ export class Notification extends LitElement {
         ${this.statusText()}
       </div>
       <div class="notification-date">
-        ${this.date}
+        ${this.time}
       </div>
       <div class="notification-content">
-        ${this.content}
+        ${this.message}
       </div>
     </li>
     `;
@@ -44,22 +40,6 @@ export class Notification extends LitElement {
 }
 
 export class Notifications extends LitElement {
-  constructor() {
-    super();
-    this.notifications = [
-      {
-        status: 'info',
-        date: '2020-01-01',
-        content: 'This is a notification'
-      },
-      {
-        status: 'info',
-        date: '2020-01-01',
-        content: 'This is a notification'
-      }
-    ];
-  }
-
   static get properties() {
     return {
       notifications: { type: Array },
@@ -74,9 +54,13 @@ export class Notifications extends LitElement {
     const notifications = this.notifications.map(notification => {
       return html`<borg-notification
         status=${notification.status}
-        date=${notification.date}
-        content=${notification.content}></borg-notification>`
+        time=${notification.time}
+        message=${notification.message}></borg-notification>`
     })
+
+    console.log(notifications)
+    console.log('notification re-render')
+    console.log('xxxxxx')
 
     return html`
     <ul>
