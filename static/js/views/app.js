@@ -3,6 +3,7 @@ import { html, LitElement } from "../../vendor/lit-element.js";
 import "./components/navbar.js";
 import "./components/database.js";
 import "./components/sidebar.js";
+import "./components/notifications.js";
 
 import "./pages/about/page.js";
 import "./pages/frontpage/page.js";
@@ -117,10 +118,20 @@ export class App extends LitElement {
 
   async handleToggleBurgerMenu(event) {
     this.showSidebar = !this.showSidebar;
+
+    // if we're on mobile, we need to disable notifications
+    if (this.showSidebar && Media.isNarrowDevice()) {
+      this.showNotifications = false;
+    }
   }
 
   async handleToggleNotifications(event) {
     this.showNotifications = !this.showNotifications;
+
+    // if we're on mobile, we need to disable notifications
+    if (this.showNotifications && Media.isNarrowDevice()) {
+      this.showSidebar = false;
+    }
   }
 
   async handleSearch(event) {
@@ -134,6 +145,12 @@ export class App extends LitElement {
 
   navigate(event) {
     const detail = event.detail;
+
+    // if we're on a narrow device, hide the sidebar
+    if (Media.isNarrowDevice()) {
+      this.showSidebar = false;
+    }
+
     if (detail.component === Components.ABOUT_PAGE) {
       delete this.selectedDatabase;
 
@@ -142,11 +159,6 @@ export class App extends LitElement {
       this.page = Components.ADD_DATABASE;
       // if none, treat as a new database form
       this.selectedDatabase = detail?.alias;
-
-      // if we're on a narrow device, hide the sidebar
-      if (Media.isNarrowDevice()) {
-        this.showSidebar = false;
-      }
     } else if (detail.component === Components.VIEW_DATABASE) {
       this.page = Components.VIEW_DATABASE;
       this.selectedDatabase = detail.alias;
@@ -206,8 +218,13 @@ export class App extends LitElement {
     console.log("app: render");
 
     const classList = ["app-cnt"];
+
     if (this.showSidebar) {
       classList.push("show-sidebar");
+    }
+
+    if (this.showNotifications) {
+      classList.push("show-notifications");
     }
 
     return html`
@@ -232,6 +249,8 @@ export class App extends LitElement {
         .selectedDatabase=${this.selectedDatabase}
         .databases=${this.databases}>
       </borg-sidebar>
+
+      <borg-notifications></borg-notifications>
 
       ${this.renderSubpage()}
     </div>

@@ -83,6 +83,8 @@ export class ClientStorage {
   }
 
   static async *sync() {
+    // TODO: block when sync is initialised for a topic
+
     const databases = await ClientStorage.getDatabases();
 
     for (const database of Object.values(databases)) {
