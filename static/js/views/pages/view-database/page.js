@@ -79,6 +79,7 @@ export class ViewDatabasePage extends LitElement {
 
     <borg-card-input
       @add-card=${this.addCard}
+      .syncTime=${this.syncTime}
       .saveState=${this.saveState}
       .focusedCard=${this.focusedCard}
       .database=${this.database}></borg-card-input>

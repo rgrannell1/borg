@@ -306,3 +306,7 @@ borg-notifications ul {
   margin-bottom: 10px;
   font-weight: bold;
 }
+
+.empty {
+  text-align: center;
+}

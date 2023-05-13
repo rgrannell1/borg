@@ -18,6 +18,7 @@ export class CardInput extends LitElement {
       saveState: { type: String },
       bookmarkCount: { type: Number },
       focusedCard: { type: Object },
+      syncTime: { type: Date }
     };
   }
 
