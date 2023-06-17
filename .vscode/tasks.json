@@ -18,6 +18,22 @@
       }
     },
     {
+      "label": "📚 | Build Common Storage",
+      "type": "shell",
+      "command": "docker-compose",
+      "args": [
+        "-f",
+        "/home/rg/Code/ws/axon/common-storage/docker-compose.yml",
+        "build"
+      ],
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+
+      }
+    },
+    {
       "label": "🔴 | Start Borg",
       "type": "shell",
       "command": "netlify",
