@@ -6,9 +6,9 @@ Borg is website that stores bookmarks to common-storage.
 
 ## Build
 
-```
-rs run:test
-```
+See VSCode `tasks.json`
+
+Start borg
 
 ## License
 

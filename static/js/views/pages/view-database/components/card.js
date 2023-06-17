@@ -26,6 +26,16 @@ export class Card extends LitElement {
     this.dispatchEvent(dispatched);
   }
 
+  broadcastDeleteCard(event) {
+    const dispatched = new CustomEvent(AppEvents.DELETE_CARD, {
+      detail: { content: this.content },
+      bubbles: true,
+      composed: true,
+    });
+
+    this.dispatchEvent(dispatched);
+  }
+
   render() {
     const date = new Date(this.content.created_at);
     const title = date.toLocaleString();
@@ -41,7 +51,7 @@ export class Card extends LitElement {
         <a href=${url} target="_blank">${urlTitle}</a>
       </p>
       <p class="card-date" title=${title}>${DateTime.formatTime(date)}</p>
-      <span class="delete-card" role="button">x</span>
+      <span class="delete-card" @click=${this.broadcastDeleteCard} role="button">x</span>
     </section>
     `;
   }

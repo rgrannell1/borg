@@ -11,6 +11,8 @@ export const AppEvents = {
   VIEW_CARD: "view-card",
   // add a new bookmark or card
   ADD_CARD: "add-card",
+  // delete a bookmark or card
+  DELETE_CARD: "delete-card",
   // add a new database to the sidebar
   ADD_DATABASE: "add-database",
   // add concept to a card

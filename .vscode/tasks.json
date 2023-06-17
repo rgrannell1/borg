@@ -1,0 +1,34 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "📚 | Start Common Storage",
+      "type": "shell",
+      "command": "docker-compose",
+      "args": [
+        "-f",
+        "/home/rg/Code/ws/axon/common-storage/docker-compose.yml",
+        "up"
+      ],
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+
+      }
+    },
+    {
+      "label": "🔴 | Start Borg",
+      "type": "shell",
+      "command": "netlify",
+      "args": [
+        "dev"
+      ],
+      "problemMatcher": [],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    }
+  ]
+}

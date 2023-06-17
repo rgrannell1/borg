@@ -83,6 +83,7 @@ export class CardInput extends LitElement {
     <input
       spellcheck="false"
       id="bookmark-url"
+      autocomplete="off"
       inputmode="url"
       type="url"
       enterhint="send"

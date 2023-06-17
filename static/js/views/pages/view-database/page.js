@@ -62,6 +62,12 @@ export class ViewDatabasePage extends LitElement {
     this.syncTime = new Date();
   }
 
+  async deleteCard(event ) {
+    await ClientStorage.deleteCard(this.database, event.detail.content);
+    this.totalBookmarks -= 1;
+    this.requestUpdate();
+  }
+
   viewCard(event) {
     this.focusedCard = event.detail.content;
   }
@@ -73,6 +79,7 @@ export class ViewDatabasePage extends LitElement {
 
     <borg-cards-panel
       @view-card=${this.viewCard}
+      @delete-card=${this.deleteCard}
       .syncTime=${this.syncTime}
       .query=${this.query}
       .database=${this.database}></borg-cards-panel>

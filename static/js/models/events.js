@@ -16,8 +16,27 @@ export function AddBookmark(url) {
       url,
       id,
       created_at: now.toISOString(),
-    }),
+    })
   };
+}
+
+export function DeleteBookmark(bookmark_id) {
+  const now = new Date();
+  const id = `urn:bookmark_deletion:${now.getTime()}`;
+
+  return {
+    source: "https://github.com/rgrannell1/borg/spec/bookmark_deletion.json",
+    id,
+    time: now.toISOString(),
+    type: "xyz.rgrannell.bookmark.delete.v1",
+    specversion: "1.0",
+    datacontenttype: "application/json",
+    data: JSON.stringify({
+      id,
+      bookmark_id,
+      created_at: now.toISOString(),
+    })
+  }
 }
 
 /*

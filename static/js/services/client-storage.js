@@ -146,6 +146,15 @@ export class ClientStorage {
     return await client.postContent(database.topic, events.AddBookmark(url));
   }
 
+  static async deleteCard(database, id) {
+    const client = new CommonStorageAPI(database.url, {
+      username: database.username,
+      password: database.password,
+    });
+
+    return await client.postContent(database.topic, events.DeleteBookmark(id));
+  }
+
   static async clearCards(database) {
     await del(`borg_database_${database.alias}_content`);
     await del(`borg_database_${database.alias}_max_id`);
