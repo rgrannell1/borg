@@ -110,7 +110,7 @@ export class CommonStorageAPI {
         yield content;
       }
 
-      startId = data.lastId;
+      startId = data.nextId;
     }
   }
 }
