@@ -5,6 +5,11 @@ export class Assembler {
     const idSet = new Set();
 
     for (const event of events) {
+      if (!event) {
+        console.error("event is undefined");
+        continue;
+      }
+
       if (event.type !== "xyz.rgrannell.bookmark.add.v1") {
         continue;
       }
