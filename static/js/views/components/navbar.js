@@ -1,7 +1,7 @@
 import {
   html,
   LitElement,
-} from "/home/rg/Code/ws/axon/borg/static/vendor/lit-element.js";
+} from "../../../vendor/lit-element.js";
 
 import { AppEvents } from "../../models/app-events.js";
 import { Components } from "../../models/components.js";

@@ -1,7 +1,7 @@
 import {
   html,
   LitElement,
-} from "/home/rg/Code/ws/axon/borg/static/vendor/lit-element.js";
+} from "../../../../vendor/lit-element.js"
 
 export class Frontpage extends LitElement {
   createRenderRoot() {

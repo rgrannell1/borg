@@ -1,4 +1,4 @@
-import { html, LitElement } from "../../vendor/lit-element.js"
+import { html, LitElement } from "../../vendor/lit-element.js";
 
 import "./components/navbar.js";
 import "./components/database.js";

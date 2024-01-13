@@ -2,7 +2,7 @@ import {
   css,
   html,
   LitElement,
-} from "/home/rg/Code/ws/axon/borg/static/vendor/lit-element.js";
+} from "../../../../../vendor/lit-element.js";
 
 import { ClientStorage } from "../../../../services/client-storage.js";
 import { Assembler } from "../../../../services/assembler.js";
