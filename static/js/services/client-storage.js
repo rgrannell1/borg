@@ -103,9 +103,9 @@ export class ClientStorage {
       let contentId = maxId;
 
       try {
-        for await (const content of client.getContent(database.topic, maxId)) {
-          currentContent.push(content.value);
-          contentId = content.id;
+        for await (const {content, nextId} of client.getContent(database.topic, maxId)) {
+          currentContent.push(content);
+          contentId = nextId;
 
           // periodically update to show sync-status
           if (contentId % 250 === 0) {

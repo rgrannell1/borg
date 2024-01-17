@@ -107,7 +107,7 @@ export class CommonStorageAPI {
       }
 
       for (const content of data.content) {
-        yield content;
+        yield {content, nextId: data.nextId};
       }
 
       if (data.nextId === startId) {
