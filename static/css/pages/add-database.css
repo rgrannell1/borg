@@ -11,7 +11,7 @@ borg-add-database-page, borg-add-concept-page {
 
 borg-add-database-page h2, borg-add-concept-page h2 {
   margin-bottom: 20px;
-  border-bottom: 2px solid #c9c9c9;
+  border-bottom: 2px solid var(--h2-border-color);
   max-width: 300px;
 
 }
@@ -35,9 +35,9 @@ borg-log-entry {
  */
 .log-panel {
   margin: 20px 0px;
-  background-color: black;
+  background-color: var(--log-panel-background-color);
   max-height: 500px;
-  color: white;
+  color: var(--log-panel-color);
 }
 
 .log-panel-cnt {
@@ -51,7 +51,7 @@ borg-log-entry {
 }
 
 .log-time {
-  color: cyan;
+  color: var(--log-time-color);
 }
 
 summary h3 {

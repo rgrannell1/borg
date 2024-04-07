@@ -5,17 +5,17 @@
   --navbar-border-color: black;
   --navbar-hover-color: hsl(0, 0%, 24%);
 
+  /* sidebar styling */
   --sidebar-hover-color: rgb(209, 227, 255);
   --sidebar-button-hover-color: rgb(188, 215, 255);
   --sidebar-active-color: blue;
   --sidebar-background-color: rgb(245, 245, 245);
   --sidebar-border-color: rgb(225, 225, 225);
 
+    /* bookmark styling */
   --card-background: rgb(245, 245, 245);
   --card-box-shadow: rgba(11, 20, 26, 0.13) 0px 1px 0.5px 0px;
   --link-color: hsl(211, 100%, 50%);
-  --input-focus-color: blue;
-
   --date-summary-color: hsl(229, 100%, 67%);
 
   /* sync animation */
@@ -40,6 +40,36 @@
   --submit-unauthorized-colour: hsl(0, 0%, 100%);
   --submit-unauthorized-background-colour: hsl(0, 0%, 54%);
   --submit-unauthorized-hover-background-colour: hsl(0, 0%, 0%);
+
+  /* input */
+  --input-background-color: #fff;
+  --input-border-color: #000;
+  --input-focus-border-color: grey;
+  --input-focus-border-color: blue;
+  --input-focus-color: blue;
+  --input-readonly-border-color: grey;
+  --input-readonly-color: grey;
+
+  /* selector */
+  --selector-background-color: #fff;
+  --selector-border-color: #000;
+
+  /* submit button */
+  --submit-button-background-color: #06f;
+  --submit-button-border-color: #06f;
+  --submit-button-color: #fff;
+  --submit-button-fill: #000;
+
+  --submit-button-danger-background-color: #f00;
+  --submit-button-danger-border-color: #f00;
+
+  /* log panel */
+  --log-panel-background-color: #000;
+  --log-panel-color: #fff;
+  --log-time-color: cyan;
+
+  /* headings */
+  --h2-border-color: #c9c9c9;
 }
 
 @font-face {

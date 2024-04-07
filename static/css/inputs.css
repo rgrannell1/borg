@@ -11,8 +11,8 @@
   font-family: inherit;
   box-sizing: border-box;
   padding: 0.25em 0.5em;
-  background-color: #fff;
-  border: 2px solid black;
+  background-color: var(--input-background-color);
+  border: 2px solid var(--input-border-color);
   width: 100%;
 }
 
@@ -22,14 +22,14 @@
 
 .borg-input:focus, .borg-input-narrow:focus {
   outline: none;
-  border: 2px solid var(--input-focus-color);
-  color: blue;
+  border: 2px solid var(--input-focus-border-color);
+  color: var(--input-focus-color);
 }
 
 .borg-input[readonly] {
   outline: none;
-  border: 2px solid grey;
-  color: grey;
+  border: 2px solid var(--input-readonly-border-color);
+  color: var(--input-readonly-color);
 }
 
 .borg-input-narrow {
@@ -49,8 +49,8 @@
   font-family: inherit;
   box-sizing: border-box;
   padding: 0.25em 0.5em;
-  background-color: #fff;
-  border: 2px solid black;
+  background-color: var(--selector-background-color);
+  border: 2px solid var(--selector-border-color);
 }
 
 /*
@@ -62,12 +62,12 @@
   float: left;
   font-size: 1.2em;
   align-items: center;
-  background-color: #06f;
-  border: 2px solid #06f;
+  background-color: var(--submit-button-background-color);
+  border: 2px solid var(--submit-button-border-color);
   box-sizing: border-box;
-  color: #fff;
+  color: var(--submit-button-color);
   cursor: pointer;
-  fill: #000;
+  fill: var(--submit-button-fill);
   font-family: Inter,sans-serif;
   font-size: 16px;
   font-weight: 600;
@@ -87,8 +87,8 @@
 }
 
 .submit-button.danger {
-  background-color: #f00;
-  border: 2px solid #f00;
+  background-color: var(--submit-button-danger-background-color);
+  border: 2px solid var(--submit-button-danger-border-color);
 }
 
 .submit-ok {
