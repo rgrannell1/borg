@@ -2,5 +2,4 @@ users.json
 upstreams.json
 .netlify
 node_modules/
-dist/
 .env
