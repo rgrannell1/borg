@@ -887,7 +887,7 @@ class CommonStorageAPI {
     } catch (err) {
       console.error(err);
       return {
-        state: AddBookmarkStates.ERROR,
+        state: "error",
       };
     }
   }
