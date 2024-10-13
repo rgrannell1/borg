@@ -8,6 +8,12 @@ Borg is website that stores bookmarks to common-storage.
 
 See VSCode `tasks.json`
 
+```
+rs build
+rs run
+rs deploy
+```
+
 Start borg
 
 ## License
